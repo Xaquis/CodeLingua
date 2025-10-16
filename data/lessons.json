@@ -1,0 +1,23 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Variables and Data Types",
+      "vocabulary": [
+        {
+          "en": "variable",
+          "es": "variable"
+        },
+        {
+          "en": "assign",
+          "es": "asignar"
+        }
+      ],
+      "codeExample": "let name = 'John';\\nconsole.log('Hello, ' + name);",
+      "explanation": {
+        "en": "The 'let' keyword is used to declare a variable.",
+        "es": "La palabra clave 'let' se usa para declarar una variable."
+      }
+    }
+  ]
+}

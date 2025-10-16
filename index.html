@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeLingua | Día 1</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f4f7fa;
-      color: #333;
-    }
-    h1 {
-      color: #0056b3;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    }
-    p {
-      line-height: 1.6;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CodeLingua — Aprende programación e inglés</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>CodeLingua — Día 1</h1>
-    <p><strong>Autor:</strong> Arlevy Sabogal</p>
-    <p>Bienvenido a la primera etapa del proyecto <em>CodeLingua</em>, una aplicación educativa orientada al aprendizaje de inglés y programación de manera simultánea.</p>
-    <p>Durante esta fase se realizó la configuración del entorno de desarrollo, repositorio GitHub y la documentación técnica según las normas APA 7.</p>
-    <p><a href="https://github.com/Xaquis/CodeLingua" target="_blank">Ver repositorio en GitHub</a></p>
-  </div>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">CodeLingua</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="learn/programming.html">Programación</a>
+        <a href="learn/english.html">Inglés</a>
+        <a href="about.html">Calidad de Software</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Aprende programación e inglés técnico al mismo tiempo</h2>
+      <p>Prototipo inicial — proyecto académico. Navega a los módulos y prueba las lecciones.</p>
+      <div class="buttons">
+        <a class="btn" href="learn/programming.html">Comenzar programación</a>
+        <a class="btn outline" href="learn/english.html">Comenzar inglés</a>
+      </div>
+    </section>
+
+    <section class="about-box">
+      <h3>Estado</h3>
+      <p>Día 1: Entorno configurado y documentado. Día 2: Diseño y prototipo base. Próximo: lecciones interactivas.</p>
+      <p>Repositorio: <a href="https://github.com/Xaquis/CodeLingua" target="_blank">github.com/Xaquis/CodeLingua</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
