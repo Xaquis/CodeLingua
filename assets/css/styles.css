@@ -27,3 +27,37 @@ body{
 .quiz button:hover{opacity:0.9}
 .vocab-list{background:white;padding:16px;border-radius:10px}
 .site-footer{padding:12px 0;text-align:center;margin-top:24px}
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.theme-toggle, .lang-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.theme-toggle:hover, .lang-toggle:hover {
+  transform: rotate(20deg);
+}
+
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode */
+body.light-mode {
+  background-color: #F4F6F7;
+  color: #2E2E2E;
+}
+
+/* Dark mode */
+body:not(.light-mode) {
+  background-color: #1E1E1E;
+  color: #EAEAEA;
+}
+

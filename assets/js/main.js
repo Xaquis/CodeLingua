@@ -1,48 +1,52 @@
-// Minimal JS for CodeLingua prototype
-document.addEventListener('DOMContentLoaded', function(){
-  // Quiz buttons
-  document.querySelectorAll('.quiz button').forEach(btn=>{
-    btn.addEventListener('click', function(){
-      if(this.dataset.correct === "true"){
-        alert('✅ Correcto!');
-      } else {
-        alert('❌ Incorrecto, inténtalo de nuevo.');
-      }
-    });
-  });
+// ===============================
+// CodeLingua - Main Interaction
+// ===============================
+
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.body.classList.toggle('light-mode', savedTheme === 'light');
+themeToggle.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light-mode');
+  themeToggle.textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
-/* ====== Modo claro/oscuro ====== */
-.theme-toggle {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 14px;
+
+// Language toggle
+const langToggle = document.getElementById('lang-toggle');
+const savedLang = localStorage.getItem('lang') || 'es';
+langToggle.textContent = savedLang === 'en' ? '🇺🇸' : '🇪🇸';
+document.documentElement.lang = savedLang;
+
+// Simple text dictionary for demonstration
+const dictionary = {
+  es: {
+    title: "Aprende Programación e Inglés",
+    intro: "Bienvenido a CodeLingua, donde aprenderás idiomas y código al mismo tiempo.",
+  },
+  en: {
+    title: "Learn Programming and English",
+    intro: "Welcome to CodeLingua, where you learn languages and code together.",
+  },
+};
+
+// Function to update the text dynamically
+function updateLanguage(lang) {
+  document.querySelector('h1').textContent = dictionary[lang].title;
+  document.querySelector('.intro-text').textContent = dictionary[lang].intro;
 }
 
-.theme-toggle:hover {
-  background-color: #388E3C;
-}
+// Set initial language
+updateLanguage(savedLang);
 
-/* Tema claro */
-body.light-mode {
-  background-color: #F4F4F4;
-  color: #222;
-}
+// Event for language change
+langToggle.addEventListener('click', () => {
+  const newLang = document.documentElement.lang === 'es' ? 'en' : 'es';
+  document.documentElement.lang = newLang;
+  langToggle.textContent = newLang === 'en' ? '🇺🇸' : '🇪🇸';
+  localStorage.setItem('lang', newLang);
+  updateLanguage(newLang);
+});
 
-body.light-mode header {
-  background-color: #FFFFFF;
-  color: #222;
-}
-
-body.light-mode section {
-  background-color: #FFFFFF;
-  color: #222;
-}
-
-body.light-mode a {
-  color: #2E7D32;
-}

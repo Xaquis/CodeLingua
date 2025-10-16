@@ -7,32 +7,29 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <!-- Encabezado principal -->
   <header class="site-header">
-    <div class="container">
-      <h1 class="logo">CodeLingua</h1>
-      <nav>
-        <a href="index.html">Inicio</a>
-        <a href="learn/programming.html">Programación</a>
-        <a href="learn/english.html">Inglés</a>
-        <a href="about.html">Calidad de Software</a>
-      </nav>
+    <h1 class="logo">CodeLingua</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="learn/programming.html">Programación</a>
+      <a href="learn/english.html">Inglés</a>
+      <a href="about.html">Calidad de Software</a>
+    </nav>
+
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
     </div>
   </header>
-<header>
-  <h1>CodeLingua</h1>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="learn/programming.html">Programación</a>
-    <a href="learn/english.html">Inglés</a>
-    <a href="about.html">Sobre</a>
-  </nav>
-  <button id="theme-toggle" class="theme-toggle">Modo Oscuro</button>
-</header>
 
+  <!-- Contenido principal -->
   <main class="container">
     <section class="hero">
-      <h2>Aprende programación e inglés técnico al mismo tiempo</h2>
-      <p>Prototipo inicial — proyecto académico. Navega a los módulos y prueba las lecciones.</p>
+      <h2 id="page-title">Aprende programación e inglés técnico al mismo tiempo</h2>
+      <p class="intro-text">
+        Bienvenido a CodeLingua, donde aprenderás idiomas y código al mismo tiempo.
+      </p>
       <div class="buttons">
         <a class="btn" href="learn/programming.html">Comenzar programación</a>
         <a class="btn outline" href="learn/english.html">Comenzar inglés</a>
@@ -40,12 +37,22 @@
     </section>
 
     <section class="about-box">
-      <h3>Estado</h3>
-      <p>Día 1: Entorno configurado y documentado. Día 2: Diseño y prototipo base. Próximo: lecciones interactivas.</p>
-      <p>Repositorio: <a href="https://github.com/Xaquis/CodeLingua" target="_blank">github.com/Xaquis/CodeLingua</a></p>
+      <h3>Estado del proyecto</h3>
+      <p>
+        Día 1: Entorno configurado y documentado.<br>
+        Día 2: Diseño y prototipo base.<br>
+        Día 3: Interactividad con modo claro/oscuro y selector de idioma.
+      </p>
+      <p>
+        Repositorio: 
+        <a href="https://github.com/Xaquis/CodeLingua" target="_blank">
+          github.com/Xaquis/CodeLingua
+        </a>
+      </p>
     </section>
   </main>
 
+  <!-- Pie de página -->
   <footer class="site-footer">
     <div class="container">
       <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
@@ -55,3 +62,4 @@
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+
