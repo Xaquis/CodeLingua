@@ -1,0 +1,160 @@
+/* ===========================
+   CodeLingua - Tema Future (Oscuro / Claro)
+   =========================== */
+
+/* Modo oscuro base */
+:root {
+  --bg-gradient: radial-gradient(circle at 20% 20%, #101317 0%, #0E1013 100%);
+  --text-color: #EAF2F7;
+  --card-bg: rgba(26, 30, 34, 0.9);
+  --accent-color: #00FFC6;
+  --accent-hover: #04E6FF;
+  --link-color: #00B8FF;
+  --link-hover: #00FFC6;
+  --shadow-glow: 0 0 10px rgba(0, 255, 198, 0.25);
+}
+
+/* Fondo general con gradiente */
+body {
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-attachment: fixed;
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+/* Cabecera */
+header {
+  background-color: rgba(15, 18, 22, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 198, 0.2);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-glow);
+}
+
+header h1 {
+  color: var(--accent-color);
+  text-shadow: 0 0 8px rgba(0, 255, 198, 0.4);
+  font-size: 1.9rem;
+  margin: 0;
+}
+
+/* Navegación */
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--link-hover);
+  text-shadow: 0 0 6px var(--link-hover);
+}
+
+/* Controles */
+.controls {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.theme-toggle, .lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(0,255,198,0.4);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  padding: 6px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle:hover, .lang-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0,255,198,0.5);
+}
+
+/* Secciones */
+main {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+section {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 15px rgba(0,184,255,0.1), var(--shadow-glow);
+  border: 1px solid rgba(0,255,198,0.1);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Botones */
+.btn {
+  background: var(--accent-color);
+  color: #0E1013;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 5px 0 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0,255,198,0.4);
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,184,255,0.6);
+}
+
+.btn.outline {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn.outline:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(15,18,22,0.85);
+  color: #AAB4BC;
+  border-top: 1px solid rgba(0,255,198,0.2);
+  margin-top: 40px;
+}
+
+/* ===========================
+   Tema claro Future
+   =========================== */
+body.light-mode {
+  --bg-gradient: radial-gradient(circle at 80% 10%, #EBF3F7 0%, #DCE5EB 100%);
+  --text-color: #1E1E1E;
+  --card-bg: rgba(255,255,255,0.85);
+  --accent-color: #00C2A2;
+  --accent-hover: #00B8FF;
+  --link-color: #007ACC;
+  --link-hover: #00B8FF;
+  --shadow-glow: 0 0 8px rgba(0,184,255,0.3);
+}
