@@ -1,7 +1,8 @@
 /* ===========================
-   CodeLingua - Tema Oscuro Educativo
+   CodeLingua - Tema Adaptativo (Oscuro / Claro)
    =========================== */
 
+/* Variables base (modo oscuro por defecto) */
 :root {
   --bg-color: #2C2C2C;
   --text-color: #E0E0E0;
@@ -12,56 +13,124 @@
   --link-hover: #AED581;
 }
 
+/* Transiciones globales */
 body {
-  background-color: #2C2C2C;
-  color: #E0E0E0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Cabecera */
 header {
   background-color: var(--card-bg);
-  ...
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 header h1 {
   color: var(--link-color);
+  font-size: 1.8rem;
+  margin: 0;
 }
 
+/* Menú */
 nav a {
   color: var(--text-color);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
   color: var(--accent-color);
 }
 
+/* Controles */
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.theme-toggle,
+.lang-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: transform 0.3s;
+}
+
+.theme-toggle:hover,
+.lang-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Secciones principales */
+main {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 section {
   background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button {
+/* Botones */
+.btn {
   background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 5px 0 0;
+  transition: all 0.3s ease;
 }
 
-button:hover {
+.btn:hover {
   background-color: var(--accent-hover);
 }
 
-a {
-  color: var(--link-color);
+.btn.outline {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
 }
 
-a:hover {
-  color: var(--link-hover);
+.btn.outline:hover {
+  background-color: var(--accent-color);
+  color: #fff;
 }
 
+/* Footer */
 footer {
+  text-align: center;
+  padding: 10px;
   background-color: var(--card-bg);
   color: #BDBDBD;
+  margin-top: 40px;
+  transition: background-color 0.3s ease;
 }
 
 /* ===========================
@@ -69,7 +138,7 @@ footer {
    =========================== */
 body.light-mode {
   --bg-color: #F4F6F7;
-  --text-color: #2E2E2E;
+  --text-color: #2C2C2C;
   --card-bg: #FFFFFF;
   --accent-color: #2ECC71;
   --accent-hover: #27AE60;
