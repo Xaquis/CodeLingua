@@ -2,6 +2,16 @@
    CodeLingua - Tema Oscuro Educativo
    =========================== */
 
+:root {
+  --bg-color: #2C2C2C;
+  --text-color: #E0E0E0;
+  --card-bg: #3A3A3A;
+  --accent-color: #4CAF50;
+  --accent-hover: #388E3C;
+  --link-color: #8BC34A;
+  --link-hover: #AED581;
+}
+
 body {
   background-color: #2C2C2C;
   color: #E0E0E0;
@@ -13,240 +23,56 @@ body {
 
 /* Cabecera */
 header {
-  background-color: #3A3A3A;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  background-color: var(--card-bg);
+  ...
 }
 
 header h1 {
-  color: #8BC34A;
+  color: var(--link-color);
 }
 
-/* Menú de navegación */
 nav a {
-  color: #E0E0E0;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
+  color: var(--text-color);
 }
 
 nav a:hover {
-  color: #4CAF50;
+  color: var(--accent-color);
 }
 
-/* Contenedor principal */
-main {
-  padding: 30px;
-  background-color: #2C2C2C;
-}
-
-/* Tarjetas o secciones */
 section {
-  background-color: #3A3A3A;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  background-color: var(--card-bg);
 }
 
-/* Botones */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
+  background-color: var(--accent-color);
 }
 
 button:hover {
-  background-color: #388E3C;
+  background-color: var(--accent-hover);
 }
 
-/* Enlaces */
 a {
-  color: #8BC34A;
+  color: var(--link-color);
 }
 
 a:hover {
-  color: #AED581;
+  color: var(--link-hover);
 }
 
-/* Footer */
 footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #3A3A3A;
+  background-color: var(--card-bg);
   color: #BDBDBD;
-  margin-top: 40px;
 }
+
 /* ===========================
-   CodeLingua - Tema Oscuro Educativo
+   Tema claro
    =========================== */
-
-body {
-  background-color: #2C2C2C;
-  color: #E0E0E0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
-
-/* Cabecera */
-header {
-  background-color: #3A3A3A;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-header h1 {
-  color: #8BC34A;
-}
-
-/* Menú de navegación */
-nav a {
-  color: #E0E0E0;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
-
-nav a:hover {
-  color: #4CAF50;
-}
-
-/* Contenedor principal */
-main {
-  padding: 30px;
-  background-color: #2C2C2C;
-}
-
-/* Tarjetas o secciones */
-section {
-  background-color: #3A3A3A;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-}
-
-/* Botones */
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #388E3C;
-}
-
-/* Enlaces */
-a {
-  color: #8BC34A;
-}
-
-a:hover {
-  color: #AED581;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #3A3A3A;
-  color: #BDBDBD;
-  margin-top: 40px;
-}
-/* ===========================
-   CodeLingua - Tema Oscuro Educativo
-   =========================== */
-
-body {
-  background-color: #2C2C2C;
-  color: #E0E0E0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
-
-/* Cabecera */
-header {
-  background-color: #3A3A3A;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-header h1 {
-  color: #8BC34A;
-}
-
-/* Menú de navegación */
-nav a {
-  color: #E0E0E0;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
-
-nav a:hover {
-  color: #4CAF50;
-}
-
-/* Contenedor principal */
-main {
-  padding: 30px;
-  background-color: #2C2C2C;
-}
-
-/* Tarjetas o secciones */
-section {
-  background-color: #3A3A3A;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-}
-
-/* Botones */
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #388E3C;
-}
-
-/* Enlaces */
-a {
-  color: #8BC34A;
-}
-
-a:hover {
-  color: #AED581;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #3A3A3A;
-  color: #BDBDBD;
-  margin-top: 40px;
+body.light-mode {
+  --bg-color: #F4F6F7;
+  --text-color: #2E2E2E;
+  --card-bg: #FFFFFF;
+  --accent-color: #2ECC71;
+  --accent-hover: #27AE60;
+  --link-color: #3498DB;
+  --link-hover: #1E88E5;
 }
