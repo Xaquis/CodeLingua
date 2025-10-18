@@ -3,61 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Acerca — CodeLingua</title>
+  <title>Acerca de | CodeLingua</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <h1>CodeLingua</h1>
-<nav>
-    <a href="index.html">Inicio</a>
-    <a href="learn/programming.html">Programación</a>
-    <a href="learn/english.html">Inglés</a>
-    <a href="about.html">Sobre</a>
-</nav>
 
-  <div class="controls">
-    <button id="theme-toggle" class="theme-toggle">🌙</button>
-    <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
-  </div>
-    <div class="container">
-      <h1 class="logo">CodeLingua</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="../learn/programming.html">Programación</a>
-        <a href="../learn/english.html">Inglés</a>
-        <a href="../about.html">Calidad de Software</a>
-      </nav>
+<body>
+  <!-- Encabezado principal -->
+  <header class="site-header">
+    <h1 class="logo">CodeLingua</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="learn/programming.html">Programación</a>
+      <a href="learn/english.html">Inglés</a>
+      <a href="about.html">Sobre</a>
+    </nav>
+
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
     </div>
   </header>
 
+  <!-- Contenido principal -->
   <main class="container">
-    <article>
-      <h2>Calidad de Software aplicada en CodeLingua</h2>
-      <p>CodeLingua integra los principios de calidad del software (ISO/IEC 25010) en el diseño y desarrollo. En esta versión inicial se prioriza:</p>
+    <section class="about">
+      <h2 id="page-title">Acerca de CodeLingua</h2>
+      <p class="intro-text">
+        CodeLingua es un proyecto educativo diseñado para enseñar simultáneamente
+        <strong>programación</strong> e <strong>inglés técnico</strong>, con un enfoque en la 
+        <em>calidad de software</em> y las buenas prácticas de desarrollo.
+      </p>
+
+      <h3>Objetivos</h3>
       <ul>
-        <li><strong>Usabilidad:</strong> interfaz limpia y navegación simple.</li>
-        <li><strong>Mantenibilidad:</strong> estructura modular y código comentado.</li>
-        <li><strong>Portabilidad:</strong> ejecución en navegadores modernos y móviles.</li>
+        <li>Promover el aprendizaje bilingüe en entornos tecnológicos.</li>
+        <li>Aplicar normas y estándares internacionales de calidad.</li>
+        <li>Ofrecer una experiencia accesible, responsiva y educativa.</li>
       </ul>
-      <h3>Componentes obligatorios del trabajo</h3>
-      <ol>
-        <li>Normas (ISO/IEC 25010)</li>
-        <li>Modelos (CMMI)</li>
-        <li>Estándares (W3C, HTML5/CSS3)</li>
-        <li>Código y programación (ejemplos y lecciones)</li>
-        <li>Pruebas y evaluación (pruebas unitarias y manuales)</li>
-        <li>Conclusiones y recomendaciones</li>
-      </ol>
-    </article>
+
+      <h3>Desarrollador</h3>
+      <p>Creado por <strong>Arlevy Sabogal</strong> como parte del proyecto académico “Calidad de Software”.</p>
+    </section>
   </main>
 
+  <!-- Pie de página -->
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
+      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
