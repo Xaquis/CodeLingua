@@ -3,53 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Programación — CodeLingua</title>
+  <title>Programación | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body>
   <header class="site-header">
-    <h1>CodeLingua</h1>
-  <nav>
-  <a href="../index.html">Inicio</a>
-  <a href="../index.html">Programación</a>
-  <a href="../index.html">Inglés</a>
-  <a href="../index.html">Sobre</a>
-</nav>
+    <h1 class="logo">CodeLingua</h1>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="programming.html">Programación</a>
+      <a href="english.html">Inglés</a>
+      <a href="../about.html">Sobre</a>
+    </nav>
 
-  <div class="controls">
-    <button id="theme-toggle" class="theme-toggle">🌙</button>
-    <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
-  </div>
-    <div class="container">
-      <h1 class="logo">CodeLingua</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Calidad de Software</a>
-      </nav>
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
     </div>
   </header>
 
   <main class="container">
-    <section>
-      <h2>Lección 1 — Variables (JS)</h2>
-      <pre class="code-block"><code id="code-example">let name = "John";
-console.log("Hello, " + name);</code></pre>
-      <p><strong>EN:</strong> The <code>let</code> keyword declares a variable in JavaScript.</p>
-      <p><strong>ES:</strong> La palabra clave <code>let</code> declara una variable en JavaScript.</p>
-      <div class="quiz">
-        <p>¿Qué hace <code>console.log()</code>?</p>
-        <button data-correct="true">Imprime un mensaje en la consola</button>
-        <button>Declara una variable</button>
-        <button>Crea un nuevo archivo</button>
-      </div>
+    <section class="lesson">
+      <h2 id="page-title">Aprende Programación</h2>
+      <p class="intro-text">
+        Bienvenido al módulo de programación. Aquí aprenderás los fundamentos de la lógica,
+        algoritmos, y estructuras de control mientras practicas tu inglés técnico.
+      </p>
+
+      <h3>Lección 1: Variables y Tipos de Datos</h3>
+      <p>En inglés: <em>Variables and Data Types</em>.</p>
+
+      <pre><code>
+// Ejemplo en JavaScript:
+let nombre = "CodeLingua";
+let edad = 25;
+console.log("Hello, " + nombre + "! You are " + edad + " years old.");
+      </code></pre>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
+      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
