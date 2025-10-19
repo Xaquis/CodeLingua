@@ -1,44 +1,38 @@
 /*
-  progress.js — CodeLingua
-  Verifica si las unidades de programación e inglés están completas.
-  Si ambas lo están, marca la unidad global como completada
-  y redirige al archivo genérico unit_complete.html?unit=X
+  activity.js - Lógica simplificada de Guardado de Estado y Finalización
+  Guarda el progreso en localStorage y desbloquea la lógica de 'unit_complete' en progress.js.
 */
 
-(function() {
-  // Detectar el número de unidad actual a partir del atributo data-unit del <body>
-  const body = document.querySelector('body');
-  if (!body) return;
+// Se expone la función al objeto global CodeLingua para su uso en los archivos HTML
+window.CodeLingua = window.CodeLingua || {};
 
-  const unitId = body.dataset.unit; // ejemplo: "unit1_prog" o "unit1_eng"
-  if (!unitId) return;
+/**
+ * Marca una parte de la unidad como completada y guarda el estado en localStorage.
+ * @param {number} unitNumber - El número de la unidad (ej: 1).
+ * @param {string} type - El tipo de actividad ('prog' o 'eng').
+ */
+window.CodeLingua.saveCompletion = function(unitNumber, type) {
+    const key = `cl_unit${unitNumber}_${type}_completed`; // ej: cl_unit1_prog_completed
+    localStorage.setItem(key, 'true');
+    console.log(`✅ Progreso guardado: ${key} = true`);
 
-  // Extraer número de unidad (por ejemplo: "1" de "unit1_prog")
-  const match = unitId.match(/unit(\d+)/);
-  if (!match) return;
+    // Llama a la función que verifica si la unidad completa está terminada.
+    if (typeof window.CodeLingua.checkGlobalProgress === 'function') {
+        window.CodeLingua.checkGlobalProgress(unitNumber);
+    }
+};
 
-  const unitNumber = match[1];
+/**
+ * Reinicia completamente el progreso de una unidad específica.
+ * @param {number} unitNumber - El número de la unidad (ej: 1).
+ */
+window.CodeLingua.resetUnit = function(unitNumber) {
+    const progKey = `cl_unit${unitNumber}_prog_completed`;
+    const engKey  = `cl_unit${unitNumber}_eng_completed`;
+    const globalKey = `cl_unit${unitNumber}_global_completed`;
 
-  // Claves de progreso individuales
-  const progKey = `cl_unit${unitNumber}_prog_completed`;
-  const engKey  = `cl_unit${unitNumber}_eng_completed`;
-  const globalKey = `unit${unitNumber}_completed`;
-
-  // Leer estado actual
-  const progDone = localStorage.getItem(progKey) === 'true';
-  const engDone  = localStorage.getItem(engKey) === 'true';
-  const globalDone = localStorage.getItem(globalKey) === 'true';
-
-  // Si ambas partes están completas y aún no se marcó globalmente
-  if (progDone && engDone && !globalDone) {
-    localStorage.setItem(globalKey, 'true');
-
-    // Esperar medio segundo y redirigir al genérico de celebración
-    setTimeout(() => {
-      const target = `unit_complete.html?unit=${unitNumber}`;
-      console.log(`✅ Unidad ${unitNumber} completada. Redirigiendo a ${target}...`);
-      window.location.href = target;
-    }, 500);
-  }
-})();
-
+    localStorage.removeItem(progKey);
+    localStorage.removeItem(engKey);
+    localStorage.removeItem(globalKey);
+    console.log(`🗑️ Unidad ${unitNumber} reiniciada.`);
+};

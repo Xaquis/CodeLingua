@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/progress.js" defer></script>
 </head>
 <body>
   <header>
@@ -18,7 +17,6 @@
   </header>
 
   <main>
-    <!-- 🧠 Bienvenida de Lin -->
     <section id="intro-lin">
       <div class="mascot lin">
         🇬🇧🎩
@@ -26,7 +24,6 @@
       <p>¡Hola! Soy <strong>Lin</strong>, tu guía de inglés técnico. Hoy aprenderás los conceptos básicos antes de comenzar los ejercicios. 🎓</p>
     </section>
 
-    <!-- 📝 Ejercicios -->
     <section id="exercises">
       <h2>Ejercicios</h2>
       <div class="exercise" data-answer="computer">
@@ -39,54 +36,40 @@
         <input type="text">
         <button class="check">Comprobar</button>
       </div>
-      <!-- Aquí agregarás 3 ejercicios más -->
+      <div class="exercise" data-answer="server">
+        <p>3️⃣ Traduce al inglés: <strong>servidor</strong></p>
+        <input type="text">
+        <button class="check">Comprobar</button>
+      </div>
+      <div class="exercise" data-answer="code">
+        <p>4️⃣ Traduce al inglés: <strong>código</strong></p>
+        <input type="text">
+        <button class="check">Comprobar</button>
+      </div>
+      <div class="exercise" data-answer="bug">
+        <p>5️⃣ Traduce al inglés: <strong>error de software</strong> (una palabra)</p>
+        <input type="text">
+        <button class="check">Comprobar</button>
+      </div>
     </section>
 
-    <!-- ❤️ Sistema de Vidas -->
     <section id="lives">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
     </section>
 
-    <!-- 🎉 Finalización -->
     <section id="complete" class="hidden">
       <p>¡Excelente trabajo! Has completado los 5 ejercicios.</p>
-      <a href="unit_complete.html?unit=1"><button>Continuar</button></a>
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng');">
+          <button>Continuar</button>
+      </a>
     </section>
   </main>
 
-  <script>
-    let lives = 10;
-    let correct = 0;
-    const total = 5;
-
-    document.querySelectorAll(".check").forEach(button => {
-      button.addEventListener("click", e => {
-        const ex = e.target.closest(".exercise");
-        const input = ex.querySelector("input");
-        const answer = ex.dataset.answer.toLowerCase();
-        if (input.value.toLowerCase() === answer) {
-          ex.style.backgroundColor = "#004d40";
-          correct++;
-          if (correct === total) {
-            document.getElementById("complete").classList.remove("hidden");
-          }
-        } else {
-          lives--;
-          document.getElementById("life-count").textContent = lives;
-          if (lives <= 0) {
-            alert("¡Te has quedado sin vidas! Intenta de nuevo.");
-            location.reload();
-          }
-        }
-      });
-    });
-   <footer class="site-footer">
+  <footer class="site-footer">
     <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
   </footer>
 
-  <!-- Scripts de funcionalidad -->
   <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/activity.js" defer></script>
+  <script src="../assets/js/activity.js" defer></script> 
 </body>
 </html>
-

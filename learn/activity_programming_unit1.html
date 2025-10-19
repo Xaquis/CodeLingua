@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Unidad 1 - Programación | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/progress.js" defer></script>
 </head>
 <body>
   <header>
@@ -18,13 +17,11 @@
   </header>
 
   <main>
-    <!-- 🧠 Bienvenida de Codder -->
     <section id="intro-codder">
       <div class="mascot codder">@🧢</div>
       <p>¡Hola, soy <strong>Codder</strong>! 🧢💻 Hoy aprenderás los fundamentos de la programación con ejercicios simples. Recuerda: los tres primeros intentos del primer ejercicio no quitan vidas. 😉</p>
     </section>
 
-    <!-- 🧩 Ejercicios -->
     <section id="exercises">
       <h2>Ejercicios</h2>
 
@@ -59,65 +56,23 @@
       </div>
     </section>
 
-    <!-- ❤️ Sistema de vidas -->
     <section id="lives">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
     </section>
 
-    <!-- 🎉 Finalización -->
     <section id="complete" class="hidden">
       <p>¡Excelente trabajo, programador! Has completado los 5 ejercicios de la unidad. 🚀</p>
-      <a href="unit_complete.html?unit=1"><button>Continuar</button></a>
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'prog');">
+          <button>Continuar</button>
+      </a>
     </section>
   </main>
 
-  <script>
-    // ===========================
-    // Lógica de evaluación Codder
-    // ===========================
-    let lives = 10;
-    let correct = 0;
-    const total = 5;
+  <footer class="site-footer">
+      <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
+    </footer>
 
-    document.querySelectorAll(".check").forEach(button => {
-      button.addEventListener("click", e => {
-        const ex = e.target.closest(".exercise");
-        const input = ex.querySelector("input");
-        const answer = ex.dataset.answer.toLowerCase();
-        const freeTries = parseInt(ex.dataset.freeTries || 0);
-        ex.dataset.attempts = (parseInt(ex.dataset.attempts || 0) + 1);
-
-        if (input.value.toLowerCase() === answer) {
-          ex.style.backgroundColor = "#004d40";
-          ex.querySelector("button").disabled = true;
-          correct++;
-          if (correct === total) {
-            document.getElementById("complete").classList.remove("hidden");
-          }
-        } else {
-          // Permitir 3 intentos gratis en el primer ejercicio
-          if (freeTries && ex.dataset.attempts <= freeTries) {
-            alert(`Intento ${ex.dataset.attempts}/${freeTries} gratuito. ¡Sigue intentando!`);
-            return;
-          }
-
-          lives--;
-          document.getElementById("life-count").textContent = lives;
-          ex.style.backgroundColor = "#3A0000";
-
-          if (lives <= 0) {
-            alert("😢 Te has quedado sin vidas. Inténtalo de nuevo.");
-            location.reload();
-          }
-        }
-      });
-    });
-    <footer class="site-footer">
-    <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
-  </footer>
-
-  <!-- Scripts de funcionalidad -->
-  <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/activity.js" defer></script>
+    <script src="../assets/js/progress.js" defer></script>
+    <script src="../assets/js/activity.js" defer></script>
 </body>
 </html>
