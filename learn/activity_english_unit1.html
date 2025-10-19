@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unidad 1 — Inglés Técnico | CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .lin-box { background-color: rgba(10,14,26,0.6); padding: 14px; border-left:5px solid #3F51B5; display:flex; gap:12px; align-items:center;border-radius:10px;margin-bottom:18px; }
+    .lin-avatar{font-size:34px;background:linear-gradient(45deg,#00247D,#CF142B);color:#fff;padding:8px;border-radius:50%;}
+    .status-bar{display:flex;gap:12px;justify-content:flex-start;margin-bottom:12px;align-items:center;}
+    #progress-wrap{background:#0b0f12;padding:6px;border-radius:8px;width:220px;}
+    #progress-bar{height:10px;background:#00B8FF;width:0%;border-radius:6px;}
+    .exercise pre{background:#091323;padding:12px;border-radius:6px;overflow:auto;color:#dbeeff;}
+    .controls-inline{display:flex;gap:8px;margin-top:10px;}
+    .small-btn{padding:8px 12px;border-radius:6px;border:none;cursor:pointer;}
+  </style>
+</head>
+<body data-unit="unit1_eng">
+  <header class="site-header">
+    <h1 class="logo">CodeLingua</h1>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="programming.html">Programación</a>
+      <a href="english.html">Inglés</a>
+      <a href="../about.html">Sobre</a>
+    </nav>
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="lesson">
+      <h2>Unidad 1: Vocabulary — Basic Programming Terms</h2>
+
+      <div class="lin-box">
+        <div class="lin-avatar">🎩</div>
+        <div>
+          <strong>Lin</strong> — Hello! In this unit you'll learn key programming vocabulary. First exercise: <strong>3 free attempts</strong> before losing lives.
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div id="lives">❤️ 10</div>
+        <div id="progress-wrap"><div id="progress-bar"></div></div>
+        <div id="progress">Progress: 0%</div>
+        <div id="attempts-count">Attempts (current): 0</div>
+      </div>
+
+      <div class="exercise">
+        <p id="question">Question</p>
+        <pre id="code-snippet"><code>// Example</code></pre>
+        <input type="text" id="answer" placeholder="Type your answer">
+        <div class="controls-inline">
+          <button id="check-btn" class="small-btn">Check</button>
+          <button id="next-btn" class="small-btn" disabled>Next</button>
+          <button id="complete-btn" class="small-btn" disabled>Complete unit</button>
+          <button id="reset-btn" class="small-btn">Reset unit</button>
+        </div>
+        <p id="feedback"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/activity.js"></script>
+  <script src="../assets/js/progress.js"></script>
+  <script>
+    const engExercises = [
+      {
+        prompt: "Translate to English: 'Variable'",
+        snippet: "Variable → ________",
+        answers: ["variable"]
+      },
+      {
+        prompt: "How do you say 'función' in English?",
+        snippet: "Función → ________",
+        answers: ["function"]
+      },
+      {
+        prompt: "Translate to English: 'bucle' (programming)",
+        snippet: "Bucle → ________",
+        answers: ["loop"]
+      },
+      {
+        prompt: "Translate: 'imprimir en consola'",
+        snippet: "console.____('hello');",
+        answers: ["log"]
+      },
+      {
+        prompt: "Translate to English: 'asignación'",
+        snippet: "Asignación → ________",
+        answers: ["assignment","assign"]
+      }
+    ];
+
+    window.CL_initActivity({
+      unitId: 'unit1_eng',
+      exercises: engExercises
+    });
+  </script>
+  <script src="../assets/js/debug_progress.js"></script>
+</body>
+</html>
