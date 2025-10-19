@@ -1,112 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unidad 1 — Programación | CodeLingua</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unidad 1 - Programación | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-  <style>
-    .codder-box { background-color: rgba(0, 0, 0, 0.35); padding: 14px; border-left: 5px solid #00FFC6; display:flex; gap:12px; align-items:center; border-radius:10px; margin-bottom:18px;}
-    .codder-avatar{font-size:34px;background:#00FFC6;color:#071011;padding:8px;border-radius:50%;}
-    .status-bar{display:flex;gap:12px;justify-content:flex-start;margin-bottom:12px;align-items:center;}
-    #progress-wrap{background:#111;padding:6px;border-radius:8px;width:220px;}
-    #progress-bar{height:10px;background:#00FFC6;width:0%;border-radius:6px;}
-    .exercise pre{background:#0b0f12;padding:12px;border-radius:6px;overflow:auto;color:#cfeefd;}
-    .controls-inline{display:flex;gap:8px;margin-top:10px;}
-    .small-btn{padding:8px 12px;border-radius:6px;border:none;cursor:pointer;}
-  </style>
+  <script src="../assets/js/progress.js" defer></script>
 </head>
-<body data-unit="unit1_prog">
-  <header class="site-header">
-    <h1 class="logo">CodeLingua</h1>
+<body>
+  <header>
+    <h1>Unidad 1: Fundamentos de Programación</h1>
     <nav>
       <a href="../index.html">Inicio</a>
-      <a href="programming.html">Programación</a>
-      <a href="english.html">Inglés</a>
+      <a href="activity_english_unit1.html">Inglés</a>
       <a href="../about.html">Sobre</a>
     </nav>
-    <div class="controls">
-      <button id="theme-toggle" class="theme-toggle">🌙</button>
-      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
-    </div>
   </header>
 
-  <main class="container">
-    <section class="lesson">
-      <h2>Unidad 1: Fundamentos — Programación</h2>
+  <main>
+    <!-- 🧠 Bienvenida de Codder -->
+    <section id="intro-codder">
+      <div class="mascot codder">@🧢</div>
+      <p>¡Hola, soy <strong>Codder</strong>! 🧢💻 Hoy aprenderás los fundamentos de la programación con ejercicios simples. Recuerda: los tres primeros intentos del primer ejercicio no quitan vidas. 😉</p>
+    </section>
 
-      <div class="codder-box">
-        <div class="codder-avatar">@</div>
-        <div>
-          <strong>Codder</strong> — ¡Hola! En esta unidad practicarás conceptos básicos de código. Recuerda: el primer ejercicio tiene <strong>3 intentos gratis</strong>.
-        </div>
+    <!-- 🧩 Ejercicios -->
+    <section id="exercises">
+      <h2>Ejercicios</h2>
+
+      <div class="exercise" data-answer="variable" data-free-tries="3">
+        <p>1️⃣ Completa: En programación, una _____ se usa para almacenar información temporalmente.</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
       </div>
 
-      <div class="status-bar">
-        <div id="lives">❤️ 10</div>
-        <div id="progress-wrap"><div id="progress-bar"></div></div>
-        <div id="progress">Progreso: 0%</div>
-        <div id="attempts-count">Intentos (ejercicio actual): 0</div>
+      <div class="exercise" data-answer="if">
+        <p>2️⃣ Escribe la palabra clave usada para evaluar condiciones en la mayoría de lenguajes: ___</p>
+        <input type="text">
+        <button class="check">Comprobar</button>
       </div>
 
-      <div class="exercise">
-        <p id="question">Pregunta</p>
-        <pre id="code-snippet"><code>// código de ejemplo</code></pre>
-        <input type="text" id="answer" placeholder="Escribe tu respuesta">
-        <div class="controls-inline">
-          <button id="check-btn" class="small-btn">Verificar</button>
-          <button id="next-btn" class="small-btn" disabled>Siguiente</button>
-          <button id="complete-btn" class="small-btn" disabled>Marcar completada</button>
-          <button id="reset-btn" class="small-btn">Reiniciar unidad</button>
-        </div>
-        <p id="feedback"></p>
+      <div class="exercise" data-answer="loop">
+        <p>3️⃣ ¿Cómo se llama la estructura que repite un bloque de código varias veces?</p>
+        <input type="text">
+        <button class="check">Comprobar</button>
       </div>
+
+      <div class="exercise" data-answer="function">
+        <p>4️⃣ En JavaScript, un conjunto de instrucciones agrupadas recibe el nombre de _____</p>
+        <input type="text">
+        <button class="check">Comprobar</button>
+      </div>
+
+      <div class="exercise" data-answer="boolean">
+        <p>5️⃣ ¿Qué tipo de dato solo puede ser verdadero o falso?</p>
+        <input type="text">
+        <button class="check">Comprobar</button>
+      </div>
+    </section>
+
+    <!-- ❤️ Sistema de vidas -->
+    <section id="lives">
+      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+    </section>
+
+    <!-- 🎉 Finalización -->
+    <section id="complete" class="hidden">
+      <p>¡Excelente trabajo, programador! Has completado los 5 ejercicios de la unidad. 🚀</p>
+      <a href="unit_complete.html?unit=1"><button>Continuar</button></a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
-  </footer>
-
-  <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/activity.js"></script>
-  <script src="../assets/js/progress.js"></script>
   <script>
-    // Define exercises for programming unit
-    const progExercises = [
-      {
-        prompt: "Completa la palabra faltante (nombre de la función principal):",
-        snippet: "function ____() { console.log('Hello World'); }",
-        answers: ["main"]
-      },
-      {
-        prompt: "¿Cuál es el operador para asignación en JavaScript?",
-        snippet: "let x = 5; // operador ____",
-        answers: ["=","igual","assign"]
-      },
-      {
-        prompt: "Completa: para imprimir en consola en JS usamos:",
-        snippet: "console.___('hola');",
-        answers: ["log"]
-      },
-      {
-        prompt: "¿Cómo se declara una variable en ES6?",
-        snippet: "____ nombre = 'CodeLingua';",
-        answers: ["let","const","var"]
-      },
-      {
-        prompt: "¿Cuál es la palabra clave para crear una función anónima?",
-        snippet: "const f = ____ () => {};",
-        answers: ["function","async function"]
-      }
-    ];
+    // ===========================
+    // Lógica de evaluación Codder
+    // ===========================
+    let lives = 10;
+    let correct = 0;
+    const total = 5;
 
-    // Initialize activity
-    window.CL_initActivity({
-      unitId: 'unit1_prog',
-      exercises: progExercises
+    document.querySelectorAll(".check").forEach(button => {
+      button.addEventListener("click", e => {
+        const ex = e.target.closest(".exercise");
+        const input = ex.querySelector("input");
+        const answer = ex.dataset.answer.toLowerCase();
+        const freeTries = parseInt(ex.dataset.freeTries || 0);
+        ex.dataset.attempts = (parseInt(ex.dataset.attempts || 0) + 1);
+
+        if (input.value.toLowerCase() === answer) {
+          ex.style.backgroundColor = "#004d40";
+          ex.querySelector("button").disabled = true;
+          correct++;
+          if (correct === total) {
+            document.getElementById("complete").classList.remove("hidden");
+          }
+        } else {
+          // Permitir 3 intentos gratis en el primer ejercicio
+          if (freeTries && ex.dataset.attempts <= freeTries) {
+            alert(`Intento ${ex.dataset.attempts}/${freeTries} gratuito. ¡Sigue intentando!`);
+            return;
+          }
+
+          lives--;
+          document.getElementById("life-count").textContent = lives;
+          ex.style.backgroundColor = "#3A0000";
+
+          if (lives <= 0) {
+            alert("😢 Te has quedado sin vidas. Inténtalo de nuevo.");
+            location.reload();
+          }
+        }
+      });
     });
   </script>
-  <script src="../assets/js/debug_progress.js"></script>
 </body>
 </html>
