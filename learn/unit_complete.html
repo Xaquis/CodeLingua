@@ -139,34 +139,31 @@
     </div>
   </main>
 
-  <footer class="site-footer">
+    <footer class="site-footer">
     <p>© 2025 CodeLingua — Arlevy Sabogal.</p>
   </footer>
 
+  <!-- Script inline final -->
   <script>
-    // 1️⃣ Leer el número de unidad desde la URL
-const params = new URLSearchParams(window.location.search);
-const unitNumber = params.get('unit') || '1';
+    const params = new URLSearchParams(window.location.search);
+    const unitNumber = params.get('unit') || '1';
+    document.querySelector('h2').textContent = `🎉 ¡Unidad ${unitNumber} completada!`;
+    document.querySelector('p').textContent = `Codder y Lin te felicitan por haber terminado todos los ejercicios de la Unidad ${unitNumber}.`;
 
-// 2️⃣ Mostrar el número de unidad en el título y mensaje
-document.querySelector('h2').textContent = `🎉 ¡Unidad ${unitNumber} completada!`;
-document.querySelector('p').textContent = `Codder y Lin te felicitan por haber terminado todos los ejercicios de la Unidad ${unitNumber}.`;
+    const codder = document.getElementById('codder');
+    const lin = document.getElementById('lin');
+    const sceneText = document.getElementById('scene-text');
 
-// 3️⃣ Animación y escena
-const codder = document.getElementById('codder');
-const lin = document.getElementById('lin');
-const sceneText = document.getElementById('scene-text');
+    setTimeout(() => {
+      codder.classList.add('high-five');
+      lin.classList.add('high-five');
+      sceneText.textContent = "Codder y Lin chocan las manos con entusiasmo.";
+    }, 1500);
 
-setTimeout(() => {
-  codder.classList.add('high-five');
-  lin.classList.add('high-five');
-  sceneText.textContent = "Codder y Lin chocan las manos con entusiasmo.";
-}, 1500);
-
-setTimeout(() => {
-  sceneText.textContent = `Codder saca su mini laptop 💻 y Lin toma un té ☕ — “Splendid teamwork in Unit ${unitNumber}!”`;
-}, 4000);
+    setTimeout(() => {
+      sceneText.textContent = `Codder saca su mini laptop 💻 y Lin toma un té ☕ — “Splendid teamwork in Unit ${unitNumber}!”`;
+    }, 4000);
   </script>
-  <script src="../assets/js/debug_progress.js"></script>
 </body>
 </html>
+
