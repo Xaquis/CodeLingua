@@ -137,3 +137,85 @@ body.light-mode .btn:hover {
 body.theme-transition {
   transition: background-color 0.6s ease, color 0.6s ease;
 }
+/* === Animaciones Lin y Codder === */
+.mascot.lin.wave {
+  animation: waveHat 2.5s ease;
+}
+@keyframes waveHat {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+.pulse {
+  animation: pulseEffect 0.6s ease;
+}
+@keyframes pulseEffect {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.mascot.lin.happy {
+  animation: jumpHappy 1s ease infinite alternate;
+}
+@keyframes jumpHappy {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+#progress-bar {
+  height: 10px;
+  background: #00ffc6;
+  width: 0%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+/* === Animaciones Codder === */
+.mascot.codder.tip-hat {
+  animation: tipHat 2s ease;
+}
+@keyframes tipHat {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(15deg); }
+  75% { transform: rotate(-8deg); }
+}
+
+.mascot.codder.victory {
+  animation: bounceVictory 1s ease infinite alternate;
+}
+@keyframes bounceVictory {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.mascot.codder.sad {
+  animation: shakeSad 0.6s ease infinite alternate;
+}
+@keyframes shakeSad {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* === Reutilización === */
+.pulse {
+  animation: pulseEffect 0.6s ease;
+}
+@keyframes pulseEffect {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#progress-bar {
+  height: 10px;
+  background: #00ffc6;
+  width: 0%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
