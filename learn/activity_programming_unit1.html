@@ -1,1 +1,103 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unidad 1 - Programación</title><link rel="stylesheet" href="../assets/css/style.css"></head><body data-unit="unit1_prog"><header class="site-header"><div class="container"><h1 class="logo">CodeLingua — Programación</h1></div></header><main class="container"><section class="lesson"><div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div class="mascot codder-avatar">@</div><div><strong>Codder</strong> — ¡Hola! En esta unidad practicarás conceptos básicos de código. Los 3 primeros intentos del primer ejercicio no quitan vidas.</div></div><div id="status" style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div id="lives">❤️ 10</div><div style="flex:1"><div style="background:#071018;border-radius:8px;padding:6px"><div id="progress-bar" style="height:10px;background:#00FFC6;width:0%;border-radius:6px"></div></div></div><div id="progress">Progreso: 0%</div></div><div id="exercise-area"><p id="question">Pregunta</p><pre id="code-snippet"><code>// código</code></pre><input id="answer" type="text" placeholder="Escribe tu respuesta"><div style="margin-top:10px"><button id="check-btn" class="small-btn">Verificar</button> <button id="next-btn" class="small-btn" disabled>Siguiente</button> <button id="complete-btn" class="small-btn" disabled>Marcar completa</button> <button id="reset-btn" class="small-btn">Reiniciar</button></div><p id="feedback"></p></div></section></main><footer class="site-footer"><div class="container"><p>© 2025 CodeLingua</p></div></footer><script src="../assets/js/activity.js" defer></script><script src="../assets/js/progress.js" defer></script><script>const progExercises=[{prompt:'Completa la palabra faltante (nombre de la función principal):',snippet:"function ____() { console.log('Hello World'); }",answers:['main']},{prompt:'¿Cuál es el operador para asignación en JavaScript?',snippet:"let x = 5; // operador ____",answers:['=','igual','assign']},{prompt:'Completa: para imprimir en consola en JS usamos:',snippet:"console.___('hola');",answers:['log']},{prompt:'¿Cómo se declara una variable en ES6?',snippet:"____ nombre = 'CodeLingua';",answers:['let','const','var']},{prompt:'¿Cuál es la palabra clave para crear una función anónima?',snippet:"const f = ____ () => {};",answers:['function','async function']}];window.CL_initActivity({unitId:'unit1_prog',exercises:progExercises});(function poll(){const k='cl_unit1_prog_completed';setInterval(()=>{if(localStorage.getItem(k)==='true'){window.CL_markUnitDone(1,'programming');}},800);})();</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- Scripts (orden correcto para dependencias) -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
+</head>
+
+<body data-unit="unit1_eng">
+  <!-- ===============================
+       ENCABEZADO PRINCIPAL
+  =============================== -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Unidad 1: Inglés Técnico</h1>
+      <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="activity_programming_unit1.html">Programación</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===============================
+       CONTENIDO PRINCIPAL
+  =============================== -->
+  <main class="container">
+    <!-- Introducción de Lin -->
+    <section id="intro-lin" class="intro-section">
+      <div class="mascot lin">🎩</div>
+      <p>
+        ¡Hola, soy <strong>Lin</strong>! 🎩📚 Hoy practicaremos vocabulario técnico que todo programador debe dominar.
+        Recuerda: los tres primeros intentos del primer ejercicio no restan vidas. 😉
+      </p>
+    </section>
+
+    <!-- Bloque de ejercicios -->
+    <section id="exercises">
+      <h2>Ejercicios</h2>
+
+      <div class="exercise" data-answer="variable" data-free-tries="3">
+        <p>1️⃣ Traduce al inglés: “Variable”.</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+      </div>
+
+      <div class="exercise" data-answer="loop">
+        <p>2️⃣ ¿Cómo se dice “bucle” o “ciclo” en inglés?</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+      </div>
+
+      <div class="exercise" data-answer="function">
+        <p>3️⃣ ¿Qué palabra describe un conjunto de instrucciones reutilizables en código?</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+      </div>
+
+      <div class="exercise" data-answer="boolean">
+        <p>4️⃣ ¿Qué tipo de dato puede ser solo <em>true</em> o <em>false</em>?</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+      </div>
+
+      <div class="exercise" data-answer="if">
+        <p>5️⃣ Escribe la palabra clave en inglés que se usa para condiciones.</p>
+        <input type="text" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+      </div>
+    </section>
+
+    <!-- Contador de vidas -->
+    <section id="lives">
+      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+    </section>
+
+    <!-- Pantalla de finalización -->
+    <section id="complete" class="hidden">
+      <p>¡Increíble trabajo, lingüista del código! Has completado todos los ejercicios de esta unidad. 🎯</p>
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
+        <button class="btn">Continuar</button>
+      </a>
+    </section>
+  </main>
+
+  <!-- ===============================
+       PIE DE PÁGINA
+  =============================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

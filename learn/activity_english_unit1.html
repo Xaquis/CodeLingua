@@ -1,1 +1,57 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unidad 1 - Inglés Técnico</title><link rel="stylesheet" href="../assets/css/style.css"></head><body data-unit="unit1_eng"><header class="site-header"><div class="container"><h1 class="logo">CodeLingua — Inglés Técnico</h1></div></header><main class="container"><section class="lesson"><div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div class="mascot lin-avatar">🎩</div><div><strong>Lin</strong> — Hello! In this unit you'll learn key programming vocabulary. First exercise has 3 free attempts.</div></div><div id="status" style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div id="lives">❤️ 10</div><div style="flex:1"><div style="background:#071018;border-radius:8px;padding:6px"><div id="progress-bar" style="height:10px;background:#00B8FF;width:0%;border-radius:6px"></div></div></div><div id="progress">Progress: 0%</div></div><div id="exercise-area"><p id="question">Question</p><pre id="code-snippet"><code>// example</code></pre><input id="answer" type="text" placeholder="Type your answer"><div style="margin-top:10px"><button id="check-btn" class="small-btn">Check</button> <button id="next-btn" class="small-btn" disabled>Next</button> <button id="complete-btn" class="small-btn" disabled>Complete</button> <button id="reset-btn" class="small-btn">Reset</button></div><p id="feedback"></p></div></section></main><footer class="site-footer"><div class="container"><p>© 2025 CodeLingua</p></div></footer><script src="../assets/js/activity.js" defer></script><script src="../assets/js/progress.js" defer></script><script>const engExercises=[{prompt:"Translate to English: 'Variable'",snippet:"Variable → ________",answers:['variable']},{prompt:"How do you say 'función' in English?",snippet:"Función → ________",answers:['function']},{prompt:"Translate to English: 'bucle' (programming)",snippet:"Bucle → ________",answers:['loop']},{prompt:"Translate: 'imprimir en consola'",snippet:"console.____('hello');",answers:['log']},{prompt:"Translate to English: 'asignación'",snippet:"Asignación → ________",answers:['assignment','assign']}];window.CL_initActivity({unitId:'unit1_eng',exercises:engExercises});(function poll(){const k='cl_unit1_eng_completed';setInterval(()=>{if(localStorage.getItem(k)==='true'){window.CL_markUnitDone(1,'english');}},800);})();</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unidad 1 - Inglés Técnico | Future</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- Dependencias JS -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity_english.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
+</head>
+
+<body data-unit="unit1_eng">
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Unidad 1: Inglés Técnico</h1>
+      <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="activity_programming_unit1.html">Programación</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="intro-lin" class="intro-section">
+      <div class="mascot lin">🎩</div>
+      <p>
+        ¡Saludos! Soy <strong>Lin</strong> 🎩💬 y te acompañaré a practicar vocabulario técnico en inglés.
+        Los primeros ejercicios son sencillos, pero irán subiendo de nivel. ¡Let's begin!
+      </p>
+    </section>
+
+    <section id="exercises"></section>
+
+    <section id="lives">
+      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+    </section>
+
+    <section id="complete" class="hidden">
+      <p>🏆 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. 🚀</p>
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
+        <button class="btn">Continuar</button>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Future — Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

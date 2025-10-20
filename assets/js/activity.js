@@ -1,1 +1,44 @@
-(function(){window.CL_initActivity=function(config){const unitId=config.unitId;const exercises=config.exercises||[];const total=exercises.length;const livesKey='cl_'+unitId+'_lives';const progKey='cl_'+unitId+'_progress';const doneKey='cl_'+unitId+'_completed';let lives=parseInt(localStorage.getItem(livesKey))||10;let progress=parseInt(localStorage.getItem(progKey))||0;let index=parseInt(localStorage.getItem(unitId+'_index'))||0;const livesEl=document.getElementById('lives');const progressEl=document.getElementById('progress');const questionEl=document.getElementById('question');const codeEl=document.getElementById('code-snippet');const answerInput=document.getElementById('answer');const checkBtn=document.getElementById('check-btn');const nextBtn=document.getElementById('next-btn');const feedbackEl=document.getElementById('feedback');const progressBar=document.getElementById('progress-bar');function save(){localStorage.setItem(livesKey,lives);localStorage.setItem(progKey,progress);localStorage.setItem(unitId+'_index',index)}function updateUI(){if(livesEl) livesEl.textContent='❤️ '+lives; if(progressEl) progressEl.textContent='Progreso: '+progress+'%'; if(progressBar) progressBar.style.width=progress+'%'}function render(){const ex=exercises[index]; if(!ex) return; if(questionEl) questionEl.textContent=ex.prompt; if(codeEl) codeEl.textContent=ex.snippet; if(answerInput) answerInput.value=''; if(feedbackEl) feedbackEl.textContent=''; if(nextBtn) nextBtn.disabled=true; localStorage.setItem(unitId+'_attempts',0); save(); updateUI()}if(!checkBtn) return;checkBtn.addEventListener('click',()=>{const ex=exercises[index];const user=(answerInput.value||'').trim().toLowerCase();let attempts=parseInt(localStorage.getItem(unitId+'_attempts'))||0;attempts++;localStorage.setItem(unitId+'_attempts',attempts);const free=(index===0)?3:0;const correct=ex.answers.some(a=>a.toLowerCase()===user);if(correct){if(feedbackEl){feedbackEl.textContent='✅ ¡Correcto!';feedbackEl.style.color='#8BC34A'}const per=Math.round(100/total);progress=Math.min(100,progress+per);nextBtn.disabled=false; if(progress>=100){localStorage.setItem(doneKey,'true'); if(feedbackEl){feedbackEl.textContent='🎉 ¡Unidad completada!'}}} else { if(attempts<=free){ if(feedbackEl){feedbackEl.textContent=`⚠️ Incorrecto — intento ${attempts}/${free}. No pierdes vida.`;feedbackEl.style.color='#FFC107'} } else { lives--; if(feedbackEl){feedbackEl.textContent='❌ Incorrecto. Vidas: '+lives;feedbackEl.style.color='#FF5252'} if(lives<=0){ if(feedbackEl){feedbackEl.textContent='💀 Sin vidas. Reinicia la unidad.'} lives=10; progress=0; index=0; localStorage.removeItem(doneKey) } } } save(); updateUI()}); if(nextBtn){nextBtn.addEventListener('click',()=>{ if(index<total-1){ index++; render(); save(); } }); } render();};})();
+const exercises = [
+  {
+    id: 1,
+    type: "text",
+    question: "En programación, una _____ se usa para almacenar información temporalmente.",
+    answer: "variable",
+    hint: "Empieza con 'v' y guarda datos.",
+    difficulty: "easy"
+  },
+  {
+    id: 2,
+    type: "multiple",
+    question: "¿Cuál palabra clave se usa para evaluar condiciones?",
+    options: ["if", "loop", "case", "def"],
+    answer: "if",
+    hint: "Se usa junto con 'else'.",
+    difficulty: "easy"
+  },
+  {
+    id: 3,
+    type: "boolean",
+    question: "El ciclo 'for' sirve para repetir código varias veces. (V/F)",
+    answer: "true",
+    hint: "Sí, recorre elementos o rangos.",
+    difficulty: "medium"
+  },
+  {
+    id: 4,
+    type: "multiple",
+    question: "Una función en JavaScript se declara con la palabra clave:",
+    options: ["method", "define", "function", "proc"],
+    answer: "function",
+    hint: "Empieza con 'fun...'.",
+    difficulty: "medium"
+  },
+  {
+    id: 5,
+    type: "text",
+    question: "¿Qué tipo de dato solo puede ser verdadero o falso?",
+    answer: "boolean",
+    hint: "Empieza con 'b'.",
+    difficulty: "hard"
+  }
+];

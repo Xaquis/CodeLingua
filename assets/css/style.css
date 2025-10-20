@@ -1,16 +1,139 @@
-:root{--bg:#091217;--panel:#0f1720;--accent:#00FFC6;--accent2:#00B8FF;--muted:#9FB5B9;--card:#132025}
-*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial;background:linear-gradient(180deg,var(--bg),#030405);color:#E0E0E0;transition:background-color .3s,color .3s;padding-bottom:60px}
-.container{max-width:980px;margin:0 auto;padding:20px}.site-header{background:var(--panel);padding:14px 0;position:sticky;top:0;z-index:50}
-.logo{font-size:20px;color:var(--accent);margin:0}nav a{color:#dfeff0;text-decoration:none;margin:0 10px;font-weight:600}
-.hero{padding:40px 20px;text-align:center}.buttons{margin-top:18px;display:flex;gap:12px;justify-content:center}
-.btn{background:var(--accent);color:#001;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
-.btn.outline{background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--accent2)}
-.section,section{background:var(--card);padding:18px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,0.5)}
-.site-footer{margin-top:30px;text-align:center;padding:18px;color:var(--muted)}
-.mascot{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;font-size:26px}
-.codder-avatar{background:var(--accent);color:#051214;padding:12px;border-radius:50%}
-.lin-avatar{background:linear-gradient(45deg,#00247D,#CF142B);color:white;padding:12px;border-radius:50%}
-.exercise{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));padding:12px;border-radius:10px;margin-bottom:10px}
-.exercise input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
-.small-btn{padding:8px 10px;border-radius:8px;border:none;background:var(--accent2);color:#001;cursor:pointer}
-#debug-panel{font-family:monospace;font-size:13px;background:rgba(0,0,0,0.6);padding:8px;border-radius:8px} .hidden{display:none}
+/* =====================================
+   CODELINGUA — THEME FUTURE (v2)
+   Autor: Arlevy Sabogal (2025)
+   ===================================== */
+
+/* 🎨 Transición global */
+* {
+  transition: 
+    background-color 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.5s ease,
+    border-color 0.4s ease;
+}
+
+/* 🌑 Modo oscuro base */
+body {
+  background-color: #0A0F14;
+  color: #D7FFF1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* ✨ Efecto de resplandor Future */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 50% 10%, rgba(0, 255, 198, 0.06), transparent 70%);
+  z-index: -1;
+}
+
+/* Encabezado y pie */
+header, footer {
+  background-color: #111923;
+  color: #C5FCEA;
+  box-shadow: 0 0 12px rgba(0, 255, 198, 0.15);
+  text-align: center;
+  padding: 16px 0;
+}
+
+header h1, footer p {
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Botones y controles */
+button, .btn {
+  background-color: #00FFC6;
+  color: #0A0A0A;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.25);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover, .btn:hover {
+  background-color: #00BFA5;
+  color: #FFF;
+  box-shadow: 0 0 15px rgba(0, 255, 198, 0.45);
+  transform: scale(1.03);
+}
+
+/* 🧭 Navegación */
+nav a {
+  color: #C5FCEA;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.3s;
+}
+
+nav a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #00FFC6;
+  transition: width 0.3s;
+  width: 0;
+  margin: auto;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Secciones */
+section {
+  background-color: #141D25;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.15);
+  max-width: 900px;
+}
+
+/* 🌕 Modo claro */
+body.light-mode {
+  background-color: #F5FAFF;
+  color: #0F1A21;
+}
+
+body.light-mode header,
+body.light-mode footer {
+  background-color: #E8F8F9;
+  color: #0D1B1E;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+body.light-mode section {
+  background-color: #FFFFFF;
+  color: #111;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+body.light-mode button, 
+body.light-mode .btn {
+  background-color: #007BFF;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+}
+
+body.light-mode button:hover, 
+body.light-mode .btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+}
+
+/* ⚡ Transición visual del cambio */
+body.theme-transition {
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
