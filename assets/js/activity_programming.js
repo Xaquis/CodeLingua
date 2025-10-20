@@ -1,42 +1,47 @@
 // =====================================================
-// CodeLingua — Unidad 1: Inglés Técnico
+// CodeLingua — Unidad 1: Fundamentos de Programación (Java)
 // Autor: Arlevy Sabogal — 2025
 // =====================================================
 
 (function () {
   // ===============================
-  // CONFIGURACIÓN DE LA UNIDAD
+  // VARIABLES PRINCIPALES
   // ===============================
   const exercises = [
     {
-      question: "1️⃣ Traduce al inglés: 'variable'.",
-      options: ["loop", "variable", "function", "class"],
+      question: "1️⃣ ¿Cómo se declara una variable entera en Java?",
+      options: ["int numero;", "integer numero;", "var numero;", "num numero;"],
+      correct: 0,
+      hint: "Recuerda que Java usa tipos de datos primitivos.",
+    },
+    {
+      question: "2️⃣ ¿Qué palabra se usa para definir una clase en Java?",
+      options: ["object", "class", "define", "type"],
       correct: 1,
-      hint: "Es casi igual en ambos idiomas, pero sin acento.",
+      hint: "Piensa en Programación Orientada a Objetos.",
     },
     {
-      question: "2️⃣ ¿Qué palabra significa 'función' en inglés?",
-      options: ["function", "feature", "loop", "method"],
-      correct: 0,
-      hint: "Comienza con 'f' y se usa mucho en programación.",
+      question: "3️⃣ ¿Qué ciclo se usa para repetir mientras una condición es verdadera?",
+      options: ["for", "repeat", "loop", "while"],
+      correct: 3,
+      hint: "Se traduce como 'mientras'.",
     },
     {
-      question: "3️⃣ ¿Cuál de las siguientes significa 'bucle' en inglés?",
-      options: ["condition", "loop", "while", "repeat"],
+      question: "4️⃣ ¿Cómo se imprime texto en la consola en Java?",
+      options: [
+        "Console.log()",
+        "echo()",
+        "System.out.println()",
+        "print()",
+      ],
+      correct: 2,
+      hint: "Comienza con 'System' y termina con 'println'.",
+    },
+    {
+      question: "5️⃣ ¿Qué tipo de dato puede almacenar valores verdaderos o falsos?",
+      options: ["bool", "boolean", "logical", "bit"],
       correct: 1,
-      hint: "Se usa para repetir instrucciones.",
-    },
-    {
-      question: "4️⃣ ¿Cómo se dice 'imprimir en pantalla' en inglés técnico?",
-      options: ["to print", "to copy", "to write", "to show"],
-      correct: 0,
-      hint: "Es un verbo que también se usa para impresoras.",
-    },
-    {
-      question: "5️⃣ ¿Qué palabra describe una comparación lógica?",
-      options: ["boolean", "string", "integer", "float"],
-      correct: 0,
-      hint: "El tipo de dato que solo puede ser true o false.",
+      hint: "En Java, esta palabra está completamente escrita.",
     },
   ];
 
@@ -90,17 +95,17 @@
 
     if (selected === q.correct) {
       correctAnswers++;
-      feedback.textContent = "✅ Correct! Great job!";
+      feedback.textContent = "✅ ¡Correcto!";
       feedback.style.color = "#00FFC6";
     } else {
       lives--;
-      feedback.textContent = "❌ Wrong answer. You lost one life.";
+      feedback.textContent = "❌ Incorrecto. Pierdes una vida.";
       feedback.style.color = "#FF6B6B";
     }
 
     updateProgress();
 
-    // Esperar antes de pasar a la siguiente
+    // Esperar antes de la siguiente pregunta
     setTimeout(() => {
       currentQuestion++;
       feedback.textContent = "";
@@ -114,12 +119,12 @@
     lifeDisplay.textContent = lives;
     const progress = (correctAnswers / exercises.length) * 100;
     progressBar.style.width = `${progress}%`;
-    progressText.textContent = `Progress: ${Math.round(progress)}%`;
+    progressText.textContent = `Progreso: ${Math.round(progress)}%`;
   }
 
   function handleDefeat() {
     feedback.innerHTML =
-      "💀 You ran out of lives.<br>Try again in 5 minutes.";
+      "💀 Te has quedado sin vidas.<br>Vuelve en 5 minutos para intentarlo de nuevo.";
     questionContainer.innerHTML = "";
     disableAllButtons();
     setTimeout(resetLives, 300000); // 5 minutos
@@ -129,7 +134,7 @@
     lives = totalLives;
     correctAnswers = 0;
     currentQuestion = 0;
-    feedback.textContent = "💪 You got new lives! Try again!";
+    feedback.textContent = "💪 ¡Tienes vidas nuevas! Inténtalo otra vez.";
     renderQuestion();
     updateProgress();
   }
@@ -144,7 +149,7 @@
     questionContainer.innerHTML = "";
     feedback.textContent = "";
     completeSection.classList.remove("hidden");
-    window.CodeLingua.saveCompletion(1, "eng");
+    window.CodeLingua.saveCompletion(1, "prog");
   }
 
   // ===============================

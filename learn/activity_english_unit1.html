@@ -64,5 +64,58 @@
       <p>© 2025 Future — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const codder = document.querySelector(".mascot.codder");
+  const livesEl = document.getElementById("life-count");
+  const progressBar = document.getElementById("progress-bar");
+  const feedback = document.getElementById("feedback");
+
+  // 🧢 Animación inicial: Codder levanta la gorra
+  codder.classList.add("tip-hat");
+  setTimeout(() => codder.classList.remove("tip-hat"), 2500);
+
+  // 🧩 Progreso y vidas
+  let correctAnswers = 0;
+
+  function showFeedback(correct) {
+    feedback.textContent = correct ? "✅ ¡Correcto!" : "❌ Intenta de nuevo";
+    feedback.style.color = correct ? "#00ffc6" : "#ff4d4d";
+    feedback.classList.add("pulse");
+    setTimeout(() => feedback.classList.remove("pulse"), 800);
+  }
+
+  document.querySelectorAll(".check").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = btn.previousElementSibling;
+      const answer = btn.parentElement.dataset.answer.trim().toLowerCase();
+      const value = input.value.trim().toLowerCase();
+
+      if (value === answer) {
+        correctAnswers++;
+        progressBar.style.width = `${(correctAnswers / 5) * 100}%`;
+        showFeedback(true);
+      } else {
+        let lives = parseInt(livesEl.textContent);
+        if (lives > 0) livesEl.textContent = lives - 1;
+        showFeedback(false);
+      }
+
+      if (correctAnswers >= 5) {
+        feedback.textContent = "🎉 ¡Unidad completada!";
+        codder.classList.add("victory");
+      }
+
+      if (parseInt(livesEl.textContent) <= 0) {
+        feedback.textContent = "💀 Sin vidas. Espera 5 minutos para reintentar.";
+        codder.classList.add("sad");
+        document.querySelectorAll(".check").forEach(b => b.disabled = true);
+      }
+    });
+  });
+});
+</script>
+
+
 </body>
 </html>
