@@ -1,139 +1,144 @@
 // ===============================
-// Future - Technical English Unit 1
-// Autor: Arlevy Sabogal (2025)
+// CodeLingua - English Activity System v2.0
+// Interactivo con Lin 🇬🇧🎩
 // ===============================
 
-document.addEventListener('DOMContentLoaded', () => {
-  const exercises = [
+document.addEventListener("DOMContentLoaded", () => {
+  const lifeCount = document.getElementById("life-count");
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress");
+  const feedbackEl = document.getElementById("feedback");
+  const questionContainer = document.getElementById("question-container");
+  const completeSection = document.getElementById("complete");
+
+  let lives = 10;
+  let correctAnswers = 0;
+  const totalQuestions = 5;
+  const cooldownTime = 5 * 60 * 1000; // 5 minutos
+
+  // 🔒 Comprobar si está en cooldown
+  const lastDeath = localStorage.getItem("lastDeathTime_english");
+  if (lastDeath && Date.now() - parseInt(lastDeath) < cooldownTime) {
+    const remaining = Math.ceil((cooldownTime - (Date.now() - parseInt(lastDeath))) / 60000);
+    document.body.innerHTML = `
+      <main class="container">
+        <h2>⏳ Sin vidas</h2>
+        <p>Debes esperar ${remaining} minuto(s) para intentarlo nuevamente.</p>
+      </main>
+    `;
+    return;
+  }
+
+  // 📘 Preguntas de inglés técnico — nivel básico
+  const questions = [
     {
-      id: 1,
-      type: "text",
-      question: "The word used to store temporary information is called a _____.",
-      answer: "variable",
-      hint: "It starts with 'v'.",
-      difficulty: "easy"
-    },
-    {
-      id: 2,
       type: "multiple",
-      question: "A block of reusable code is called a:",
-      options: ["loop", "variable", "function", "object"],
-      answer: "function",
-      hint: "You can call it with parentheses.",
-      difficulty: "easy"
+      q: "What is the English word for 'función'?",
+      options: ["function", "loop", "variable", "condition"],
+      a: "function",
     },
     {
-      id: 3,
-      type: "boolean",
-      question: "A loop executes a block of code once. (True/False)",
-      answer: "false",
-      hint: "It repeats multiple times.",
-      difficulty: "medium"
+      type: "truefalse",
+      q: "‘Loop’ means a repetition structure in programming.",
+      a: "true",
     },
     {
-      id: 4,
       type: "multiple",
-      question: "When a program has an unexpected problem, it is called a:",
-      options: ["error", "bug", "exception", "alert"],
-      answer: "bug",
-      hint: "🐛 Think of small insects in code.",
-      difficulty: "medium"
+      q: "Choose the correct translation for 'variable'.",
+      options: ["constant", "variable", "method", "library"],
+      a: "variable",
     },
     {
-      id: 5,
-      type: "text",
-      question: "The process of converting source code into executable code is called _____.",
-      answer: "compilation",
-      hint: "Starts with 'c' and ends with 'tion'.",
-      difficulty: "hard"
-    }
+      type: "truefalse",
+      q: "‘If’ is used to declare a function in English.",
+      a: "false",
+    },
+    {
+      type: "multiple",
+      q: "Select the correct meaning of ‘debug’.",
+      options: ["create errors", "fix errors", "ignore code", "write comments"],
+      a: "fix errors",
+    },
   ];
 
-  let current = 0;
-  let lives = 10;
-  const lifeCount = document.getElementById('life-count');
-  const exerciseArea = document.getElementById('exercises');
-  const completeSection = document.getElementById('complete');
+  let currentQuestion = 0;
 
-  function renderExercise(ex) {
-    exerciseArea.innerHTML = `
-      <h2>Exercise ${ex.id} (${ex.difficulty})</h2>
-      <p>${ex.question}</p>
-      <div id="answer-area"></div>
-      <button id="check" class="btn">Check</button>
-      <button id="hint" class="btn outline hidden">Hint</button>
-      <p id="feedback"></p>
-    `;
+  function updateUI() {
+    lifeCount.textContent = lives;
+    const progress = Math.min((correctAnswers / totalQuestions) * 100, 100);
+    progressBar.style.width = `${progress}%`;
+    progressText.textContent = `Progress: ${Math.floor(progress)}%`;
+  }
 
-    const area = document.getElementById('answer-area');
-    if (ex.type === "text") {
-      area.innerHTML = `<input type="text" id="answer" placeholder="Type your answer...">`;
-    } else if (ex.type === "multiple") {
-      area.innerHTML = ex.options.map(opt => `
-        <label><input type="radio" name="answer" value="${opt}"> ${opt}</label>
-      `).join('<br>');
-    } else if (ex.type === "boolean") {
-      area.innerHTML = `
-        <label><input type="radio" name="answer" value="true"> True</label><br>
-        <label><input type="radio" name="answer" value="false"> False</label>
-      `;
+  function renderQuestion() {
+    if (correctAnswers >= totalQuestions) {
+      completeUnit();
+      return;
     }
 
-    const btnCheck = document.getElementById('check');
-    const btnHint = document.getElementById('hint');
-    const feedback = document.getElementById('feedback');
+    const q = questions[currentQuestion];
+    questionContainer.innerHTML = `<p>${q.q}</p>`;
 
-    btnCheck.addEventListener('click', () => {
-      const userAnswer = getUserAnswer(ex.type);
-      if (!userAnswer) {
-        feedback.textContent = "⚠️ Please select or type an answer.";
+    if (q.type === "multiple") {
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.classList.add("option-btn");
+        btn.addEventListener("click", () => checkAnswer(opt));
+        questionContainer.appendChild(btn);
+      });
+    } else if (q.type === "truefalse") {
+      ["True", "False"].forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.classList.add("option-btn");
+        btn.addEventListener("click", () => checkAnswer(opt.toLowerCase()));
+        questionContainer.appendChild(btn);
+      });
+    }
+
+    feedbackEl.textContent = "";
+  }
+
+  function checkAnswer(selected) {
+    const correct = questions[currentQuestion].a.toLowerCase();
+    if (selected.toLowerCase() === correct) {
+      correctAnswers++;
+      feedbackEl.textContent = "✅ Correct!";
+      feedbackEl.style.color = "#00FFC6";
+      updateUI();
+      nextQuestion();
+    } else {
+      lives--;
+      feedbackEl.textContent = "❌ Incorrect. Try again!";
+      feedbackEl.style.color = "#FF5252";
+      if (lives <= 0) {
+        localStorage.setItem("lastDeathTime_english", Date.now());
+        alert("😢 No lives left. Please wait 5 minutes before retrying.");
+        window.location.reload();
         return;
       }
-
-      if (userAnswer.toLowerCase() === ex.answer.toLowerCase()) {
-        feedback.textContent = "✅ Correct!";
-        nextExercise();
-      } else {
-        lives--;
-        lifeCount.textContent = lives;
-        feedback.textContent = `❌ Incorrect. Lives left: ${lives}`;
-        btnHint.classList.remove('hidden');
-        if (lives <= 0) {
-          feedback.textContent = "💀 No lives left. Restart the unit.";
-          btnCheck.disabled = true;
-        }
-      }
-    });
-
-    btnHint.addEventListener('click', () => {
-      feedback.textContent = `💡 Hint: ${ex.hint}`;
-      btnHint.disabled = true;
-    });
-  }
-
-  function getUserAnswer(type) {
-    if (type === "text") {
-      return document.getElementById('answer').value.trim();
-    } else {
-      const selected = document.querySelector('input[name="answer"]:checked');
-      return selected ? selected.value : "";
+      updateUI();
+      nextQuestion();
     }
   }
 
-  function nextExercise() {
-    current++;
-    if (current < exercises.length) {
-      renderExercise(exercises[current]);
-    } else {
-      showCompletion();
-    }
+  function nextQuestion() {
+    setTimeout(() => {
+      currentQuestion = (currentQuestion + 1) % questions.length;
+      renderQuestion();
+    }, 1000);
   }
 
-  function showCompletion() {
-    exerciseArea.classList.add('hidden');
-    completeSection.classList.remove('hidden');
-    window.CodeLingua?.saveCompletion(1, 'eng');
+  function completeUnit() {
+    feedbackEl.textContent = "🎉 Excellent! You have completed this unit!";
+    feedbackEl.style.color = "#00FFC6";
+    window.CodeLingua.saveCompletion(1, "eng");
+    setTimeout(() => {
+      window.location.href = "unit_complete.html?unit=1";
+    }, 1500);
   }
 
-  renderExercise(exercises[current]);
+  updateUI();
+  renderQuestion();
 });

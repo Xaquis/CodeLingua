@@ -26,20 +26,31 @@
   </header>
 
   <main class="container">
+    <!-- Introducción -->
     <section id="intro-lin" class="intro-section">
-      <div class="mascot lin">🎩</div>
+      <div class="mascot lin">🎩🇬🇧</div>
       <p>
-        ¡Saludos! Soy <strong>Lin</strong> 🎩💬 y te acompañaré a practicar vocabulario técnico en inglés.
-        Los primeros ejercicios son sencillos, pero irán subiendo de nivel. ¡Let's begin!
+        ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧 — aprenderemos inglés técnico juntos.  
+        Tienes <strong>10 vidas</strong> y <strong>5 ejercicios</strong>. ¡Buena suerte!
       </p>
     </section>
 
-    <section id="exercises"></section>
-
-    <section id="lives">
+    <!-- Estado general -->
+    <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+      <div class="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+      <p id="progress">Progreso: 0%</p>
     </section>
 
+    <!-- Contenedor de ejercicios -->
+    <section id="activity">
+      <div id="question-container"></div>
+      <p id="feedback"></p>
+    </section>
+
+    <!-- Pantalla de finalización -->
     <section id="complete" class="hidden">
       <p>🏆 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. 🚀</p>
       <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
