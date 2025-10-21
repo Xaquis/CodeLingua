@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Inglés Técnico | Future</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-
-  <!-- Dependencias JS -->
   <script src="../assets/js/progress.js" defer></script>
   <script src="../assets/js/activity_english.js" defer></script>
   <script src="../assets/js/debug_progress.js" defer></script>
 </head>
-
 <body data-unit="unit1_eng">
   <header class="site-header">
     <div class="container">
@@ -24,98 +20,33 @@
       </nav>
     </div>
   </header>
-
   <main class="container">
-    <!-- Introducción -->
     <section id="intro-lin" class="intro-section">
       <div class="mascot lin">🎩🇬🇧</div>
-      <p>
-        ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧 — aprenderemos inglés técnico juntos.  
-        Tienes <strong>10 vidas</strong> y <strong>5 ejercicios</strong>. ¡Buena suerte!
-      </p>
+      <p>¡Hi! Soy <strong>Lin</strong> 🎩 y hoy te enseñaré vocabulario técnico en inglés.
+      Si fallas, te mostraré la respuesta correcta para que mejores paso a paso. 💪</p>
     </section>
-
-    <!-- Estado general -->
     <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
-      <div class="progress-bar-container">
-        <div id="progress-bar"></div>
-      </div>
+      <div class="progress-bar-container"><div id="progress-bar"></div></div>
       <p id="progress">Progreso: 0%</p>
     </section>
-
-    <!-- Contenedor de ejercicios -->
-    <section id="activity">
-      <div id="question-container"></div>
+    <section id="question-area">
+      <h2 id="question-text">Cargando...</h2>
+      <div id="options-container"></div>
       <p id="feedback"></p>
     </section>
-
-    <!-- Pantalla de finalización -->
     <section id="complete" class="hidden">
-      <p>🏆 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. 🚀</p>
-      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
+      <p>🎉 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. ☕🇬🇧</p>
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1,'eng')">
         <button class="btn">Continuar</button>
       </a>
     </section>
   </main>
-
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 Future — Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const codder = document.querySelector(".mascot.codder");
-  const livesEl = document.getElementById("life-count");
-  const progressBar = document.getElementById("progress-bar");
-  const feedback = document.getElementById("feedback");
-
-  // 🧢 Animación inicial: Codder levanta la gorra
-  codder.classList.add("tip-hat");
-  setTimeout(() => codder.classList.remove("tip-hat"), 2500);
-
-  // 🧩 Progreso y vidas
-  let correctAnswers = 0;
-
-  function showFeedback(correct) {
-    feedback.textContent = correct ? "✅ ¡Correcto!" : "❌ Intenta de nuevo";
-    feedback.style.color = correct ? "#00ffc6" : "#ff4d4d";
-    feedback.classList.add("pulse");
-    setTimeout(() => feedback.classList.remove("pulse"), 800);
-  }
-
-  document.querySelectorAll(".check").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const input = btn.previousElementSibling;
-      const answer = btn.parentElement.dataset.answer.trim().toLowerCase();
-      const value = input.value.trim().toLowerCase();
-
-      if (value === answer) {
-        correctAnswers++;
-        progressBar.style.width = `${(correctAnswers / 5) * 100}%`;
-        showFeedback(true);
-      } else {
-        let lives = parseInt(livesEl.textContent);
-        if (lives > 0) livesEl.textContent = lives - 1;
-        showFeedback(false);
-      }
-
-      if (correctAnswers >= 5) {
-        feedback.textContent = "🎉 ¡Unidad completada!";
-        codder.classList.add("victory");
-      }
-
-      if (parseInt(livesEl.textContent) <= 0) {
-        feedback.textContent = "💀 Sin vidas. Espera 5 minutos para reintentar.";
-        codder.classList.add("sad");
-        document.querySelectorAll(".check").forEach(b => b.disabled = true);
-      }
-    });
-  });
-});
-</script>
-
-
 </body>
 </html>
