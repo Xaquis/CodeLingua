@@ -1,18 +1,72 @@
 /* ===========================================
-   CodeLingua - Tema Future (restaurado)
+   CodeLingua - Tema Future + Light Mode
    Autor: Arlevy Sabogal
    =========================================== */
 
-/* Fondo general */
+/* ====== VARIABLES BASE (tema oscuro) ====== */
+:root {
+  --neon-green: #00FFC6;
+  --neon-blue: #00B8FF;
+  --dark-bg: #010304;
+  --panel-bg: rgba(255, 255, 255, 0.02);
+  --text-color: #E0E0E0;
+  --muted: #A7C7C5;
+  --error: #FF5E5E;
+  --success: #00ff99;
+}
+
+/* ====== BASE ====== */
 body {
-  background: radial-gradient(circle at top, #0a0f1e 0%, #010304 100%);
-  color: #e0e0e0;
+  background: radial-gradient(circle at top, #0a0f1e 0%, var(--dark-bg) 100%);
+  color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  transition: background 0.5s, color 0.5s;
+  overflow-x: hidden;
 }
 
-/* Encabezado */
+/* ====== MODO CLARO ====== */
+body.light-mode {
+  background: radial-gradient(circle at top, #f0faff 0%, #e6f4f7 100%);
+  color: #111;
+}
+
+body.light-mode .site-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 184, 255, 0.2);
+}
+
+body.light-mode .logo {
+  color: var(--neon-blue);
+  text-shadow: none;
+}
+
+body.light-mode section {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 184, 255, 0.2);
+  color: #111;
+}
+
+body.light-mode .exercise {
+  background: rgba(0, 184, 255, 0.05);
+}
+
+body.light-mode .btn,
+body.light-mode button,
+body.light-mode .check {
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+  color: #111;
+}
+
+body.light-mode .site-footer {
+  background: #fff;
+  color: #333;
+  border-top: 1px solid rgba(0, 184, 255, 0.2);
+}
+
+/* ====== ENCABEZADO ====== */
 .site-header {
   background: rgba(0, 0, 0, 0.85);
   border-bottom: 1px solid rgba(0, 255, 198, 0.3);
@@ -21,74 +75,84 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 12px rgba(0, 255, 198, 0.15);
+  animation: glowHeader 4s ease-in-out infinite alternate;
 }
 
 .logo {
-  font-size: 1.6em;
-  color: #00FFC6;
+  font-size: 1.8em;
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green);
   margin: 0;
 }
 
+@keyframes glowHeader {
+  0% { box-shadow: 0 0 8px var(--neon-green); }
+  100% { box-shadow: 0 0 25px var(--neon-blue); }
+}
+
+/* ====== NAVEGACIÓN ====== */
 nav a {
-  color: #00B8FF;
+  color: var(--neon-blue);
   text-decoration: none;
   margin: 0 10px;
-  transition: color 0.3s;
+  transition: color 0.3s, text-shadow 0.3s;
 }
 
 nav a:hover {
-  color: #00FFC6;
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green);
 }
 
-/* Botones */
-.btn, .check, button {
-  background-color: #00FFC6;
+/* ====== BOTONES ====== */
+button, .btn, .check {
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
   color: #111;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 0 12px rgba(0, 255, 198, 0.2);
 }
 
-.btn:hover, .check:hover, button:hover {
-  background-color: #00BFA5;
+button:hover, .btn:hover, .check:hover {
   color: #fff;
-  box-shadow: 0 0 12px #00FFC6;
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px var(--neon-green), 0 0 25px var(--neon-blue);
 }
 
-/* Contenedor principal */
+/* ====== CONTENEDOR ====== */
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Hero */
-.hero {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(0, 255, 198, 0.25);
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 255, 198, 0.15);
-  padding: 30px;
-  margin: 30px 0;
-  text-align: center;
-}
-
-/* Secciones */
+/* ====== TARJETAS ====== */
 section {
-  margin-bottom: 30px;
+  background: var(--panel-bg);
+  border: 1px solid rgba(0, 255, 198, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.08);
+  padding: 20px;
+  margin-bottom: 25px;
+  transition: 0.4s ease;
 }
 
-/* Ejercicios */
+section:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 198, 0.2);
+}
+
+/* ====== EJERCICIOS ====== */
 .exercise {
   background: rgba(0, 255, 198, 0.05);
-  border-left: 4px solid #00FFC6;
+  border-left: 4px solid var(--neon-green);
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
-  box-shadow: 0 0 10px rgba(0, 255, 198, 0.1);
+  box-shadow: 0 0 12px rgba(0, 255, 198, 0.1);
+  animation: fadeIn 0.8s ease;
 }
 
 .exercise input {
@@ -97,9 +161,27 @@ section {
   color: #fff;
   padding: 8px;
   border-radius: 6px;
+  width: 60%;
 }
 
-/* Barra de progreso */
+.exercise p {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.exercise.correct {
+  border-left-color: var(--neon-green);
+  background: rgba(0, 255, 198, 0.12);
+  box-shadow: 0 0 15px rgba(0, 255, 198, 0.3);
+}
+
+.exercise.wrong {
+  border-left-color: var(--error);
+  background: rgba(255, 94, 94, 0.05);
+  box-shadow: 0 0 10px rgba(255, 94, 94, 0.2);
+}
+
+/* ====== BARRA DE PROGRESO ====== */
 .progress-bar-container {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
@@ -110,24 +192,43 @@ section {
 
 #progress-bar {
   height: 10px;
-  background: linear-gradient(90deg, #00FFC6, #00B8FF);
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
   width: 0%;
   border-radius: 10px;
-  transition: width 0.3s ease;
+  transition: width 0.4s ease;
 }
 
-/* Footer */
+/* ====== VIDAS ====== */
+#lives {
+  text-align: center;
+  font-weight: bold;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* ====== FOOTER ====== */
 .site-footer {
   text-align: center;
   padding: 15px;
-  color: #A7C7C5;
+  color: var(--muted);
   border-top: 1px solid rgba(0, 255, 198, 0.2);
   font-size: 14px;
   background: rgba(0, 0, 0, 0.6);
 }
 
-/* Animaciones */
-@keyframes glow {
-  0% { box-shadow: 0 0 5px #00FFC6; }
-  100% { box-shadow: 0 0 20px #00B8FF; }
+/* ====== ANIMACIONES ====== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 600px) {
+  .exercise input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  button, .btn, .check {
+    width: 100%;
+  }
 }
