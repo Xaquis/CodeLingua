@@ -1,155 +1,129 @@
-// =====================================================
-// CodeLingua — Unidad 1: Inglés Técnico
-// Autor: Arlevy Sabogal — 2025
-// =====================================================
 
-(function () {
-  // ===============================
-  // CONFIGURACIÓN DE LA UNIDAD
-  // ===============================
+// ===============================================
+// CodeLingua - Módulo de Inglés Técnico
+// Autor: Arlevy Sabogal (2025)
+// ===============================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🎩 Lin: English module loaded!");
+
   const exercises = [
-    {
-      question: "1️⃣ Traduce al inglés: 'variable'.",
-      options: ["loop", "variable", "function", "class"],
-      correct: 1,
-      hint: "Es casi igual en ambos idiomas, pero sin acento.",
-    },
-    {
-      question: "2️⃣ ¿Qué palabra significa 'función' en inglés?",
-      options: ["function", "feature", "loop", "method"],
-      correct: 0,
-      hint: "Comienza con 'f' y se usa mucho en programación.",
-    },
-    {
-      question: "3️⃣ ¿Cuál de las siguientes significa 'bucle' en inglés?",
-      options: ["condition", "loop", "while", "repeat"],
-      correct: 1,
-      hint: "Se usa para repetir instrucciones.",
-    },
-    {
-      question: "4️⃣ ¿Cómo se dice 'imprimir en pantalla' en inglés técnico?",
-      options: ["to print", "to copy", "to write", "to show"],
-      correct: 0,
-      hint: "Es un verbo que también se usa para impresoras.",
-    },
-    {
-      question: "5️⃣ ¿Qué palabra describe una comparación lógica?",
-      options: ["boolean", "string", "integer", "float"],
-      correct: 0,
-      hint: "El tipo de dato que solo puede ser true o false.",
-    },
+    { question: "Traduce al inglés: “Variable”.", answer: "variable", hint: "Empieza con 'v' y se escribe igual en inglés." },
+    { question: "¿Cómo se dice “bucle” o “ciclo” en inglés?", answer: "loop", hint: "Empieza con 'l'." },
+    { question: "¿Qué palabra describe un conjunto de instrucciones reutilizables en código?", answer: "function", hint: "Empieza con 'f'." },
+    { question: "¿Qué tipo de dato puede ser solo true o false?", answer: "boolean", hint: "Empieza con 'b'." },
+    { question: "Escribe la palabra clave en inglés que se usa para condiciones.", answer: "if", hint: "Solo dos letras." }
   ];
 
-  const totalLives = 10;
-  let lives = totalLives;
+  let currentIndex = 0;
   let correctAnswers = 0;
-  let currentQuestion = 0;
-  let isCooldown = false;
+  let lives = 10;
+  let isWaiting = false;
+  const regenerationTime = 5 * 60 * 1000; // 5 minutos
 
-  // ===============================
-  // ELEMENTOS DEL DOM
-  // ===============================
-  const lifeDisplay = document.getElementById("life-count");
-  const progressBar = document.getElementById("progress-bar");
-  const progressText = document.getElementById("progress");
-  const questionContainer = document.getElementById("question-container");
-  const feedback = document.getElementById("feedback");
+  const questionContainer = document.getElementById("exercises");
+  const livesEl = document.getElementById("life-count");
+  const feedbackEl = document.createElement("p");
+  const progressBar = document.createElement("div");
+
+  progressBar.id = "progress-bar";
+  progressBar.style.height = "10px";
+  progressBar.style.borderRadius = "8px";
+  progressBar.style.background = "#00B8FF";
+  progressBar.style.width = "0%";
+  progressBar.style.marginTop = "8px";
+  questionContainer.prepend(progressBar);
+  questionContainer.appendChild(feedbackEl);
+
   const completeSection = document.getElementById("complete");
 
-  // ===============================
-  // FUNCIONES PRINCIPALES
-  // ===============================
-
   function renderQuestion() {
-    const q = exercises[currentQuestion];
-    if (!q) return showCompletion();
-
-    questionContainer.innerHTML = `
-      <h3>${q.question}</h3>
-      <div class="options">
-        ${q.options
-          .map(
-            (opt, index) => `
-          <button class="option-btn" data-index="${index}">${opt}</button>
-        `
-          )
-          .join("")}
-      </div>
-      <p class="hint">💡 Pista: ${q.hint}</p>
-    `;
-
-    document.querySelectorAll(".option-btn").forEach((btn) => {
-      btn.addEventListener("click", () => checkAnswer(parseInt(btn.dataset.index)));
+    const exerciseList = questionContainer.querySelectorAll(".exercise");
+    exerciseList.forEach((ex, i) => {
+      ex.style.display = i === currentIndex ? "block" : "none";
     });
+    feedbackEl.textContent = "";
   }
 
-  function checkAnswer(selected) {
-    const q = exercises[currentQuestion];
-    if (!q || isCooldown) return;
-    isCooldown = true;
+  function checkAnswer(input, correctAnswer, hint) {
+    if (isWaiting) return;
+    const userAnswer = input.value.trim().toLowerCase();
 
-    if (selected === q.correct) {
+    if (userAnswer === correctAnswer.toLowerCase()) {
+      feedbackEl.textContent = "✅ ¡Correcto!";
+      feedbackEl.style.color = "#00FFC6";
       correctAnswers++;
-      feedback.textContent = "✅ Correct! Great job!";
-      feedback.style.color = "#00FFC6";
+      updateProgress();
+
+      if (correctAnswers >= 5) {
+        completeSection.classList.remove("hidden");
+        questionContainer.style.display = "none";
+        return;
+      }
+
+      currentIndex++;
+      if (currentIndex < exercises.length) {
+        isWaiting = true;
+        setTimeout(() => {
+          isWaiting = false;
+          renderQuestion();
+        }, 1000);
+      }
     } else {
       lives--;
-      feedback.textContent = "❌ Wrong answer. You lost one life.";
-      feedback.style.color = "#FF6B6B";
+      feedbackEl.textContent = `❌ Incorrecto. Pista: ${hint}`;
+      feedbackEl.style.color = "#FF4C4C";
+      updateLives();
+      if (lives <= 0) gameOver();
     }
-
-    updateProgress();
-
-    // Esperar antes de pasar a la siguiente
-    setTimeout(() => {
-      currentQuestion++;
-      feedback.textContent = "";
-      if (lives <= 0) return handleDefeat();
-      renderQuestion();
-      isCooldown = false;
-    }, 1200);
   }
 
   function updateProgress() {
-    lifeDisplay.textContent = lives;
-    const progress = (correctAnswers / exercises.length) * 100;
-    progressBar.style.width = `${progress}%`;
-    progressText.textContent = `Progress: ${Math.round(progress)}%`;
+    const percent = (correctAnswers / exercises.length) * 100;
+    progressBar.style.width = `${percent}%`;
   }
 
-  function handleDefeat() {
-    feedback.innerHTML =
-      "💀 You ran out of lives.<br>Try again in 5 minutes.";
-    questionContainer.innerHTML = "";
-    disableAllButtons();
-    setTimeout(resetLives, 300000); // 5 minutos
+  function updateLives() {
+    livesEl.textContent = lives;
   }
 
-  function resetLives() {
-    lives = totalLives;
-    correctAnswers = 0;
-    currentQuestion = 0;
-    feedback.textContent = "💪 You got new lives! Try again!";
-    renderQuestion();
-    updateProgress();
+  function gameOver() {
+    feedbackEl.textContent = "💀 Has perdido todas tus vidas. Espera 5 minutos para reintentar.";
+    feedbackEl.style.color = "#FF4C4C";
+    isWaiting = true;
+    localStorage.setItem("eng_lives_blocked_until", Date.now() + regenerationTime);
+    setTimeout(() => {
+      lives = 10;
+      updateLives();
+      feedbackEl.textContent = "💪 Tus vidas han sido regeneradas. ¡Intenta de nuevo!";
+      feedbackEl.style.color = "#00FFC6";
+      isWaiting = false;
+      currentIndex = 0;
+      correctAnswers = 0;
+      updateProgress();
+      renderQuestion();
+    }, regenerationTime);
   }
 
-  function disableAllButtons() {
-    document.querySelectorAll(".option-btn").forEach((btn) => {
-      btn.disabled = true;
-    });
+  const blockedUntil = localStorage.getItem("eng_lives_blocked_until");
+  if (blockedUntil && Date.now() < blockedUntil) {
+    const remaining = Math.ceil((blockedUntil - Date.now()) / 60000);
+    feedbackEl.textContent = `🕓 Espera ${remaining} minutos para que se regeneren tus vidas.`;
+    feedbackEl.style.color = "#FF4C4C";
+    isWaiting = true;
+    return;
   }
 
-  function showCompletion() {
-    questionContainer.innerHTML = "";
-    feedback.textContent = "";
-    completeSection.classList.remove("hidden");
-    window.CodeLingua.saveCompletion(1, "eng");
-  }
+  const buttons = questionContainer.querySelectorAll(".check");
+  buttons.forEach((btn, i) => {
+    const input = btn.previousElementSibling;
+    const correctAnswer = exercises[i].answer;
+    const hint = exercises[i].hint;
+    btn.addEventListener("click", () => checkAnswer(input, correctAnswer, hint));
+  });
 
-  // ===============================
-  // INICIO
-  // ===============================
   renderQuestion();
+  updateLives();
   updateProgress();
-})();
+  console.log("🎩 Lin está lista para enseñar inglés técnico.");
+});

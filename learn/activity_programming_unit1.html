@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
 
   <!-- Estilos principales -->
@@ -10,7 +10,7 @@
 
   <!-- Scripts (orden correcto para dependencias) -->
   <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/activity.js" defer></script>
+  <script src="../assets/js/activity_english.js" defer></script>
   <script src="../assets/js/debug_progress.js" defer></script>
 </head>
 
@@ -35,11 +35,24 @@
   <main class="container">
     <!-- Introducción de Lin -->
     <section id="intro-lin" class="intro-section">
-      <div class="mascot lin">🎩</div>
+      <div class="mascot lin bounce">🎩🇬🇧</div>
       <p>
         ¡Hola, soy <strong>Lin</strong>! 🎩📚 Hoy practicaremos vocabulario técnico que todo programador debe dominar.
         Recuerda: los tres primeros intentos del primer ejercicio no restan vidas. 😉
       </p>
+    </section>
+
+    <!-- Barra de progreso -->
+    <section id="status" class="status-section">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <div id="lives">❤️ <span id="life-count">10</span></div>
+        <div style="flex:1">
+          <div style="background:#071018;border-radius:8px;padding:6px">
+            <div id="progress-bar" style="height:10px;background:#00FFC6;width:0%;border-radius:6px;transition:width 0.4s ease;"></div>
+          </div>
+        </div>
+        <div id="progress">Progreso: 0%</div>
+      </div>
     </section>
 
     <!-- Bloque de ejercicios -->
@@ -75,16 +88,13 @@
         <input type="text" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
       </div>
-    </section>
 
-    <!-- Contador de vidas -->
-    <section id="lives">
-      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+      <p id="feedback" class="feedback"></p>
     </section>
 
     <!-- Pantalla de finalización -->
     <section id="complete" class="hidden">
-      <p>¡Increíble trabajo, lingüista del código! Has completado todos los ejercicios de esta unidad. 🎯</p>
+      <p>🏆 ¡Excelente trabajo, lingüista del código! Has completado todos los ejercicios de esta unidad. 🚀</p>
       <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
         <button class="btn">Continuar</button>
       </a>
