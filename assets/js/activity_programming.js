@@ -1,160 +1,73 @@
-// =====================================================
-// CodeLingua — Unidad 1: Fundamentos de Programación (Java)
-// Autor: Arlevy Sabogal — 2025
-// =====================================================
+// ===============================
+// CodeLingua - Programación Unidad 1
+// ===============================
 
-(function () {
-  // ===============================
-  // VARIABLES PRINCIPALES
-  // ===============================
+document.addEventListener("DOMContentLoaded", () => {
   const exercises = [
-    {
-      question: "1️⃣ ¿Cómo se declara una variable entera en Java?",
-      options: ["int numero;", "integer numero;", "var numero;", "num numero;"],
-      correct: 0,
-      hint: "Recuerda que Java usa tipos de datos primitivos.",
-    },
-    {
-      question: "2️⃣ ¿Qué palabra se usa para definir una clase en Java?",
-      options: ["object", "class", "define", "type"],
-      correct: 1,
-      hint: "Piensa en Programación Orientada a Objetos.",
-    },
-    {
-      question: "3️⃣ ¿Qué ciclo se usa para repetir mientras una condición es verdadera?",
-      options: ["for", "repeat", "loop", "while"],
-      correct: 3,
-      hint: "Se traduce como 'mientras'.",
-    },
-    {
-      question: "4️⃣ ¿Cómo se imprime texto en la consola en Java?",
-      options: [
-        "Console.log()",
-        "echo()",
-        "System.out.println()",
-        "print()",
-      ],
-      correct: 2,
-      hint: "Comienza con 'System' y termina con 'println'.",
-    },
-    {
-      question: "5️⃣ ¿Qué tipo de dato puede almacenar valores verdaderos o falsos?",
-      options: ["bool", "boolean", "logical", "bit"],
-      correct: 1,
-      hint: "En Java, esta palabra está completamente escrita.",
-    },
+    { q: "1️⃣ En programación, una _____ se usa para almacenar datos.", options: ["función", "variable", "bucle", "boolean"], answer: "variable" },
+    { q: "2️⃣ La palabra clave usada para condiciones es:", options: ["if", "loop", "return", "case"], answer: "if" },
+    { q: "3️⃣ Una estructura que repite código varias veces se llama:", options: ["loop", "var", "array", "switch"], answer: "loop" },
+    { q: "4️⃣ Un conjunto de instrucciones agrupadas se llama:", options: ["método", "función", "dato", "objeto"], answer: "función" },
+    { q: "5️⃣ Un valor que puede ser verdadero o falso es:", options: ["cadena", "boolean", "entero", "condición"], answer: "boolean" }
   ];
 
-  const totalLives = 10;
-  let lives = totalLives;
-  let correctAnswers = 0;
-  let currentQuestion = 0;
-  let isCooldown = false;
+  let current = 0;
+  let correct = 0;
+  let lives = 10;
+  let freeTries = 3;
 
-  // ===============================
-  // ELEMENTOS DEL DOM
-  // ===============================
-  const lifeDisplay = document.getElementById("life-count");
+  const lifeEl = document.getElementById("life-count");
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress");
-  const questionContainer = document.getElementById("question-container");
+  const exercisesEl = document.getElementById("exercises");
   const feedback = document.getElementById("feedback");
   const completeSection = document.getElementById("complete");
 
-  // ===============================
-  // FUNCIONES PRINCIPALES
-  // ===============================
+  function loadExercise() {
+    if (current >= exercises.length) {
+      completeSection.classList.remove("hidden");
+      exercisesEl.innerHTML = "";
+      feedback.textContent = "";
+      window.CodeLingua.saveCompletion(1, "prog");
+      return;
+    }
 
-  function renderQuestion() {
-    const q = exercises[currentQuestion];
-    if (!q) return showCompletion();
-
-    questionContainer.innerHTML = `
-      <h3>${q.question}</h3>
-      <div class="options">
-        ${q.options
-          .map(
-            (opt, index) => `
-          <button class="option-btn" data-index="${index}">${opt}</button>
-        `
-          )
-          .join("")}
+    const ex = exercises[current];
+    exercisesEl.innerHTML = `
+      <div class="exercise">
+        <p>${ex.q}</p>
+        ${ex.options.map(opt => `<button class="option">${opt}</button>`).join("")}
       </div>
-      <p class="hint">💡 Pista: ${q.hint}</p>
     `;
 
-    document.querySelectorAll(".option-btn").forEach((btn) => {
-      btn.addEventListener("click", () => checkAnswer(parseInt(btn.dataset.index)));
+    document.querySelectorAll(".option").forEach(btn => {
+      btn.addEventListener("click", () => checkAnswer(btn.textContent));
     });
   }
 
   function checkAnswer(selected) {
-    const q = exercises[currentQuestion];
-    if (!q || isCooldown) return;
-    isCooldown = true;
-
-    if (selected === q.correct) {
-      correctAnswers++;
+    const ex = exercises[current];
+    if (selected.toLowerCase() === ex.answer.toLowerCase()) {
+      correct++;
       feedback.textContent = "✅ ¡Correcto!";
       feedback.style.color = "#00FFC6";
+      progressBar.style.width = `${(correct / exercises.length) * 100}%`;
+      progressText.textContent = `Progreso: ${Math.round((correct / exercises.length) * 100)}%`;
+      window.CodeLingua.speak("¡Bien hecho!");
     } else {
       lives--;
-      feedback.textContent = "❌ Incorrecto. Pierdes una vida.";
-      feedback.style.color = "#FF6B6B";
+      lifeEl.textContent = lives;
+      feedback.textContent = `❌ Incorrecto. La respuesta era "${ex.answer}".`;
+      feedback.style.color = "#FF5E5E";
+      window.CodeLingua.speak("Sigue intentando.");
+      if (lives <= 0) {
+        alert("😢 Te has quedado sin vidas. Vuelve a intentarlo en 5 minutos.");
+        return;
+      }
     }
-
-    updateProgress();
-
-    // Esperar antes de la siguiente pregunta
-    setTimeout(() => {
-      currentQuestion++;
-      feedback.textContent = "";
-      if (lives <= 0) return handleDefeat();
-      renderQuestion();
-      isCooldown = false;
-    }, 1200);
+    current++;
+    setTimeout(loadExercise, 1500);
   }
 
-  function updateProgress() {
-    lifeDisplay.textContent = lives;
-    const progress = (correctAnswers / exercises.length) * 100;
-    progressBar.style.width = `${progress}%`;
-    progressText.textContent = `Progreso: ${Math.round(progress)}%`;
-  }
-
-  function handleDefeat() {
-    feedback.innerHTML =
-      "💀 Te has quedado sin vidas.<br>Vuelve en 5 minutos para intentarlo de nuevo.";
-    questionContainer.innerHTML = "";
-    disableAllButtons();
-    setTimeout(resetLives, 300000); // 5 minutos
-  }
-
-  function resetLives() {
-    lives = totalLives;
-    correctAnswers = 0;
-    currentQuestion = 0;
-    feedback.textContent = "💪 ¡Tienes vidas nuevas! Inténtalo otra vez.";
-    renderQuestion();
-    updateProgress();
-  }
-
-  function disableAllButtons() {
-    document.querySelectorAll(".option-btn").forEach((btn) => {
-      btn.disabled = true;
-    });
-  }
-
-  function showCompletion() {
-    questionContainer.innerHTML = "";
-    feedback.textContent = "";
-    completeSection.classList.remove("hidden");
-    window.CodeLingua.saveCompletion(1, "prog");
-  }
-
-  // ===============================
-  // INICIO
-  // ===============================
-  renderQuestion();
-  updateProgress();
-})();
+  loadExercise();
+});
