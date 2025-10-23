@@ -1,72 +1,104 @@
-// ===============================
-// CodeLingua - Inglés Técnico Unidad 1
-// ===============================
+window.CodeLingua = window.CodeLingua || {};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const exercises = [
-    { q: "1️⃣ Traduce al inglés: “Variable”.", options: ["Variable", "Loop", "Condition", "Data"], answer: "Variable" },
-    { q: "2️⃣ ¿Cómo se dice 'bucle' o 'ciclo' en inglés?", options: ["Loop", "Function", "While", "Case"], answer: "Loop" },
-    { q: "3️⃣ ¿Qué palabra describe un conjunto de instrucciones reutilizables?", options: ["Function", "Array", "Code", "Class"], answer: "Function" },
-    { q: "4️⃣ ¿Qué tipo de dato puede ser solo verdadero o falso?", options: ["Boolean", "String", "Integer", "Object"], answer: "Boolean" },
-    { q: "5️⃣ ¿Qué palabra se usa para condiciones?", options: ["If", "Else", "Check", "Compare"], answer: "If" }
-  ];
-
-  let current = 0;
-  let correct = 0;
-  let lives = 10;
-
-  const lifeEl = document.getElementById("life-count");
+  const lifeCount = document.getElementById("life-count");
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress");
-  const exercisesEl = document.getElementById("exercises");
+  const questionText = document.getElementById("question-text");
+  const optionsContainer = document.getElementById("options-container");
   const feedback = document.getElementById("feedback");
   const completeSection = document.getElementById("complete");
 
-  function loadExercise() {
-    if (current >= exercises.length) {
-      completeSection.classList.remove("hidden");
-      exercisesEl.innerHTML = "";
-      feedback.textContent = "";
-      window.CodeLingua.saveCompletion(1, "eng");
-      return;
+  let lives = 10;
+  let score = 0;
+  let currentQuestion = 0;
+
+  const questions = [
+    {
+      text: "¿Cómo se traduce al inglés la palabra “Variable”?",
+      options: ["Variable", "Constant", "Loop"],
+      answer: "Variable",
+      hint: "Es un contenedor que cambia su valor."
+    },
+    {
+      text: "¿Cuál es la traducción correcta de 'Función'?",
+      options: ["Loop", "Function", "Class"],
+      answer: "Function",
+      hint: "Agrupa código reutilizable."
+    },
+    {
+      text: "¿Cómo se dice 'Bucle' en inglés técnico?",
+      options: ["Loop", "Condition", "Branch"],
+      answer: "Loop",
+      hint: "Repite instrucciones varias veces."
+    },
+    {
+      text: "Selecciona la traducción correcta de 'Booleano':",
+      options: ["Boolean", "Number", "Character"],
+      answer: "Boolean",
+      hint: "Solo puede ser verdadero o falso."
+    },
+    {
+      text: "¿Qué palabra se usa para decir 'Compilar'?",
+      options: ["Compile", "Execute", "Print"],
+      answer: "Compile",
+      hint: "Convierte código fuente en ejecutable."
     }
+  ];
 
-    const ex = exercises[current];
-    exercisesEl.innerHTML = `
-      <div class="exercise">
-        <p>${ex.q}</p>
-        ${ex.options.map(opt => `<button class="option">${opt}</button>`).join("")}
-      </div>
-    `;
+  function renderQuestion() {
+    if (currentQuestion >= questions.length) return finishUnit();
 
-    document.querySelectorAll(".option").forEach(btn => {
-      btn.addEventListener("click", () => checkAnswer(btn.textContent));
+    const q = questions[currentQuestion];
+    questionText.textContent = q.text;
+    optionsContainer.innerHTML = "";
+    feedback.textContent = "";
+
+    q.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.classList.add("check");
+      btn.textContent = opt;
+      btn.onclick = () => checkAnswer(opt, q.answer, q.hint);
+      optionsContainer.appendChild(btn);
     });
   }
 
-  function checkAnswer(selected) {
-    const ex = exercises[current];
-    if (selected.toLowerCase() === ex.answer.toLowerCase()) {
-      correct++;
-      feedback.textContent = "✅ Correct!";
-      feedback.style.color = "#00FFC6";
-      progressBar.style.width = `${(correct / exercises.length) * 100}%`;
-      progressText.textContent = `Progress: ${Math.round((correct / exercises.length) * 100)}%`;
-      window.CodeLingua.speak("Great job!");
+  function checkAnswer(selected, correct, hint) {
+    if (selected === correct) {
+      score++;
+      feedback.textContent = "✅ Correcto!";
+      feedback.style.color = "#00ff99";
     } else {
       lives--;
-      lifeEl.textContent = lives;
-      feedback.textContent = `❌ Incorrect. The correct answer was "${ex.answer}".`;
-      feedback.style.color = "#FF5E5E";
-      window.CodeLingua.speak("Try again!");
-      if (lives <= 0) {
-        alert("💀 You've run out of lives. Try again later!");
-        return;
-      }
+      feedback.textContent = `❌ Incorrecto. Respuesta correcta: "${correct}". Pista: ${hint}`;
+      feedback.style.color = "#ff5555";
     }
-    current++;
-    setTimeout(loadExercise, 1500);
+
+    updateProgress();
+    setTimeout(() => {
+      currentQuestion++;
+      renderQuestion();
+    }, 1800);
   }
 
-  loadExercise();
+  function updateProgress() {
+    lifeCount.textContent = lives;
+    const progressPercent = Math.floor((score / questions.length) * 100);
+    progressBar.style.width = `${progressPercent}%`;
+    progressText.textContent = `Progreso: ${progressPercent}%`;
+
+    if (lives <= 0) {
+      feedback.textContent = "💀 Te quedaste sin vidas. Reintenta en 5 minutos.";
+      optionsContainer.innerHTML = "";
+    }
+  }
+
+  function finishUnit() {
+    questionText.textContent = "";
+    optionsContainer.innerHTML = "";
+    feedback.textContent = "";
+    completeSection.classList.remove("hidden");
+  }
+
+  renderQuestion();
 });

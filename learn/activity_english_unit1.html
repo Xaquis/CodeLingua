@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
+
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/activity_english.js" defer></script>
-  <script src="../assets/js/debug_progress.js" defer></script>
+  <script src="../assets/js/core/progress.js" defer></script>
+  <script src="../assets/js/core/lives.js" defer></script>
+  <script src="../assets/js/utils/feedback.js" defer></script>
+  <script src="../assets/js/modules/activity_english.js" defer></script>
 </head>
+
 <body data-unit="unit1_eng">
   <header class="site-header">
     <div class="container">
@@ -20,29 +23,34 @@
       </nav>
     </div>
   </header>
+
   <main class="container">
     <section id="intro-lin" class="intro-section">
       <div class="mascot lin">🎩🇬🇧</div>
       <p>¡Hi! Soy <strong>Lin</strong> 🎩 y hoy te enseñaré vocabulario técnico en inglés.
-      Si fallas, te mostraré la respuesta correcta para que mejores paso a paso. 💪</p>
+      Si fallas, te mostraré la respuesta correcta para que aprendas paso a paso. 💪</p>
     </section>
+
     <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
       <div class="progress-bar-container"><div id="progress-bar"></div></div>
       <p id="progress">Progreso: 0%</p>
     </section>
+
     <section id="question-area">
       <h2 id="question-text">Cargando...</h2>
       <div id="options-container"></div>
       <p id="feedback"></p>
     </section>
+
     <section id="complete" class="hidden">
       <p>🎉 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. ☕🇬🇧</p>
-      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1,'eng')">
+      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
         <button class="btn">Continuar</button>
       </a>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
