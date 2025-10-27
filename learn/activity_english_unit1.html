@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
 
+  <!-- Estilos principales -->
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/core/progress.js" defer></script>
-  <script src="../assets/js/core/lives.js" defer></script>
-  <script src="../assets/js/utils/feedback.js" defer></script>
-  <script src="../assets/js/modules/activity_english.js" defer></script>
+
+  <!-- Scripts -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
 </head>
 
 <body data-unit="unit1_eng">
@@ -25,24 +26,29 @@
   </header>
 
   <main class="container">
+    <!-- Introducción -->
     <section id="intro-lin" class="intro-section">
       <div class="mascot lin">🎩🇬🇧</div>
-      <p>¡Hi! Soy <strong>Lin</strong> 🎩 y hoy te enseñaré vocabulario técnico en inglés.
-      Si fallas, te mostraré la respuesta correcta para que aprendas paso a paso. 💪</p>
+      <p>¡Hi! Soy <strong>Lin</strong> 🎩 — aprenderemos vocabulario técnico básico.  
+      Tienes <strong>10 vidas</strong> y necesitas <strong>5 aciertos</strong> para completar la unidad.  
+      Si fallas, te mostraré la respuesta correcta. 💪</p>
     </section>
 
+    <!-- Estado -->
     <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
       <div class="progress-bar-container"><div id="progress-bar"></div></div>
       <p id="progress">Progreso: 0%</p>
     </section>
 
+    <!-- Ejercicios -->
     <section id="question-area">
       <h2 id="question-text">Cargando...</h2>
       <div id="options-container"></div>
       <p id="feedback"></p>
     </section>
 
+    <!-- Completado -->
     <section id="complete" class="hidden">
       <p>🎉 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. ☕🇬🇧</p>
       <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
@@ -56,5 +62,86 @@
       <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- Lógica de la unidad -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const questions = [
+      { q: "¿Cómo se traduce 'variable' al inglés?", options: ["Variable", "Loop", "Boolean"], answer: "Variable" },
+      { q: "¿Qué palabra significa 'bucle'?", options: ["Loop", "Condition", "Method"], answer: "Loop" },
+      { q: "¿Qué término describe un conjunto de instrucciones?", options: ["Function", "Object", "Array"], answer: "Function" },
+      { q: "¿Cuál tipo de dato puede ser true o false?", options: ["Boolean", "String", "Number"], answer: "Boolean" },
+      { q: "¿Qué palabra se usa para condiciones?", options: ["If", "Else", "Then"], answer: "If" }
+    ];
+
+    let index = 0;
+    let correctCount = 0;
+    let lives = 10;
+
+    const qText = document.getElementById("question-text");
+    const optionsC = document.getElementById("options-container");
+    const feedback = document.getElementById("feedback");
+    const progressBar = document.getElementById("progress-bar");
+    const lifeCount = document.getElementById("life-count");
+    const progressText = document.getElementById("progress");
+    const complete = document.getElementById("complete");
+
+    function updateProgress() {
+      const progress = (correctCount / 5) * 100;
+      progressBar.style.width = progress + "%";
+      progressText.textContent = `Progreso: ${progress.toFixed(0)}%`;
+    }
+
+    function renderQuestion() {
+      if (index >= questions.length) {
+        complete.classList.remove("hidden");
+        return;
+      }
+
+      const q = questions[index];
+      qText.textContent = q.q;
+      optionsC.innerHTML = "";
+
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.classList.add("btn");
+        btn.onclick = () => checkAnswer(opt, q.answer);
+        optionsC.appendChild(btn);
+      });
+
+      feedback.textContent = "";
+    }
+
+    function checkAnswer(opt, correct) {
+      if (opt.toLowerCase() === correct.toLowerCase()) {
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "#00FF99";
+        correctCount++;
+        updateProgress();
+        index++;
+        setTimeout(renderQuestion, 800);
+      } else {
+        lives--;
+        feedback.textContent = `❌ Incorrecto. La respuesta era "${correct}".`;
+        feedback.style.color = "#FF5E5E";
+        lifeCount.textContent = lives;
+        if (lives <= 0) {
+          feedback.textContent = "💀 Te has quedado sin vidas. Intenta nuevamente en 5 minutos.";
+          optionsC.innerHTML = "";
+        } else {
+          index++;
+          setTimeout(renderQuestion, 1200);
+        }
+      }
+
+      if (correctCount >= 5) {
+        complete.classList.remove("hidden");
+      }
+    }
+
+    renderQuestion();
+  });
+  </script>
 </body>
 </html>

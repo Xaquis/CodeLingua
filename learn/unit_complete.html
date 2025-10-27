@@ -1,103 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
-
-  <!-- Estilos -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Unidad Completada | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-
-  <!-- Scripts -->
-  <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/activity.js" defer></script>
-  <script src="../assets/js/debug_progress.js" defer></script>
 </head>
 
-<body data-unit="unit1_eng">
-  <!-- ===============================
-       ENCABEZADO
-  =============================== -->
+<body>
   <header class="site-header">
     <div class="container">
-      <h1 class="logo">Unidad 1: Inglés Técnico</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="activity_programming_unit1.html">Programación</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
+      <h1 class="logo">CodeLingua</h1>
     </div>
   </header>
 
-  <!-- ===============================
-       CONTENIDO PRINCIPAL
-  =============================== -->
   <main class="container">
-    <!-- Introducción de Lin -->
-    <section id="intro-lin" class="intro-section">
-      <div class="mascot lin">🎩🇬🇧</div>
-      <p>
-        ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧. Hoy repasaremos vocabulario técnico de programación.
-        Recuerda: los tres primeros intentos del primer ejercicio no te quitarán vidas. ☕✨
-      </p>
-    </section>
-
-    <!-- Ejercicios -->
-    <section id="exercises">
-      <h2>Ejercicios</h2>
-
-      <div class="exercise" data-answer="variable" data-free-tries="3">
-        <p>1️⃣ Traduce al inglés: “Variable”.</p>
-        <input type="text" placeholder="Your answer...">
-        <button class="check">Check</button>
+    <div class="celebration">
+      <h2 id="title">🎉 ¡Unidad Completada!</h2>
+      <p id="subtitle">Codder y Lin te felicitan. 🚀</p>
+      <div style="display:flex;justify-content:center;gap:40px;margin:20px 0">
+        <div class="codder-avatar" id="codder">@</div>
+        <div class="lin-avatar" id="lin">🎩</div>
       </div>
-
-      <div class="exercise" data-answer="function">
-        <p>2️⃣ Traduce al inglés: “Función”.</p>
-        <input type="text" placeholder="Your answer...">
-        <button class="check">Check</button>
+      <p id="scene-text">Codder y Lin se miran con orgullo... ✨</p>
+      <div class="actions">
+        <button id="next-unit" class="btn">Siguiente Unidad</button>
       </div>
-
-      <div class="exercise" data-answer="loop">
-        <p>3️⃣ Traduce al inglés: “Bucle”.</p>
-        <input type="text" placeholder="Your answer...">
-        <button class="check">Check</button>
-      </div>
-
-      <div class="exercise" data-answer="boolean">
-        <p>4️⃣ ¿Cómo se dice “Booleano” en inglés técnico?</p>
-        <input type="text" placeholder="Your answer...">
-        <button class="check">Check</button>
-      </div>
-
-      <div class="exercise" data-answer="compile">
-        <p>5️⃣ Traduce al inglés: “Compilar”.</p>
-        <input type="text" placeholder="Your answer...">
-        <button class="check">Check</button>
-      </div>
-    </section>
-
-    <!-- Contador de vidas -->
-    <section id="lives">
-      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
-    </section>
-
-    <!-- Pantalla de finalización -->
-    <section id="complete" class="hidden">
-      <p>🎉 ¡Excelente trabajo! Has completado los 5 ejercicios de la unidad. ☕✨</p>
-      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'eng')">
-        <button class="btn">Continuar</button>
-      </a>
-    </section>
+    </div>
   </main>
 
-  <!-- ===============================
-       PIE DE PÁGINA
-  =============================== -->
   <footer class="site-footer">
     <div class="container">
       <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const unit = params.get("unit") || "1";
+    document.getElementById("title").textContent = `🎉 ¡Unidad ${unit} Completada!`;
+    document.getElementById("subtitle").textContent = `Codder y Lin te felicitan por haber completado la Unidad ${unit}.`;
+    
+    setTimeout(() => document.getElementById("scene-text").textContent = "Codder y Lin chocan las manos con entusiasmo 🤝", 1500);
+    setTimeout(() => document.getElementById("scene-text").textContent = "Codder abre su laptop 💻 y Lin brinda con té ☕", 4000);
+
+    document.getElementById("next-unit").addEventListener("click", () => {
+      window.location.href = "../index.html";
+    });
+  });
+  </script>
 </body>
 </html>
