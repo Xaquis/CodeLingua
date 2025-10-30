@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Fundamentos de Programaci車n | CodeLingua</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
 
   <!-- Scripts (orden correcto para dependencias) -->
   <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
   <script src="../assets/js/narrator.js" defer></script>
   <script src="../assets/js/activity_programming.js" defer></script>
   <script src="../assets/js/debug_progress.js" defer></script>
@@ -26,41 +29,36 @@
   </header>
 
   <main class="container">
+    <!-- Introducci車n -->
     <section id="intro-codder" class="intro-section">
-      <div class="mascot codder">@??</div>
+      <div class="mascot codder">????</div>
       <p>
         ?Hola! Soy <strong>Codder</strong> ???? y ser谷 tu gu赤a en esta unidad.
-        Practicaremos los conceptos m芍s b芍sicos de la programaci車n.
-        Recuerda: los tres primeros intentos del primer ejercicio no quitan vidas. ??
+        Aprenderemos los fundamentos de la programaci車n paso a paso. ??
       </p>
     </section>
 
-    <!-- Barra de progreso y vidas -->
+    <!-- Di芍logo did芍ctico din芍mico -->
+    <section class="mentor-dialogue" id="mentor-dialogue"></section>
+
+    <!-- Estado -->
     <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ??</h3>
-      <div class="progress-bar-container">
-        <div id="progress-bar"></div>
-      </div>
+      <div class="progress-bar-container"><div id="progress-bar"></div></div>
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- 芍rea de ejercicios -->
-    <section id="exercises"></section>
-
-    <!-- Retroalimentaci車n -->
-    <p id="feedback"></p>
+    <!-- Zona de preguntas -->
+    <section id="question-area">
+      <h2 id="question-text">Cargando...</h2>
+      <div id="options-container"></div>
+      <p id="feedback"></p>
+    </section>
 
     <!-- Finalizaci車n -->
     <section id="complete" class="hidden">
-      <p>?? ?Excelente trabajo, programador! Has completado la Unidad 1. ??</p>
-      <a href="unit_complete.html?unit=1" onclick="window.CodeLingua.saveCompletion(1, 'prog')">
-        <button class="btn">Continuar</button>
-      </a>
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci車n. ???</p>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <p>? 2025 CodeLingua 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
-  </footer>
 </body>
 </html>

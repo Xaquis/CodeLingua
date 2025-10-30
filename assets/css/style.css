@@ -22,7 +22,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  transition: background 0.5s, color 0.5s;
+  transition: background 0.8s, color 0.8s;
   overflow-x: hidden;
 }
 
@@ -142,7 +142,7 @@ section {
   box-shadow: 0 0 20px rgba(0, 255, 198, 0.08);
   padding: 20px;
   margin-bottom: 25px;
-  transition: 0.4s ease;
+  transition: 0.10s ease;
 }
 
 section:hover {
@@ -157,7 +157,7 @@ section:hover {
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 0 12px rgba(0, 255, 198, 0.1);
-  animation: fadeIn 0.8s ease;
+  animation: fadeIn 0.12s ease;
 }
 
 .exercise input {
@@ -196,7 +196,7 @@ section:hover {
   background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
   width: 0%;
   border-radius: 10px;
-  transition: width 0.4s ease;
+  transition: width 0.10s ease;
 }
 
 /* ====== VIDAS ====== */
@@ -215,6 +215,41 @@ section:hover {
   border-top: 1px solid rgba(0, 255, 198, 0.2);
   font-size: 14px;
   background: rgba(0, 0, 0, 0.6);
+}
+/* ====== MENTOR DIALOGUE ====== */
+.mentor-dialogue {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  height: 180px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(0, 255, 198, 0.2);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.mentor-bubble {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(0, 255, 198, 0.1);
+  border-left: 3px solid var(--neon-green);
+  animation: fadeIn 0.5s ease;
+  color: var(--text-color);
+  text-shadow: 0 0 4px rgba(0, 255, 198, 0.2);
+}
+
+.mentor-bubble strong {
+  color: var(--neon-green);
+}
+
+.mentor-dialogue::-webkit-scrollbar {
+  width: 6px;
+}
+.mentor-dialogue::-webkit-scrollbar-thumb {
+  background: var(--neon-green);
+  border-radius: 4px;
 }
 
 /* ====== ANIMACIONES ====== */
