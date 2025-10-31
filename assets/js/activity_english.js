@@ -1,147 +1,101 @@
-// ===============================
-// CodeLingua - Unidad 1 Inglés Técnico
-// Sistema didáctico + evaluación interactiva
-// ===============================
+// ======================================================
+// CodeLingua - Unidad 1 Inglés Técnico (v2)
+// Integración con unit_config.js
+// ======================================================
 
 window.CodeLingua = window.CodeLingua || {};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const lifeCount = document.getElementById("life-count");
+  console.log("🚀 Iniciando actividad de inglés...");
+
+  const unitId = "unit1_eng";
+  const unit = window.CodeLingua.getUnitConfig(unitId);
+  const mentorName = window.CodeLingua.getMentorName(unit.mentor);
+
+  const mentorBubble = document.getElementById("mentor-dialogue");
+  const exercises = document.querySelectorAll(".exercise");
   const progressBar = document.getElementById("progress-bar");
+  const lifeCount = document.getElementById("life-count");
   const progressText = document.getElementById("progress");
-  const questionText = document.getElementById("question-text");
-  const optionsContainer = document.getElementById("options-container");
-  const feedback = document.getElementById("feedback");
+  const completeSection = document.getElementById("complete");
 
-  let lives = 10;
-  let currentQuestion = 0;
-  let correctAnswers = 0;
+  let lives = unit.settings.lives;
+  let correctCount = 0;
 
-  const unit = document.body.dataset.unit;
-  console.log(`🎩 Cargando actividades de inglés para ${unit}`);
-
-  // ===============================
-  // PREGUNTAS DE LA UNIDAD 1
-  // ===============================
-  const questions = [
-    {
-      q: "¿Qué significa 'variable' en inglés técnico?",
-      options: [
-        "Una función matemática",
-        "Algo que puede cambiar",
-        "Una palabra reservada"
-      ],
-      correct: 1
-    },
-    {
-      q: "¿Cómo se dice 'función' en inglés?",
-      options: ["Condition", "Loop", "Function"],
-      correct: 2
-    },
-    {
-      q: "¿Qué significa 'condition'?",
-      options: [
-        "Una instrucción repetitiva",
-        "Una regla que determina una acción",
-        "Un tipo de dato"
-      ],
-      correct: 1
-    },
-    {
-      q: "¿Cómo se traduce 'loop'?",
-      options: ["Bucle", "Variable", "Constante"],
-      correct: 0
-    },
-    {
-      q: "¿Qué significa 'debug'?",
-      options: [
-        "Corregir errores en el código",
-        "Escribir código nuevo",
-        "Ejecutar un programa"
-      ],
-      correct: 0
-    }
-  ];
-
-  // ===============================
-  // MOSTRAR PREGUNTA
-  // ===============================
-  function showQuestion() {
-    if (currentQuestion >= questions.length) {
-      completeUnit();
-      return;
-    }
-
-    const q = questions[currentQuestion];
-    questionText.textContent = q.q;
-    optionsContainer.innerHTML = "";
-
-    q.options.forEach((option, index) => {
-      const btn = document.createElement("button");
-      btn.textContent = option;
-      btn.classList.add("btn");
-      btn.addEventListener("click", () => checkAnswer(index));
-      optionsContainer.appendChild(btn);
-    });
-  }
-
-  // ===============================
-  // VALIDAR RESPUESTA
-  // ===============================
-  function checkAnswer(selected) {
-    const q = questions[currentQuestion];
-
-    if (selected === q.correct) {
-      feedback.textContent = "✅ Correct! Well done!";
-      feedback.style.color = "#00ff99";
-      correctAnswers++;
-      updateProgress();
-    } else {
-      feedback.textContent = "❌ Wrong answer. You lose one life.";
-      feedback.style.color = "#ff5e5e";
-      lives--;
-      lifeCount.textContent = lives;
-
-      if (lives <= 0) {
-        endGame();
-        return;
+  // ========= INTRO =========
+  function showMentorIntro() {
+    mentorBubble.innerHTML = "";
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < unit.intro.length) {
+        const msg = document.createElement("div");
+        msg.classList.add("mentor-bubble");
+        msg.innerHTML = `<strong>${mentorName}:</strong> ${unit.intro[index]}`;
+        mentorBubble.appendChild(msg);
+        index++;
+      } else {
+        clearInterval(interval);
+        window.CodeLingua.learningReady?.();
       }
-    }
-
-    currentQuestion++;
-    setTimeout(showQuestion, 1200);
+    }, 2000);
   }
 
-  // ===============================
-  // PROGRESO
-  // ===============================
+  // ========= VALIDACIÓN =========
+  exercises.forEach((exercise) => {
+    const input = exercise.querySelector("input");
+    const button = exercise.querySelector(".check");
+    const feedback = exercise.querySelector(".exercise-feedback");
+    const correctAnswer = exercise.dataset.answer.trim().toLowerCase();
+    const freeTries = parseInt(unit.settings.freeTries);
+    let tries = 0;
+    let answered = false;
+
+    button.addEventListener("click", () => {
+      if (answered) return;
+
+      const userAnswer = input.value.trim().toLowerCase();
+      tries++;
+
+      if (userAnswer === correctAnswer) {
+        exercise.classList.add("correct");
+        feedback.textContent = "✅ Correct!";
+        feedback.style.color = "#00ff99";
+        answered = true;
+        correctCount++;
+        updateProgress();
+        if (correctCount >= exercises.length) completeUnit();
+      } else {
+        feedback.textContent = tries > freeTries ? "❌ Wrong answer. Try again later." : "Almost! Try again.";
+        feedback.style.color = "#ff5e5e";
+        if (tries > freeTries) {
+          lives--;
+          lifeCount.textContent = lives;
+          if (lives <= 0) endGame();
+        }
+      }
+    });
+  });
+
+  // ========= FUNCIONES =========
   function updateProgress() {
-    const percent = Math.floor((correctAnswers / questions.length) * 100);
+    const percent = Math.floor((correctCount / exercises.length) * 100);
     progressBar.style.width = percent + "%";
-    progressText.textContent = `Progreso: ${percent}%`;
+    progressText.textContent = `Progress: ${percent}%`;
   }
 
-  // ===============================
-  // COMPLETAR UNIDAD
-  // ===============================
   function completeUnit() {
-    questionText.textContent = "🎩 Excellent! You completed the English Unit 1!";
-    optionsContainer.innerHTML = "";
-    feedback.textContent = "";
+    document.getElementById("exercises").classList.add("hidden");
+    completeSection.classList.remove("hidden");
     window.CodeLingua.saveCompletion?.(1, "eng");
   }
 
-  // ===============================
-  // SIN VIDAS
-  // ===============================
   function endGame() {
-    questionText.textContent = "😢 You ran out of lives. Try again later.";
-    optionsContainer.innerHTML = "";
-    feedback.textContent = "";
+    document.getElementById("exercises").classList.add("hidden");
+    mentorBubble.innerHTML = `<div class="mentor-bubble"><strong>${mentorName}:</strong> 😢 You've run out of lives. Take a break and try again in a few minutes.</div>`;
+    setTimeout(() => location.reload(), window.CodeLingua.config.global.retryDelay);
   }
 
-  // ===============================
-  // INICIO
-  // ===============================
-  showQuestion();
+  // ========= INICIO =========
+  lifeCount.textContent = lives;
+  showMentorIntro();
 });

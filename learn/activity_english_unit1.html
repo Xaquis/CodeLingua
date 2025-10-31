@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
 
-  <!-- Estilos principales -->
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
 
-  <!-- Scripts en orden correcto -->
-  <script src="../assets/js/progress.js" defer></script>
+  <!-- Scripts -->
+  <script src="../assets/js/unit_config.js" defer></script>
   <script src="../assets/js/learning_module.js" defer></script>
   <script src="../assets/js/narrator.js" defer></script>
   <script src="../assets/js/activity_english.js" defer></script>
@@ -22,7 +22,7 @@
       <h1 class="logo">Unidad 1: Inglés Técnico</h1>
       <nav>
         <a href="../index.html">Inicio</a>
-        <a href="activity_programming_unit1.html">Programación</a>
+        <a href="programming.html">Programación</a>
         <a href="../about.html">Sobre</a>
       </nav>
     </div>
@@ -33,12 +33,12 @@
     <section id="intro-lin" class="intro-section">
       <div class="mascot lin">🎩🇬🇧</div>
       <p>
-        ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧 y hoy aprenderemos vocabulario técnico esencial.
-        No te preocupes si fallas, te enseñaré la palabra correcta. 💬
+        ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧 y te enseñaré vocabulario técnico en inglés.
+        Aprenderemos paso a paso con ejemplos prácticos. 💬✨
       </p>
     </section>
 
-    <!-- Bloque dinámico de enseñanza -->
+    <!-- Diálogo didáctico -->
     <section class="mentor-dialogue" id="mentor-dialogue"></section>
 
     <!-- Estado -->
@@ -48,17 +48,43 @@
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Zona de preguntas -->
-    <section id="question-area">
-      <h2 id="question-text">Cargando...</h2>
-      <div id="options-container"></div>
-      <p id="feedback"></p>
+    <!-- Ejercicios -->
+    <section id="exercises" class="hidden">
+      <div class="exercise" data-answer="variable" data-free-tries="2">
+        <h3>Exercise 1:</h3>
+        <p>Translate: “Variable” means something that can change.</p>
+        <input type="text" placeholder="Tu traducción..." />
+        <button class="check">Check</button>
+        <p class="exercise-feedback"></p>
+      </div>
+
+      <div class="exercise" data-answer="function" data-free-tries="1">
+        <h3>Exercise 2:</h3>
+        <p>Translate: “Function” means a reusable block of code.</p>
+        <input type="text" placeholder="Tu traducción..." />
+        <button class="check">Check</button>
+        <p class="exercise-feedback"></p>
+      </div>
+
+      <div class="exercise" data-answer="condition" data-free-tries="1">
+        <h3>Exercise 3:</h3>
+        <p>Translate: “Condition” means a rule that must be true for something to happen.</p>
+        <input type="text" placeholder="Tu traducción..." />
+        <button class="check">Check</button>
+        <p class="exercise-feedback"></p>
+      </div>
     </section>
 
     <!-- Finalización -->
     <section id="complete" class="hidden">
-      <p>🎉 ¡Excelente trabajo! Has completado la Unidad 1 de Inglés Técnico. ☕🇬🇧</p>
+      <p>🎉 Great job! You've completed Unit 1 of Technical English. ☕🇬🇧</p>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>
