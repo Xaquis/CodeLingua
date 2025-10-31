@@ -3,7 +3,7 @@
 <head>
  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Fundamentos de Programaci¨®n | CodeLingua</title>
+  <title>Unidad 1 - Fundamentos de Programaciè»Šn | CodeLingua</title>
 
   <!-- Estilos principales -->
   <link rel="stylesheet" href="../assets/css/style.css" />
@@ -19,26 +19,26 @@
 <body data-unit="unit1_prog">
   <header class="site-header" role="banner">
     <div class="container">
-      <h1 class="logo">Unidad 1: Fundamentos de Programaci¨®n</h1>
-      <nav aria-label="Men¨² principal">
+      <h1 class="logo">Unidad 1: Fundamentos de Programaciè»Šn</h1>
+      <nav aria-label="Menè¿† principal">
         <a href="../index.html">Inicio</a>
-        <a href="activity_english_unit1.html">Ingl¨¦s</a>
+        <a href="activity_english_unit1.html">Inglè°·s</a>
         <a href="../about.html">Sobre</a>
       </nav>
     </div>
   </header>
 
   <main class="container" role="main">
-    <!-- Introducci¨®n -->
+    <!-- Introducciè»Šn -->
     <section id="intro-codder" class="intro-section">
       <div class="mascot codder" aria-hidden="true">????</div>
       <p>
-        ?Hola! Soy <strong>Codder</strong> ???? y ser¨¦ tu gu¨ªa en esta unidad.
-        Aprenderemos los fundamentos de la programaci¨®n paso a paso. ??
+        ?Hola! Soy <strong>Codder</strong> ???? y serè°· tu guèµ¤a en esta unidad.
+        Aprenderemos los fundamentos de la programaciè»Šn paso a paso. ??
       </p>
     </section>
 
-    <!-- Di¨¢logo did¨¢ctico din¨¢mico (rellenado por learning_module.js) -->
+    <!-- DièŠlogo didèŠctico dinèŠmico (rellenado por learning_module.js) -->
     <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
 
     <!-- Estado -->
@@ -50,26 +50,26 @@
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did¨¢ctica) -->
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar didèŠctica) -->
     <section id="exercises" class="hidden" aria-live="polite">
       <h2>Ejercicios</h2>
 
       <div class="exercise" data-answer="variable" data-free-tries="3">
-        <p>1?? Completa: En programaci¨®n, una <strong>_____</strong> se usa para almacenar informaci¨®n temporalmente.</p>
+        <p>1?? Completa: En programaciè»Šn, una <strong>_____</strong> se usa para almacenar informaciè»Šn temporalmente.</p>
         <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="if">
-        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor¨ªa de lenguajes: <strong>___</strong></p>
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayorèµ¤a de lenguajes: <strong>___</strong></p>
         <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="loop">
-        <p>3?? ?C¨®mo se llama la estructura que repite un bloque de c¨®digo varias veces?</p>
+        <p>3?? ?Cè»Šmo se llama la estructura que repite un bloque de cè»Šdigo varias veces?</p>
         <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -83,7 +83,7 @@
       </div>
 
       <div class="exercise" data-answer="boolean">
-        <p>5?? ?Qu¨¦ tipo de dato solo puede ser verdadero o falso?</p>
+        <p>5?? ?Què°· tipo de dato solo puede ser verdadero o falso?</p>
         <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -97,23 +97,23 @@
       <p id="feedback"></p>
     </section>
 
-    <!-- Finalizaci¨®n -->
+    <!-- Finalizaciè»Šn -->
     <section id="complete" class="hidden" aria-hidden="true">
-      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci¨®n. ???</p>
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaciè»Šn. ???</p>
       <a class="btn" href="../index.html">Volver al inicio</a>
     </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>? 2025 CodeLingua ¡ª Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>? 2025 CodeLingua ã€ž Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
   <script>
     (function(){
-      // Si la fase did¨¢ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac¨ªa.
+      // Si la fase didèŠctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vacèµ¤a.
       const fallbackTimeout = 6000;
       let shown = false;
 
@@ -121,7 +121,7 @@
         const ex = document.getElementById('exercises');
         if (ex && ex.classList.contains('hidden')) {
           ex.classList.remove('hidden');
-          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ¨® a tiempo.');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializè»Š a tiempo.');
           shown = true;
         }
       }
@@ -159,7 +159,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Fundamentos de Programaci¨®n | CodeLingua</title>
+  <title>Unidad 1 - Fundamentos de Programaciè»Šn | CodeLingua</title>
 
   <!-- Estilos principales -->
   <link rel="stylesheet" href="../assets/css/style.css" />
@@ -175,26 +175,26 @@
 <body data-unit="unit1_prog">
   <header class="site-header" role="banner">
     <div class="container">
-      <h1 class="logo">Unidad 1: Fundamentos de Programaci¨®n</h1>
-      <nav aria-label="Men¨² principal">
+      <h1 class="logo">Unidad 1: Fundamentos de Programaciè»Šn</h1>
+      <nav aria-label="Menè¿† principal">
         <a href="../index.html">Inicio</a>
-        <a href="activity_english_unit1.html">Ingl¨¦s</a>
+        <a href="activity_english_unit1.html">Inglè°·s</a>
         <a href="../about.html">Sobre</a>
       </nav>
     </div>
   </header>
 
   <main class="container" role="main">
-    <!-- Introducci¨®n -->
+    <!-- Introducciè»Šn -->
     <section id="intro-codder" class="intro-section">
       <div class="mascot codder" aria-hidden="true">????</div>
       <p>
-        ?Hola! Soy <strong>Codder</strong> ???? y ser¨¦ tu gu¨ªa en esta unidad.
-        Aprenderemos los fundamentos de la programaci¨®n paso a paso. ??
+        ?Hola! Soy <strong>Codder</strong> ???? y serè°· tu guèµ¤a en esta unidad.
+        Aprenderemos los fundamentos de la programaciè»Šn paso a paso. ??
       </p>
     </section>
 
-    <!-- Di¨¢logo did¨¢ctico din¨¢mico (rellenado por learning_module.js) -->
+    <!-- DièŠlogo didèŠctico dinèŠmico (rellenado por learning_module.js) -->
     <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
 
     <!-- Estado -->
@@ -206,26 +206,26 @@
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did¨¢ctica) -->
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar didèŠctica) -->
     <section id="exercises" class="hidden" aria-live="polite">
       <h2>Ejercicios</h2>
 
       <div class="exercise" data-answer="variable" data-free-tries="3">
-        <p>1?? Completa: En programaci¨®n, una <strong>_____</strong> se usa para almacenar informaci¨®n temporalmente.</p>
+        <p>1?? Completa: En programaciè»Šn, una <strong>_____</strong> se usa para almacenar informaciè»Šn temporalmente.</p>
         <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="if">
-        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor¨ªa de lenguajes: <strong>___</strong></p>
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayorèµ¤a de lenguajes: <strong>___</strong></p>
         <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="loop">
-        <p>3?? ?C¨®mo se llama la estructura que repite un bloque de c¨®digo varias veces?</p>
+        <p>3?? ?Cè»Šmo se llama la estructura que repite un bloque de cè»Šdigo varias veces?</p>
         <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -239,7 +239,7 @@
       </div>
 
       <div class="exercise" data-answer="boolean">
-        <p>5?? ?Qu¨¦ tipo de dato solo puede ser verdadero o falso?</p>
+        <p>5?? ?Què°· tipo de dato solo puede ser verdadero o falso?</p>
         <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -253,23 +253,23 @@
       <p id="feedback"></p>
     </section>
 
-    <!-- Finalizaci¨®n -->
+    <!-- Finalizaciè»Šn -->
     <section id="complete" class="hidden" aria-hidden="true">
-      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci¨®n. ???</p>
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaciè»Šn. ???</p>
       <a class="btn" href="../index.html">Volver al inicio</a>
     </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>? 2025 CodeLingua ¡ª Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>? 2025 CodeLingua ã€ž Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
   <script>
     (function(){
-      // Si la fase did¨¢ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac¨ªa.
+      // Si la fase didèŠctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vacèµ¤a.
       const fallbackTimeout = 6000;
       let shown = false;
 
@@ -277,7 +277,7 @@
         const ex = document.getElementById('exercises');
         if (ex && ex.classList.contains('hidden')) {
           ex.classList.remove('hidden');
-          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ¨® a tiempo.');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializè»Š a tiempo.');
           shown = true;
         }
       }
@@ -315,7 +315,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Fundamentos de Programaci¨®n | CodeLingua</title>
+  <title>Unidad 1 - Fundamentos de Programaciè»Šn | CodeLingua</title>
 
   <!-- Estilos principales -->
   <link rel="stylesheet" href="../assets/css/style.css" />
@@ -331,26 +331,26 @@
 <body data-unit="unit1_prog">
   <header class="site-header" role="banner">
     <div class="container">
-      <h1 class="logo">Unidad 1: Fundamentos de Programaci¨®n</h1>
-      <nav aria-label="Men¨² principal">
+      <h1 class="logo">Unidad 1: Fundamentos de Programaciè»Šn</h1>
+      <nav aria-label="Menè¿† principal">
         <a href="../index.html">Inicio</a>
-        <a href="activity_english_unit1.html">Ingl¨¦s</a>
+        <a href="activity_english_unit1.html">Inglè°·s</a>
         <a href="../about.html">Sobre</a>
       </nav>
     </div>
   </header>
 
   <main class="container" role="main">
-    <!-- Introducci¨®n -->
+    <!-- Introducciè»Šn -->
     <section id="intro-codder" class="intro-section">
       <div class="mascot codder" aria-hidden="true">????</div>
       <p>
-        ?Hola! Soy <strong>Codder</strong> ???? y ser¨¦ tu gu¨ªa en esta unidad.
-        Aprenderemos los fundamentos de la programaci¨®n paso a paso. ??
+        ?Hola! Soy <strong>Codder</strong> ???? y serè°· tu guèµ¤a en esta unidad.
+        Aprenderemos los fundamentos de la programaciè»Šn paso a paso. ??
       </p>
     </section>
 
-    <!-- Di¨¢logo did¨¢ctico din¨¢mico (rellenado por learning_module.js) -->
+    <!-- DièŠlogo didèŠctico dinèŠmico (rellenado por learning_module.js) -->
     <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
 
     <!-- Estado -->
@@ -362,26 +362,26 @@
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did¨¢ctica) -->
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar didèŠctica) -->
     <section id="exercises" class="hidden" aria-live="polite">
       <h2>Ejercicios</h2>
 
       <div class="exercise" data-answer="variable" data-free-tries="3">
-        <p>1?? Completa: En programaci¨®n, una <strong>_____</strong> se usa para almacenar informaci¨®n temporalmente.</p>
+        <p>1?? Completa: En programaciè»Šn, una <strong>_____</strong> se usa para almacenar informaciè»Šn temporalmente.</p>
         <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="if">
-        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor¨ªa de lenguajes: <strong>___</strong></p>
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayorèµ¤a de lenguajes: <strong>___</strong></p>
         <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
       </div>
 
       <div class="exercise" data-answer="loop">
-        <p>3?? ?C¨®mo se llama la estructura que repite un bloque de c¨®digo varias veces?</p>
+        <p>3?? ?Cè»Šmo se llama la estructura que repite un bloque de cè»Šdigo varias veces?</p>
         <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -395,7 +395,7 @@
       </div>
 
       <div class="exercise" data-answer="boolean">
-        <p>5?? ?Qu¨¦ tipo de dato solo puede ser verdadero o falso?</p>
+        <p>5?? ?Què°· tipo de dato solo puede ser verdadero o falso?</p>
         <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
         <button class="check">Comprobar</button>
         <p class="exercise-feedback" aria-live="polite"></p>
@@ -409,23 +409,23 @@
       <p id="feedback"></p>
     </section>
 
-    <!-- Finalizaci¨®n -->
+    <!-- Finalizaciè»Šn -->
     <section id="complete" class="hidden" aria-hidden="true">
-      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci¨®n. ???</p>
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaciè»Šn. ???</p>
       <a class="btn" href="../index.html">Volver al inicio</a>
     </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>? 2025 CodeLingua ¡ª Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>? 2025 CodeLingua ã€ž Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
   <script>
     (function(){
-      // Si la fase did¨¢ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac¨ªa.
+      // Si la fase didèŠctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vacèµ¤a.
       const fallbackTimeout = 6000;
       let shown = false;
 
@@ -433,7 +433,7 @@
         const ex = document.getElementById('exercises');
         if (ex && ex.classList.contains('hidden')) {
           ex.classList.remove('hidden');
-          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ¨® a tiempo.');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializè»Š a tiempo.');
           shown = true;
         }
       }
