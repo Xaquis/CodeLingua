@@ -1,73 +1,106 @@
 // ===============================
-// CodeLingua - Programación Unidad 1
+// CodeLingua - Unidad 1 Programación
+// Modo didáctico + ejercicios interactivos
 // ===============================
 
+window.CodeLingua = window.CodeLingua || {};
+
 document.addEventListener("DOMContentLoaded", () => {
-  const exercises = [
-    { q: "1️⃣ En programación, una _____ se usa para almacenar datos.", options: ["función", "variable", "bucle", "boolean"], answer: "variable" },
-    { q: "2️⃣ La palabra clave usada para condiciones es:", options: ["if", "loop", "return", "case"], answer: "if" },
-    { q: "3️⃣ Una estructura que repite código varias veces se llama:", options: ["loop", "var", "array", "switch"], answer: "loop" },
-    { q: "4️⃣ Un conjunto de instrucciones agrupadas se llama:", options: ["método", "función", "dato", "objeto"], answer: "función" },
-    { q: "5️⃣ Un valor que puede ser verdadero o falso es:", options: ["cadena", "boolean", "entero", "condición"], answer: "boolean" }
-  ];
-
-  let current = 0;
-  let correct = 0;
-  let lives = 10;
-  let freeTries = 3;
-
-  const lifeEl = document.getElementById("life-count");
+  const exercises = document.querySelectorAll(".exercise");
   const progressBar = document.getElementById("progress-bar");
+  const lifeCount = document.getElementById("life-count");
   const progressText = document.getElementById("progress");
-  const exercisesEl = document.getElementById("exercises");
   const feedback = document.getElementById("feedback");
-  const completeSection = document.getElementById("complete");
 
-  function loadExercise() {
-    if (current >= exercises.length) {
-      completeSection.classList.remove("hidden");
-      exercisesEl.innerHTML = "";
-      feedback.textContent = "";
-      window.CodeLingua.saveCompletion(1, "prog");
-      return;
-    }
+  let lives = 10;
+  let correctCount = 0;
 
-    const ex = exercises[current];
-    exercisesEl.innerHTML = `
-      <div class="exercise">
-        <p>${ex.q}</p>
-        ${ex.options.map(opt => `<button class="option">${opt}</button>`).join("")}
-      </div>
-    `;
+  // Mostrar mensaje al inicio
+  console.log("🚀 CodeLingua - Unidad de Programación lista");
 
-    document.querySelectorAll(".option").forEach(btn => {
-      btn.addEventListener("click", () => checkAnswer(btn.textContent));
-    });
+  // ========= DIDÁCTICA (controlada por learning_module.js) =========
+  // Si learning_module no la controla, podemos iniciar manualmente los ejercicios
+  if (!window.CodeLingua.learningReady) {
+    window.CodeLingua.learningReady = function () {
+      const exSection = document.getElementById("exercises");
+      if (exSection) exSection.classList.remove("hidden");
+      console.log("✅ Fase didáctica completada. Ejercicios desbloqueados.");
+    };
   }
 
-  function checkAnswer(selected) {
-    const ex = exercises[current];
-    if (selected.toLowerCase() === ex.answer.toLowerCase()) {
-      correct++;
-      feedback.textContent = "✅ ¡Correcto!";
-      feedback.style.color = "#00FFC6";
-      progressBar.style.width = `${(correct / exercises.length) * 100}%`;
-      progressText.textContent = `Progreso: ${Math.round((correct / exercises.length) * 100)}%`;
-      window.CodeLingua.speak("¡Bien hecho!");
-    } else {
-      lives--;
-      lifeEl.textContent = lives;
-      feedback.textContent = `❌ Incorrecto. La respuesta era "${ex.answer}".`;
-      feedback.style.color = "#FF5E5E";
-      window.CodeLingua.speak("Sigue intentando.");
-      if (lives <= 0) {
-        alert("😢 Te has quedado sin vidas. Vuelve a intentarlo en 5 minutos.");
-        return;
+  // ========= VALIDACIÓN DE EJERCICIOS =========
+  exercises.forEach((exercise) => {
+    const input = exercise.querySelector("input");
+    const button = exercise.querySelector(".check");
+    const feedback = exercise.querySelector(".exercise-feedback");
+    const correctAnswer = exercise.dataset.answer.trim().toLowerCase();
+    const freeTries = parseInt(exercise.dataset.freeTries || 0);
+    let tries = 0;
+    let answered = false;
+
+    button.addEventListener("click", () => {
+      if (answered) return;
+
+      const userAnswer = input.value.trim().toLowerCase();
+      tries++;
+
+      if (userAnswer === correctAnswer) {
+        exercise.classList.remove("wrong");
+        exercise.classList.add("correct");
+        feedback.textContent = "✅ ¡Correcto! Bien hecho.";
+        feedback.style.color = "#00ff99";
+        answered = true;
+        correctCount++;
+
+        updateProgress();
+
+        // Si completa los 5 ejercicios, mostrar finalización
+        if (correctCount >= exercises.length) {
+          completeUnit();
+        }
+      } else {
+        exercise.classList.remove("correct");
+        exercise.classList.add("wrong");
+        feedback.textContent = `❌ Incorrecto. ${
+          tries > freeTries ? "Perdiste una vida." : "Inténtalo de nuevo."
+        }`;
+        feedback.style.color = "#FF5E5E";
+
+        // Restar vida si superó los intentos gratis
+        if (tries > freeTries) {
+          lives--;
+          lifeCount.textContent = lives;
+
+          if (lives <= 0) {
+            endGame();
+          }
+        }
       }
-    }
-    current++;
-    setTimeout(loadExercise, 1500);
+    });
+  });
+
+  // ========= FUNCIONES =========
+  function updateProgress() {
+    const percent = Math.floor((correctCount / exercises.length) * 100);
+    progressBar.style.width = percent + "%";
+    progressText.textContent = `Progreso: ${percent}%`;
   }
 
-  loadExercise();
+  function completeUnit() {
+    document.getElementById("exercises").classList.add("hidden");
+    document.getElementById("complete").classList.remove("hidden");
+
+    // Guardar progreso
+    window.CodeLingua.saveCompletion?.(1, "prog");
+    console.log("🏁 Unidad completada por el usuario.");
+  }
+
+  function endGame() {
+    document.getElementById("exercises").classList.add("hidden");
+    const mentor = document.getElementById("mentor-dialogue");
+    mentor.innerHTML = `
+      <div class="mentor-bubble"><strong>Codder:</strong> 😢 Te has quedado sin vidas,
+      pero no pasa nada. En unos minutos podrás intentarlo otra vez.</div>`;
+    setTimeout(() => location.reload(), 300000); // 5 minutos
+  }
 });

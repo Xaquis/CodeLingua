@@ -2,24 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Programaci車n | CodeLingua</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta name="description" content="Aprende los fundamentos de programaci車n con Codder en CodeLingua. Ejercicios pr芍cticos, explicaciones y aprendizaje did芍ctico." />
+  <link rel="preload" href="../assets/css/style.css" as="style" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 
-<body>
+<body data-unit="programming_home">
   <header class="site-header">
-    <h1 class="logo">CodeLingua</h1>
-    <nav>
-      <a href="../index.html">Inicio</a>
-      <a href="programming.html">Programaci車n</a>
-      <a href="english.html">Ingl谷s</a>
-      <a href="../about.html">Sobre</a>
-    </nav>
+    <div class="container">
+      <h1 class="logo">CodeLingua</h1>
+      <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="programming.html" class="active">Programaci車n</a>
+        <a href="english.html">Ingl谷s</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
 
-    <div class="controls">
-      <button id="theme-toggle" class="theme-toggle">??</button>
-      <button id="lang-toggle" class="lang-toggle">????</button>
+      <div class="controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">??</button>
+        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">??</button>
+      </div>
     </div>
   </header>
 
@@ -27,8 +31,8 @@
     <section class="lesson">
       <h2 id="page-title">Aprende Programaci車n desde cero</h2>
       <p class="intro-text">
-        En este m車dulo aprender芍s los fundamentos b芍sicos de la programaci車n.
-        Resolver芍s ejercicios interactivos y ver芍s ejemplos en JavaScript.
+        En este m車dulo aprender芍s los fundamentos b芍sicos de la programaci車n,
+        resolver芍s ejercicios interactivos y descubrir芍s c車mo pensar como un programador. ??
       </p>
 
       <h3>Lecci車n 1: Conceptos esenciales</h3>
@@ -37,17 +41,20 @@
         <li><strong>Funci車n:</strong> conjunto de instrucciones reutilizables.</li>
         <li><strong>Condicional:</strong> ejecuta c車digo seg迆n una condici車n.</li>
       </ul>
-      
-      <a href="activity_programming_unit1.html" class="btn">Empezar Unidad 1</a>
+
+      <div class="lesson-actions">
+        <a href="activity_programming_unit1.html" class="btn">?? Empezar Unidad 1</a>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>? 2025 CodeLingua 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>? 2025 <strong>CodeLingua</strong> 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/debug_progress.js" defer></script>
 </body>

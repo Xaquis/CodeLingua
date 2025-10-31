@@ -2,52 +2,59 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inglés Técnico | CodeLingua</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta name="description" content="Aprende vocabulario técnico en inglés con Lin, mentor didáctico de CodeLingua. Lecciones prácticas y ejercicios interactivos." />
+  <link rel="preload" href="../assets/css/style.css" as="style" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 
-<body>
-  <header class="site-header">
-    <h1 class="logo">CodeLingua</h1>
-    <nav>
-      <a href="../index.html">Inicio</a>
-      <a href="programming.html">Programación</a>
-      <a href="english.html">Inglés</a>
-      <a href="../about.html">Sobre</a>
-    </nav>
+<body data-unit="english_home">
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="logo">CodeLingua</h1>
+      <nav aria-label="Menú principal">
+        <a href="../index.html">Inicio</a>
+        <a href="programming.html">Programación</a>
+        <a href="english.html" class="active">Inglés</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
 
-    <div class="controls">
-      <button id="theme-toggle" class="theme-toggle">🌙</button>
-      <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
+      <div class="controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
+        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma" lang="es">🌐</button>
+      </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <section class="lesson">
-      <h2 id="page-title">Aprende Inglés Técnico</h2>
+      <h2 id="page-title">Aprende Inglés Técnico desde cero</h2>
       <p class="intro-text">
-        En este módulo reforzarás tu comprensión del inglés técnico usado en programación
-        y tecnología. Aprende nuevas palabras con ejemplos prácticos.
+        En este módulo aprenderás vocabulario esencial para desenvolverte en entornos tecnológicos.
+        Lin 🎩🇬🇧 te acompañará paso a paso con explicaciones claras y ejercicios prácticos. ✨
       </p>
 
-      <h3>Lección 1: Palabras clave de programación</h3>
+      <h3>Lección 1: Vocabulario Técnico Esencial</h3>
       <ul>
-        <li><strong>Variable:</strong> A storage location for data.</li>
-        <li><strong>Function:</strong> A block of reusable code.</li>
-        <li><strong>Loop:</strong> A structure that repeats instructions.</li>
+        <li><strong>Variable:</strong> <em>Variable</em> — un valor que puede cambiar.</li>
+        <li><strong>Function:</strong> <em>Función</em> — un conjunto de instrucciones.</li>
+        <li><strong>Condition:</strong> <em>Condición</em> — una regla que determina una acción.</li>
       </ul>
-      
-      <a href="activity_english_unit1.html" class="btn">Empezar Unidad 1</a>
+
+      <div class="lesson-actions">
+        <a href="activity_english_unit1.html" class="btn">🎩 Empezar Unidad 1</a>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/debug_progress.js" defer></script>
 </body>

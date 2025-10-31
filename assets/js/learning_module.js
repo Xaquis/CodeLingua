@@ -1,106 +1,45 @@
-// ==============================================
-// CodeLingua - Módulo Didáctico (Lin & Codder)
-// Autor: Arlevy Sabogal
-// ==============================================
+// ===============================
+// CodeLingua - Learning Module (Didáctico)
+// ===============================
 
 window.CodeLingua = window.CodeLingua || {};
 
-(function() {
-  const learningModule = {
-    mentor: null,
-    currentStep: 0,
-    steps: [],
+document.addEventListener("DOMContentLoaded", () => {
+  const mentorBox = document.getElementById("mentor-dialogue");
+  if (!mentorBox) return;
 
-    // Inicializa según la unidad
-    init() {
-      const unit = document.body.dataset.unit;
+  // Secuencia de mensajes didácticos
+  const messages = [
+    { from: "Codder", text: "Hola 👋 Soy Codder. Hoy aprenderás los fundamentos de la programación." },
+    { from: "Codder", text: "Imagina que una variable es como una caja 🧱 donde puedes guardar valores." },
+    { from: "Codder", text: "Los condicionales (if) son como tomar decisiones: 'si llueve, usa paraguas ☔'." },
+    { from: "Codder", text: "Y los bucles repiten tareas, como practicar hasta que domines algo 🔁" },
+    { from: "Codder", text: "¿Listo para ponerlo a prueba? 🚀" },
+  ];
 
-      if (unit.includes("eng")) {
-        this.mentor = "Lin";
-        this.steps = [
-          {
-            mentor: "Lin",
-            text: "¡Hola! Soy Lin 🎩🇬🇧. Hoy aprenderás vocabulario técnico esencial en inglés."
-          },
-          {
-            mentor: "Lin",
-            text: "Recuerda: una <em>variable</em> en inglés es algo que puede cambiar, como 'variable' en español. 🔤"
-          },
-          {
-            mentor: "Lin",
-            text: "Vamos a practicar traduciendo y comprendiendo palabras comunes del entorno tecnológico. 💻"
-          }
-        ];
-      } else if (unit.includes("prog")) {
-        this.mentor = "Codder";
-        this.steps = [
-          {
-            mentor: "Codder",
-            text: "¡Hola! Soy Codder 🧢💻. Te enseñaré los fundamentos de la programación paso a paso."
-          },
-          {
-            mentor: "Codder",
-            text: "Primero entenderemos qué es una <em>variable</em>: piensa en una caja donde guardas datos. 📦"
-          },
-          {
-            mentor: "Codder",
-            text: "Luego exploraremos cómo usar condiciones, bucles y lógica básica en los programas. 🧠"
-          }
-        ];
-      }
+  let index = 0;
 
-      this.renderStep();
-    },
-
-    // Muestra el paso actual
-    renderStep() {
-      const dialogueContainer = document.getElementById("mentor-dialogue");
-      if (!dialogueContainer) return;
-
-      const step = this.steps[this.currentStep];
-      if (!step) {
-        this.finishIntro();
-        return;
-      }
-
+  function showMessage() {
+    if (index < messages.length) {
+      const msg = messages[index];
       const bubble = document.createElement("div");
-      bubble.className = "mentor-bubble";
-      bubble.innerHTML = `<strong>${step.mentor}:</strong> ${step.text}`;
-      dialogueContainer.appendChild(bubble);
-
-      // Efecto visual de narración
-      if (window.CodeLingua.speak) {
-        window.CodeLingua.speak(`${step.mentor} dice: ${step.text.replace(/<[^>]+>/g, '')}`);
+      bubble.classList.add("mentor-bubble");
+      bubble.innerHTML = `<strong>${msg.from}:</strong> ${msg.text}`;
+      mentorBox.appendChild(bubble);
+      mentorBox.scrollTop = mentorBox.scrollHeight;
+      index++;
+      setTimeout(showMessage, 2500);
+    } else {
+      // Cuando termina la enseñanza, desbloqueamos ejercicios
+      if (window.CodeLingua.learningReady) {
+        window.CodeLingua.learningReady();
+      } else {
+        const exSection = document.getElementById("exercises");
+        if (exSection) exSection.classList.remove("hidden");
       }
-
-      // Avanza al siguiente paso después de 4 segundos
-      setTimeout(() => {
-        this.currentStep++;
-        this.renderStep();
-      }, 4000);
-    },
-
-    // Cierra la introducción y da paso a las preguntas
-    finishIntro() {
-      const dialogueContainer = document.getElementById("mentor-dialogue");
-      const bubble = document.createElement("div");
-      bubble.className = "mentor-bubble";
-      bubble.innerHTML = `<strong>${this.mentor}:</strong> ¡Excelente! Ahora pongamos en práctica lo aprendido. 🚀`;
-      dialogueContainer.appendChild(bubble);
-
-      if (window.CodeLingua.speak) {
-        window.CodeLingua.speak("Excelente, ahora pongamos en práctica lo aprendido.");
-      }
-
-      setTimeout(() => {
-        const introSection = document.querySelector(".intro-section");
-        if (introSection) introSection.scrollIntoView({ behavior: "smooth" });
-      }, 2500);
     }
-  };
+  }
 
-  window.CodeLingua.learningModule = learningModule;
-
-  // Inicialización automática cuando la página carga
-  document.addEventListener("DOMContentLoaded", () => learningModule.init());
-})();
+  // Iniciar la secuencia
+  showMessage();
+});
