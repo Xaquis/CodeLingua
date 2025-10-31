@@ -1,6 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+ <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unidad 1 - Fundamentos de Programaci車n | CodeLingua</title>
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <!-- Scripts (orden correcto para dependencias) -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/narrator.js" defer></script>
+  <script src="../assets/js/activity_programming.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
+</head>
+
+<body data-unit="unit1_prog">
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="logo">Unidad 1: Fundamentos de Programaci車n</h1>
+      <nav aria-label="Men迆 principal">
+        <a href="../index.html">Inicio</a>
+        <a href="activity_english_unit1.html">Ingl谷s</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- Introducci車n -->
+    <section id="intro-codder" class="intro-section">
+      <div class="mascot codder" aria-hidden="true">????</div>
+      <p>
+        ?Hola! Soy <strong>Codder</strong> ???? y ser谷 tu gu赤a en esta unidad.
+        Aprenderemos los fundamentos de la programaci車n paso a paso. ??
+      </p>
+    </section>
+
+    <!-- Di芍logo did芍ctico din芍mico (rellenado por learning_module.js) -->
+    <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
+
+    <!-- Estado -->
+    <section id="status" aria-label="Estado de la unidad">
+      <h3>Vidas: <span id="life-count">10</span> ??</h3>
+      <div class="progress-bar-container" aria-hidden="true">
+        <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+      <p id="progress">Progreso: 0%</p>
+    </section>
+
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did芍ctica) -->
+    <section id="exercises" class="hidden" aria-live="polite">
+      <h2>Ejercicios</h2>
+
+      <div class="exercise" data-answer="variable" data-free-tries="3">
+        <p>1?? Completa: En programaci車n, una <strong>_____</strong> se usa para almacenar informaci車n temporalmente.</p>
+        <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="if">
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor赤a de lenguajes: <strong>___</strong></p>
+        <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="loop">
+        <p>3?? ?C車mo se llama la estructura que repite un bloque de c車digo varias veces?</p>
+        <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="function">
+        <p>4?? En JavaScript, un conjunto de instrucciones agrupadas recibe el nombre de _____</p>
+        <input type="text" aria-label="Respuesta 4" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="boolean">
+        <p>5?? ?Qu谷 tipo de dato solo puede ser verdadero o falso?</p>
+        <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Zona alternativa de preguntas (si usas opciones en vez de input) -->
+    <section id="question-area" class="hidden" role="region" aria-live="polite">
+      <h2 id="question-text">Cargando...</h2>
+      <div id="options-container"></div>
+      <p id="feedback"></p>
+    </section>
+
+    <!-- Finalizaci車n -->
+    <section id="complete" class="hidden" aria-hidden="true">
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci車n. ???</p>
+      <a class="btn" href="../index.html">Volver al inicio</a>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>? 2025 CodeLingua 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
+  <script>
+    (function(){
+      // Si la fase did芍ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac赤a.
+      const fallbackTimeout = 6000;
+      let shown = false;
+
+      function showExercisesIfHidden() {
+        const ex = document.getElementById('exercises');
+        if (ex && ex.classList.contains('hidden')) {
+          ex.classList.remove('hidden');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ車 a tiempo.');
+          shown = true;
+        }
+      }
+
+      const t = setTimeout(() => {
+        try {
+          showExercisesIfHidden();
+        } catch (err) {
+          console.error('Error en fallback showExercisesIfHidden:', err);
+        }
+      }, fallbackTimeout);
+
+      // Si learning_module notifica ready puede llamar a window.CodeLingua.learningReady()
+      window.CodeLingua = window.CodeLingua || {};
+      window.CodeLingua.learningReady = function() {
+        const ex = document.getElementById('exercises');
+        if (ex) ex.classList.remove('hidden');
+        const qa = document.getElementById('question-area');
+        if (qa) qa.classList.add('hidden');
+        clearTimeout(t);
+      };
+
+      // Eventual registro de errores JS visibles
+      window.addEventListener('error', (e) => {
+        console.error('Error JS detectado:', e.message, 'en', e.filename + ':' + e.lineno);
+        // mostrar ejercicios para seguir probando
+        if (!shown) showExercisesIfHidden();
+      });
+    })();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Fundamentos de Programaci車n | CodeLingua</title>
@@ -17,10 +173,10 @@
 </head>
 
 <body data-unit="unit1_prog">
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="container">
       <h1 class="logo">Unidad 1: Fundamentos de Programaci車n</h1>
-      <nav>
+      <nav aria-label="Men迆 principal">
         <a href="../index.html">Inicio</a>
         <a href="activity_english_unit1.html">Ingl谷s</a>
         <a href="../about.html">Sobre</a>
@@ -28,37 +184,285 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <!-- Introducci車n -->
     <section id="intro-codder" class="intro-section">
-      <div class="mascot codder">????</div>
+      <div class="mascot codder" aria-hidden="true">????</div>
       <p>
         ?Hola! Soy <strong>Codder</strong> ???? y ser谷 tu gu赤a en esta unidad.
         Aprenderemos los fundamentos de la programaci車n paso a paso. ??
       </p>
     </section>
 
-    <!-- Di芍logo did芍ctico din芍mico -->
-    <section class="mentor-dialogue" id="mentor-dialogue"></section>
+    <!-- Di芍logo did芍ctico din芍mico (rellenado por learning_module.js) -->
+    <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
 
     <!-- Estado -->
-    <section id="status">
+    <section id="status" aria-label="Estado de la unidad">
       <h3>Vidas: <span id="life-count">10</span> ??</h3>
-      <div class="progress-bar-container"><div id="progress-bar"></div></div>
+      <div class="progress-bar-container" aria-hidden="true">
+        <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Zona de preguntas -->
-    <section id="question-area">
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did芍ctica) -->
+    <section id="exercises" class="hidden" aria-live="polite">
+      <h2>Ejercicios</h2>
+
+      <div class="exercise" data-answer="variable" data-free-tries="3">
+        <p>1?? Completa: En programaci車n, una <strong>_____</strong> se usa para almacenar informaci車n temporalmente.</p>
+        <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="if">
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor赤a de lenguajes: <strong>___</strong></p>
+        <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="loop">
+        <p>3?? ?C車mo se llama la estructura que repite un bloque de c車digo varias veces?</p>
+        <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="function">
+        <p>4?? En JavaScript, un conjunto de instrucciones agrupadas recibe el nombre de _____</p>
+        <input type="text" aria-label="Respuesta 4" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="boolean">
+        <p>5?? ?Qu谷 tipo de dato solo puede ser verdadero o falso?</p>
+        <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Zona alternativa de preguntas (si usas opciones en vez de input) -->
+    <section id="question-area" class="hidden" role="region" aria-live="polite">
       <h2 id="question-text">Cargando...</h2>
       <div id="options-container"></div>
       <p id="feedback"></p>
     </section>
 
     <!-- Finalizaci車n -->
-    <section id="complete" class="hidden">
+    <section id="complete" class="hidden" aria-hidden="true">
       <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci車n. ???</p>
+      <a class="btn" href="../index.html">Volver al inicio</a>
     </section>
   </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>? 2025 CodeLingua 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
+  <script>
+    (function(){
+      // Si la fase did芍ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac赤a.
+      const fallbackTimeout = 6000;
+      let shown = false;
+
+      function showExercisesIfHidden() {
+        const ex = document.getElementById('exercises');
+        if (ex && ex.classList.contains('hidden')) {
+          ex.classList.remove('hidden');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ車 a tiempo.');
+          shown = true;
+        }
+      }
+
+      const t = setTimeout(() => {
+        try {
+          showExercisesIfHidden();
+        } catch (err) {
+          console.error('Error en fallback showExercisesIfHidden:', err);
+        }
+      }, fallbackTimeout);
+
+      // Si learning_module notifica ready puede llamar a window.CodeLingua.learningReady()
+      window.CodeLingua = window.CodeLingua || {};
+      window.CodeLingua.learningReady = function() {
+        const ex = document.getElementById('exercises');
+        if (ex) ex.classList.remove('hidden');
+        const qa = document.getElementById('question-area');
+        if (qa) qa.classList.add('hidden');
+        clearTimeout(t);
+      };
+
+      // Eventual registro de errores JS visibles
+      window.addEventListener('error', (e) => {
+        console.error('Error JS detectado:', e.message, 'en', e.filename + ':' + e.lineno);
+        // mostrar ejercicios para seguir probando
+        if (!shown) showExercisesIfHidden();
+      });
+    })();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unidad 1 - Fundamentos de Programaci車n | CodeLingua</title>
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <!-- Scripts (orden correcto para dependencias) -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/narrator.js" defer></script>
+  <script src="../assets/js/activity_programming.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
+</head>
+
+<body data-unit="unit1_prog">
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="logo">Unidad 1: Fundamentos de Programaci車n</h1>
+      <nav aria-label="Men迆 principal">
+        <a href="../index.html">Inicio</a>
+        <a href="activity_english_unit1.html">Ingl谷s</a>
+        <a href="../about.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- Introducci車n -->
+    <section id="intro-codder" class="intro-section">
+      <div class="mascot codder" aria-hidden="true">????</div>
+      <p>
+        ?Hola! Soy <strong>Codder</strong> ???? y ser谷 tu gu赤a en esta unidad.
+        Aprenderemos los fundamentos de la programaci車n paso a paso. ??
+      </p>
+    </section>
+
+    <!-- Di芍logo did芍ctico din芍mico (rellenado por learning_module.js) -->
+    <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
+
+    <!-- Estado -->
+    <section id="status" aria-label="Estado de la unidad">
+      <h3>Vidas: <span id="life-count">10</span> ??</h3>
+      <div class="progress-bar-container" aria-hidden="true">
+        <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+      <p id="progress">Progreso: 0%</p>
+    </section>
+
+    <!-- Zona de preguntas / ejercicios (oculta hasta terminar did芍ctica) -->
+    <section id="exercises" class="hidden" aria-live="polite">
+      <h2>Ejercicios</h2>
+
+      <div class="exercise" data-answer="variable" data-free-tries="3">
+        <p>1?? Completa: En programaci車n, una <strong>_____</strong> se usa para almacenar informaci車n temporalmente.</p>
+        <input type="text" aria-label="Respuesta 1" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="if">
+        <p>2?? Escribe la palabra clave usada para evaluar condiciones en la mayor赤a de lenguajes: <strong>___</strong></p>
+        <input type="text" aria-label="Respuesta 2" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="loop">
+        <p>3?? ?C車mo se llama la estructura que repite un bloque de c車digo varias veces?</p>
+        <input type="text" aria-label="Respuesta 3" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="function">
+        <p>4?? En JavaScript, un conjunto de instrucciones agrupadas recibe el nombre de _____</p>
+        <input type="text" aria-label="Respuesta 4" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="exercise" data-answer="boolean">
+        <p>5?? ?Qu谷 tipo de dato solo puede ser verdadero o falso?</p>
+        <input type="text" aria-label="Respuesta 5" placeholder="Tu respuesta...">
+        <button class="check">Comprobar</button>
+        <p class="exercise-feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Zona alternativa de preguntas (si usas opciones en vez de input) -->
+    <section id="question-area" class="hidden" role="region" aria-live="polite">
+      <h2 id="question-text">Cargando...</h2>
+      <div id="options-container"></div>
+      <p id="feedback"></p>
+    </section>
+
+    <!-- Finalizaci車n -->
+    <section id="complete" class="hidden" aria-hidden="true">
+      <p>?? ?Excelente trabajo! Has completado la Unidad 1 de Fundamentos de Programaci車n. ???</p>
+      <a class="btn" href="../index.html">Volver al inicio</a>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>? 2025 CodeLingua 〞 Arlevy Sabogal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Peque?o fallback / debug para forzar mostrar ejercicios si algo no inicializa -->
+  <script>
+    (function(){
+      // Si la fase did芍ctica no inicia o tarda >6s, mostramos los ejercicios para no dejar pantalla vac赤a.
+      const fallbackTimeout = 6000;
+      let shown = false;
+
+      function showExercisesIfHidden() {
+        const ex = document.getElementById('exercises');
+        if (ex && ex.classList.contains('hidden')) {
+          ex.classList.remove('hidden');
+          console.warn('Fallback: se mostraron los ejercicios porque learning_module no inicializ車 a tiempo.');
+          shown = true;
+        }
+      }
+
+      const t = setTimeout(() => {
+        try {
+          showExercisesIfHidden();
+        } catch (err) {
+          console.error('Error en fallback showExercisesIfHidden:', err);
+        }
+      }, fallbackTimeout);
+
+      // Si learning_module notifica ready puede llamar a window.CodeLingua.learningReady()
+      window.CodeLingua = window.CodeLingua || {};
+      window.CodeLingua.learningReady = function() {
+        const ex = document.getElementById('exercises');
+        if (ex) ex.classList.remove('hidden');
+        const qa = document.getElementById('question-area');
+        if (qa) qa.classList.add('hidden');
+        clearTimeout(t);
+      };
+
+      // Eventual registro de errores JS visibles
+      window.addEventListener('error', (e) => {
+        console.error('Error JS detectado:', e.message, 'en', e.filename + ':' + e.lineno);
+        // mostrar ejercicios para seguir probando
+        if (!shown) showExercisesIfHidden();
+      });
+    })();
+  </script>
 </body>
 </html>

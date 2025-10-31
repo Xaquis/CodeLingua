@@ -1,106 +1,150 @@
 // ===============================
-// CodeLingua - Unidad 1 Programación
-// Modo didáctico + ejercicios interactivos
+// CodeLingua - Unidad 1 Programación (modo didáctico + IA)
 // ===============================
 
 window.CodeLingua = window.CodeLingua || {};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const exercises = document.querySelectorAll(".exercise");
-  const progressBar = document.getElementById("progress-bar");
   const lifeCount = document.getElementById("life-count");
+  const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress");
+  const questionText = document.getElementById("question-text");
+  const optionsContainer = document.getElementById("options-container");
   const feedback = document.getElementById("feedback");
 
   let lives = 10;
-  let correctCount = 0;
+  let currentQuestion = 0;
+  let correctAnswers = 0;
 
-  // Mostrar mensaje al inicio
-  console.log("🚀 CodeLingua - Unidad de Programación lista");
+  const unit = document.body.dataset.unit; // ← ahora detecta la unidad
+  console.log(`🚀 Cargando actividades para ${unit}`);
 
-  // ========= DIDÁCTICA (controlada por learning_module.js) =========
-  // Si learning_module no la controla, podemos iniciar manualmente los ejercicios
-  if (!window.CodeLingua.learningReady) {
-    window.CodeLingua.learningReady = function () {
-      const exSection = document.getElementById("exercises");
-      if (exSection) exSection.classList.remove("hidden");
-      console.log("✅ Fase didáctica completada. Ejercicios desbloqueados.");
-    };
+  // ===============================
+  // PREGUNTAS DE LA UNIDAD 1
+  // ===============================
+  const questions = [
+    {
+      q: "¿Qué es una variable?",
+      options: [
+        "Un error de sintaxis",
+        "Un espacio donde guardas datos",
+        "Una función repetitiva"
+      ],
+      correct: 1
+    },
+    {
+      q: "¿Qué palabra reservada se usa para definir una variable en JavaScript?",
+      options: ["var", "func", "if"],
+      correct: 0
+    },
+    {
+      q: "¿Qué hace un condicional (if)?",
+      options: [
+        "Repite instrucciones",
+        "Ejecuta código según una condición",
+        "Guarda datos en memoria"
+      ],
+      correct: 1
+    },
+    {
+      q: "¿Qué es una función?",
+      options: [
+        "Un conjunto de instrucciones reutilizables",
+        "Un tipo de variable",
+        "Una estructura de datos"
+      ],
+      correct: 0
+    },
+    {
+      q: "¿Qué es un bucle (loop)?",
+      options: [
+        "Una instrucción que repite tareas hasta cumplir una condición",
+        "Un error de compilación",
+        "Un tipo de variable"
+      ],
+      correct: 0
+    }
+  ];
+
+  // ===============================
+  // MOSTRAR PREGUNTA
+  // ===============================
+  function showQuestion() {
+    if (currentQuestion >= questions.length) {
+      completeUnit();
+      return;
+    }
+
+    const q = questions[currentQuestion];
+    questionText.textContent = q.q;
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+      btn.classList.add("btn");
+      btn.addEventListener("click", () => checkAnswer(index));
+      optionsContainer.appendChild(btn);
+    });
   }
 
-  // ========= VALIDACIÓN DE EJERCICIOS =========
-  exercises.forEach((exercise) => {
-    const input = exercise.querySelector("input");
-    const button = exercise.querySelector(".check");
-    const feedback = exercise.querySelector(".exercise-feedback");
-    const correctAnswer = exercise.dataset.answer.trim().toLowerCase();
-    const freeTries = parseInt(exercise.dataset.freeTries || 0);
-    let tries = 0;
-    let answered = false;
+  // ===============================
+  // VERIFICAR RESPUESTA
+  // ===============================
+  function checkAnswer(selected) {
+    const q = questions[currentQuestion];
 
-    button.addEventListener("click", () => {
-      if (answered) return;
+    if (selected === q.correct) {
+      feedback.textContent = "✅ ¡Correcto!";
+      feedback.style.color = "#00ff99";
+      correctAnswers++;
+      updateProgress();
+    } else {
+      feedback.textContent = "❌ Incorrecto. Pierdes una vida.";
+      feedback.style.color = "#ff5e5e";
+      lives--;
+      lifeCount.textContent = lives;
 
-      const userAnswer = input.value.trim().toLowerCase();
-      tries++;
-
-      if (userAnswer === correctAnswer) {
-        exercise.classList.remove("wrong");
-        exercise.classList.add("correct");
-        feedback.textContent = "✅ ¡Correcto! Bien hecho.";
-        feedback.style.color = "#00ff99";
-        answered = true;
-        correctCount++;
-
-        updateProgress();
-
-        // Si completa los 5 ejercicios, mostrar finalización
-        if (correctCount >= exercises.length) {
-          completeUnit();
-        }
-      } else {
-        exercise.classList.remove("correct");
-        exercise.classList.add("wrong");
-        feedback.textContent = `❌ Incorrecto. ${
-          tries > freeTries ? "Perdiste una vida." : "Inténtalo de nuevo."
-        }`;
-        feedback.style.color = "#FF5E5E";
-
-        // Restar vida si superó los intentos gratis
-        if (tries > freeTries) {
-          lives--;
-          lifeCount.textContent = lives;
-
-          if (lives <= 0) {
-            endGame();
-          }
-        }
+      if (lives <= 0) {
+        endGame();
+        return;
       }
-    });
-  });
+    }
 
-  // ========= FUNCIONES =========
+    currentQuestion++;
+    setTimeout(showQuestion, 1200);
+  }
+
+  // ===============================
+  // PROGRESO
+  // ===============================
   function updateProgress() {
-    const percent = Math.floor((correctCount / exercises.length) * 100);
+    const percent = Math.floor((correctAnswers / questions.length) * 100);
     progressBar.style.width = percent + "%";
     progressText.textContent = `Progreso: ${percent}%`;
   }
 
+  // ===============================
+  // COMPLETAR UNIDAD
+  // ===============================
   function completeUnit() {
-    document.getElementById("exercises").classList.add("hidden");
-    document.getElementById("complete").classList.remove("hidden");
-
-    // Guardar progreso
+    questionText.textContent = "🎉 ¡Excelente trabajo! Has completado la Unidad 1.";
+    optionsContainer.innerHTML = "";
+    feedback.textContent = "";
     window.CodeLingua.saveCompletion?.(1, "prog");
-    console.log("🏁 Unidad completada por el usuario.");
   }
 
+  // ===============================
+  // SIN VIDAS
+  // ===============================
   function endGame() {
-    document.getElementById("exercises").classList.add("hidden");
-    const mentor = document.getElementById("mentor-dialogue");
-    mentor.innerHTML = `
-      <div class="mentor-bubble"><strong>Codder:</strong> 😢 Te has quedado sin vidas,
-      pero no pasa nada. En unos minutos podrás intentarlo otra vez.</div>`;
-    setTimeout(() => location.reload(), 300000); // 5 minutos
+    questionText.textContent = "😢 Te has quedado sin vidas. Puedes intentarlo de nuevo en unos minutos.";
+    optionsContainer.innerHTML = "";
+    feedback.textContent = "";
   }
+
+  // ===============================
+  // INICIO
+  // ===============================
+  showQuestion();
 });

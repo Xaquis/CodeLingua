@@ -1,3 +1,8 @@
+// ===============================
+// CodeLingua - Unidad 1 Inglés Técnico
+// Sistema didáctico + evaluación interactiva
+// ===============================
+
 window.CodeLingua = window.CodeLingua || {};
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,98 +12,136 @@ document.addEventListener("DOMContentLoaded", () => {
   const questionText = document.getElementById("question-text");
   const optionsContainer = document.getElementById("options-container");
   const feedback = document.getElementById("feedback");
-  const completeSection = document.getElementById("complete");
 
   let lives = 10;
-  let score = 0;
   let currentQuestion = 0;
+  let correctAnswers = 0;
 
+  const unit = document.body.dataset.unit;
+  console.log(`🎩 Cargando actividades de inglés para ${unit}`);
+
+  // ===============================
+  // PREGUNTAS DE LA UNIDAD 1
+  // ===============================
   const questions = [
     {
-      text: "¿Cómo se traduce al inglés la palabra “Variable”?",
-      options: ["Variable", "Constant", "Loop"],
-      answer: "Variable",
-      hint: "Es un contenedor que cambia su valor."
+      q: "¿Qué significa 'variable' en inglés técnico?",
+      options: [
+        "Una función matemática",
+        "Algo que puede cambiar",
+        "Una palabra reservada"
+      ],
+      correct: 1
     },
     {
-      text: "¿Cuál es la traducción correcta de 'Función'?",
-      options: ["Loop", "Function", "Class"],
-      answer: "Function",
-      hint: "Agrupa código reutilizable."
+      q: "¿Cómo se dice 'función' en inglés?",
+      options: ["Condition", "Loop", "Function"],
+      correct: 2
     },
     {
-      text: "¿Cómo se dice 'Bucle' en inglés técnico?",
-      options: ["Loop", "Condition", "Branch"],
-      answer: "Loop",
-      hint: "Repite instrucciones varias veces."
+      q: "¿Qué significa 'condition'?",
+      options: [
+        "Una instrucción repetitiva",
+        "Una regla que determina una acción",
+        "Un tipo de dato"
+      ],
+      correct: 1
     },
     {
-      text: "Selecciona la traducción correcta de 'Booleano':",
-      options: ["Boolean", "Number", "Character"],
-      answer: "Boolean",
-      hint: "Solo puede ser verdadero o falso."
+      q: "¿Cómo se traduce 'loop'?",
+      options: ["Bucle", "Variable", "Constante"],
+      correct: 0
     },
     {
-      text: "¿Qué palabra se usa para decir 'Compilar'?",
-      options: ["Compile", "Execute", "Print"],
-      answer: "Compile",
-      hint: "Convierte código fuente en ejecutable."
+      q: "¿Qué significa 'debug'?",
+      options: [
+        "Corregir errores en el código",
+        "Escribir código nuevo",
+        "Ejecutar un programa"
+      ],
+      correct: 0
     }
   ];
 
-  function renderQuestion() {
-    if (currentQuestion >= questions.length) return finishUnit();
+  // ===============================
+  // MOSTRAR PREGUNTA
+  // ===============================
+  function showQuestion() {
+    if (currentQuestion >= questions.length) {
+      completeUnit();
+      return;
+    }
 
     const q = questions[currentQuestion];
-    questionText.textContent = q.text;
+    questionText.textContent = q.q;
     optionsContainer.innerHTML = "";
-    feedback.textContent = "";
 
-    q.options.forEach(opt => {
+    q.options.forEach((option, index) => {
       const btn = document.createElement("button");
-      btn.classList.add("check");
-      btn.textContent = opt;
-      btn.onclick = () => checkAnswer(opt, q.answer, q.hint);
+      btn.textContent = option;
+      btn.classList.add("btn");
+      btn.addEventListener("click", () => checkAnswer(index));
       optionsContainer.appendChild(btn);
     });
   }
 
-  function checkAnswer(selected, correct, hint) {
-    if (selected === correct) {
-      score++;
-      feedback.textContent = "✅ Correcto!";
+  // ===============================
+  // VALIDAR RESPUESTA
+  // ===============================
+  function checkAnswer(selected) {
+    const q = questions[currentQuestion];
+
+    if (selected === q.correct) {
+      feedback.textContent = "✅ Correct! Well done!";
       feedback.style.color = "#00ff99";
+      correctAnswers++;
+      updateProgress();
     } else {
+      feedback.textContent = "❌ Wrong answer. You lose one life.";
+      feedback.style.color = "#ff5e5e";
       lives--;
-      feedback.textContent = `❌ Incorrecto. Respuesta correcta: "${correct}". Pista: ${hint}`;
-      feedback.style.color = "#ff5555";
+      lifeCount.textContent = lives;
+
+      if (lives <= 0) {
+        endGame();
+        return;
+      }
     }
 
-    updateProgress();
-    setTimeout(() => {
-      currentQuestion++;
-      renderQuestion();
-    }, 1800);
+    currentQuestion++;
+    setTimeout(showQuestion, 1200);
   }
 
+  // ===============================
+  // PROGRESO
+  // ===============================
   function updateProgress() {
-    lifeCount.textContent = lives;
-    const progressPercent = Math.floor((score / questions.length) * 100);
-    progressBar.style.width = `${progressPercent}%`;
-    progressText.textContent = `Progreso: ${progressPercent}%`;
-
-    if (lives <= 0) {
-      feedback.textContent = "💀 Te quedaste sin vidas. Reintenta en 5 minutos.";
-      optionsContainer.innerHTML = "";
-    }
+    const percent = Math.floor((correctAnswers / questions.length) * 100);
+    progressBar.style.width = percent + "%";
+    progressText.textContent = `Progreso: ${percent}%`;
   }
 
-  function finishUnit() {
-    questionText.textContent = "";
+  // ===============================
+  // COMPLETAR UNIDAD
+  // ===============================
+  function completeUnit() {
+    questionText.textContent = "🎩 Excellent! You completed the English Unit 1!";
     optionsContainer.innerHTML = "";
     feedback.textContent = "";
-    completeSection.classList.remove("hidden");
+    window.CodeLingua.saveCompletion?.(1, "eng");
   }
 
-  renderQuestion();
+  // ===============================
+  // SIN VIDAS
+  // ===============================
+  function endGame() {
+    questionText.textContent = "😢 You ran out of lives. Try again later.";
+    optionsContainer.innerHTML = "";
+    feedback.textContent = "";
+  }
+
+  // ===============================
+  // INICIO
+  // ===============================
+  showQuestion();
 });

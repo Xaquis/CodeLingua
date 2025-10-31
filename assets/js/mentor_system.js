@@ -1,69 +1,70 @@
-// assets/js/mentor_system.js
-window.MentorSystem = (function () {
+// =======================================================
+// CodeLingua - Sistema de Mentoría con IA Básica (Codder & Lin)
+// Día 13 — Mejora Didáctica + Interacción Inteligente
+// =======================================================
 
+window.CodeLingua = window.CodeLingua || {};
+
+(() => {
   const mentors = {
-    lin: {
-      name: "Lin",
-      icon: "🎩🇬🇧",
-      tone: "formal-friendly",
-      intro: [
-        "¡Hola! Soy Lin 🎩 y hoy aprenderás vocabulario técnico básico en inglés.",
-        "Recuerda: los programadores también piensan en inglés.",
-        "¡Veamos algunos ejemplos antes de comenzar!"
-      ],
-      aiResponses: {
-        "variable": "¡Muy bien! Variable se traduce igual: ‘variable’. Se usa igual en programación.",
-        "loop": "Correcto, ‘loop’ es un bucle, una estructura que repite acciones.",
-        "function": "Excelente, ‘function’ agrupa instrucciones reutilizables.",
-        "boolean": "Exacto, ‘boolean’ significa verdadero o falso.",
-        "if": "¡Bien! ‘If’ significa ‘si’ en inglés condicional."
-      }
+    codder: {
+      name: "Codder 🧢💻",
+      tone: "amigable",
+      messages: [
+        "¡Hola! Soy Codder y te enseñaré los fundamentos de la programación. 🚀",
+        "Recuerda: una variable es como una caja donde guardas datos. 📦",
+        "Si fallas, no pasa nada. ¡Aprender es parte del proceso! 💪",
+        "¿Quieres un consejo? Prueba a escribir el código tú mismo. 😉"
+      ]
     },
-
-    coder: {
-      name: "Coder",
-      icon: "🧢💻",
-      tone: "enthusiastic",
-      intro: [
-        "¡Hey, soy Coder! 🧢💻 Hoy aprenderás los fundamentos de la programación.",
-        "Todo programa empieza con una idea, pero necesita orden, lógica y estructura.",
-        "Vamos a explorar los conceptos básicos con ejemplos simples. ¡Listo!"
-      ],
-      aiResponses: {
-        "variable": "Una variable guarda un valor. Piensa en ella como una caja con nombre.",
-        "loop": "Un ‘loop’ repite una acción hasta que dejes de necesitarlo. ¡Muy útil!",
-        "function": "Una función agrupa código para reutilizarlo, ¡como una receta!",
-        "boolean": "‘Boolean’ solo puede ser verdadero o falso. Es el alma de la lógica.",
-        "if": "‘If’ significa ‘si’. Permite que el programa tome decisiones."
-      }
+    lin: {
+      name: "Lin 🎩🇬🇧",
+      tone: "elegante",
+      messages: [
+        "Hello there! Soy Lin y te enseñaré inglés técnico. 🇬🇧✨",
+        "‘Variable’ en inglés se pronuncia igual, pero se escribe igual también. 🔤",
+        "Cada palabra técnica tiene su contexto en programación. 💬",
+        "Si te confundes, yo te mostraré la respuesta correcta. 😊"
+      ]
     }
   };
 
-  let activeMentor = "lin";
+  // Detecta quién es el mentor según el dataset del body
+  const currentMentor =
+    document.body.dataset.unit?.includes("eng") ? mentors.lin : mentors.codder;
 
-  function setMentor(name) {
-    if (mentors[name]) activeMentor = name;
+  const dialogueBox = document.getElementById("mentor-dialogue");
+
+  // ✅ Render inicial
+  if (dialogueBox) {
+    const intro = document.createElement("div");
+    intro.className = "mentor-bubble";
+    intro.innerHTML = `<strong>${currentMentor.name}:</strong> ${
+      currentMentor.messages[0]
+    }`;
+    dialogueBox.appendChild(intro);
   }
 
-  function getIntro() {
-    return mentors[activeMentor].intro;
-  }
+  // ✅ Mecanismo simple de IA didáctica
+  window.CodeLingua.askMentor = function (question) {
+    const reply = document.createElement("div");
+    reply.className = "mentor-bubble";
 
-  function respondToAnswer(answer) {
-    const lower = answer.toLowerCase().trim();
-    return mentors[activeMentor].aiResponses[lower] ||
-      "Hmm... no estoy seguro de eso. Revisa el concepto e inténtalo de nuevo.";
-  }
+    // Sistema de respuestas muy básicas
+    const q = question.toLowerCase();
+    let answer = "";
 
-  function showMentorMessage(message, type = "normal") {
-    const container = document.getElementById("mentor-dialogue");
-    if (!container) return;
-    const bubble = document.createElement("div");
-    bubble.className = `mentor-bubble ${type}`;
-    bubble.innerHTML = `${mentors[activeMentor].icon} ${message}`;
-    container.appendChild(bubble);
-    container.scrollTop = container.scrollHeight;
-  }
+    if (q.includes("variable")) answer = currentMentor.messages[1];
+    else if (q.includes("error")) answer = "Revisemos juntos el código. 🔍 ¿Qué línea falló?";
+    else if (q.includes("función") || q.includes("function"))
+      answer = "Una función agrupa instrucciones que puedes usar varias veces. 🔁";
+    else if (q.includes("hola")) answer = `¡Hola! Soy ${currentMentor.name}. 😊`;
+    else answer = currentMentor.messages[Math.floor(Math.random() * currentMentor.messages.length)];
 
-  return { setMentor, getIntro, respondToAnswer, showMentorMessage };
+    reply.innerHTML = `<strong>${currentMentor.name}:</strong> ${answer}`;
+    dialogueBox?.appendChild(reply);
+
+    // Mantener scroll abajo
+    dialogueBox.scrollTop = dialogueBox.scrollHeight;
+  };
 })();
