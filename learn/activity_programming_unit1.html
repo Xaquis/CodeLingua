@@ -9,11 +9,12 @@
   <link rel="stylesheet" href="../assets/css/style.css" />
 
   <!-- Scripts -->
-  <script src="../assets/js/unit_config.js" defer></script>
-  <script src="../assets/js/learning_module.js" defer></script>
-  <script src="../assets/js/narrator.js" defer></script>
-  <script src="../assets/js/activity_programming.js" defer></script>
-  <script src="../assets/js/debug_progress.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/learning_module.js" defer></script>
+<script src="../assets/js/voice_manager.js" defer></script> 
+<script src="../assets/js/narrator.js" defer></script>
+<script src="../assets/js/activity_programming.js" defer></script>
+<script src="../assets/js/debug_progress.js" defer></script>
 </head>
 
 <body data-unit="unit1_prog">
@@ -36,6 +37,41 @@
         ¡Hola! Soy <strong>Codder</strong> 🧢💻 y te acompañaré en tu viaje
         para aprender los fundamentos de la programación. 🚀
       </p>
+<main class="container">
+  <!-- Introducción -->
+  <section id="intro-codder" class="intro-section">
+    <div class="mascot codder">🧢💻</div>
+    <p>
+      ¡Hola! Soy <strong>Codder</strong> 🧢💻 y seré tu guía en esta unidad.
+      Hoy te contaré la historia del lenguaje Java y cómo empezó todo. ☕
+    </p>
+  </section>
+
+  <!-- 🟡 Historia Didáctica -->
+  <section id="story-area" class="story-mode">
+    <h2 id="story-title">Cargando historia...</h2>
+    <p id="story-text"></p>
+    <pre id="story-code"></pre>
+    <div id="story-question"></div>
+    <button id="next-btn" class="btn">Continuar</button>
+  </section>
+
+  <!-- Estado -->
+  <section id="status">
+    <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+    <div class="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    <p id="progress">Progreso: 0%</p>
+  </section>
+
+  <!-- Zona de preguntas y ejercicios -->
+  <section id="question-area">
+    <h2 id="question-text">Cargando...</h2>
+    <div id="options-container"></div>
+    <p id="feedback"></p>
+  </section>
+</main>
     </section>
 
     <!-- Diálogo didáctico -->

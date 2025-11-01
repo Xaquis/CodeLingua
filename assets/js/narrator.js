@@ -1,47 +1,67 @@
 // ===============================
-// CodeLingua - Narrador Didáctico (Codder & Lin)
-// Autor: Arlevy Sabogal (2025)
+// CodeLingua - Narrador Inteligente (v2)
+// Integración con VoiceManager.js
 // ===============================
 
 window.CodeLingua = window.CodeLingua || {};
 
-/**
- * Muestra una burbuja temporal en pantalla (modo clásico)
- * Uso: window.CodeLingua.speak("Hola soy Codder!");
- */
-window.CodeLingua.speak = function (text) {
-  const existing = document.querySelector(".speech-bubble");
-  if (existing) existing.remove();
+document.addEventListener("DOMContentLoaded", () => {
+  const dialogueBox = document.getElementById("mentor-dialogue");
+  if (!dialogueBox) return;
 
-  const bubble = document.createElement("div");
-  bubble.className = "speech-bubble";
-  bubble.textContent = text;
+  // === Personajes base ===
+  const lin = {
+    name: "Lin",
+    accent: "en-GB", // Identidad británica
+    style: "british",
+    color: "#00B8FF",
+    voiceIndex: 1
+  };
 
-  document.body.appendChild(bubble);
-  setTimeout(() => bubble.remove(), 3000);
-};
+  const codder = {
+    name: "Codder",
+    accent: "en-US",
+    style: "neutral",
+    color: "#00FF99",
+    voiceIndex: 0
+  };
 
-/**
- * Presenta un diálogo progresivo dentro del bloque .mentor-dialogue
- * para dar contexto educativo antes de los ejercicios.
- */
-window.addEventListener("DOMContentLoaded", () => {
-  const dialogue = document.getElementById("mentor-dialogue");
-  if (!dialogue) return;
+  // === Contexto dinámico según la unidad ===
+  const isProgramming = location.href.includes("programming");
+  const mentor = isProgramming ? codder : lin;
 
-  const bubbles = dialogue.querySelectorAll(".mentor-bubble");
-  bubbles.forEach(bubble => {
-    bubble.style.opacity = 0;
-    bubble.style.transform = "translateY(5px)";
-  });
+  // === Control narrativo ===
+  const narrator = {
+    log: [],
+    add(message, speaker = mentor.name) {
+      const bubble = document.createElement("div");
+      bubble.className = "mentor-bubble";
+      bubble.innerHTML = `<strong>${speaker}:</strong> ${message}`;
+      dialogueBox.appendChild(bubble);
+      dialogueBox.scrollTop = dialogueBox.scrollHeight;
 
-  // Animar aparición progresiva
-  bubbles.forEach((bubble, i) => {
-    setTimeout(() => {
-      bubble.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-      bubble.style.opacity = 1;
-      bubble.style.transform = "translateY(0)";
-    }, i * 2500); // cada 2.5 segundos
-  });
+      this.log.push({ speaker, message });
+
+      // 🔊 Reproduce voz automática
+      window.CodeLingua.voice?.speak(message, mentor.accent);
+    },
+    clear() {
+      dialogueBox.innerHTML = "";
+    }
+  };
+
+  window.CodeLingua.narrator = narrator;
+
+  // === Mensaje inicial según contexto ===
+  if (isProgramming) {
+    narrator.add(
+      "Welcome to Unit 1: Fundamentals of Programming. Let's explore how Java became one of the most powerful languages in the digital era."
+    );
+  } else {
+    narrator.add(
+      "Hello! I'm Lin, your technical English mentor. Let's practice understanding and applying English in the world of technology."
+    );
+  }
+
+  console.log(`🎙️ Narrator loaded (${mentor.name}, ${mentor.accent})`);
 });
-

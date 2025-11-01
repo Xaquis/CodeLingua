@@ -3,59 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inglés Técnico | CodeLingua</title>
-  <meta name="description" content="Aprende vocabulario técnico en inglés con Lin, mentor didáctico de CodeLingua. Lecciones prácticas y ejercicios interactivos." />
-  <link rel="preload" href="../assets/css/style.css" as="style" />
+  <title>Programación | CodeLingua</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 
-<body data-unit="english_home">
-  <header class="site-header" role="banner">
+<body data-unit="programming_home">
+  <header class="site-header">
     <div class="container">
       <h1 class="logo">CodeLingua</h1>
-      <nav aria-label="Menú principal">
+      <nav>
         <a href="../index.html">Inicio</a>
-        <a href="programming.html">Programación</a>
-        <a href="english.html" class="active">Inglés</a>
+        <a href="programming.html" class="active">Programación</a>
+        <a href="english.html">Inglés</a>
         <a href="../about.html">Sobre</a>
       </nav>
 
       <div class="controls">
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
-        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma" lang="es">🌐</button>
+        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">🌐</button>
       </div>
     </div>
   </header>
 
-  <main class="container" role="main">
+  <main class="container">
     <section class="lesson">
-      <h2 id="page-title">Aprende Inglés Técnico desde cero</h2>
+      <h2 id="page-title">Aprende Programación desde cero</h2>
       <p class="intro-text">
-        En este módulo aprenderás vocabulario esencial para desenvolverte en entornos tecnológicos.
-        Lin 🎩🇬🇧 te acompañará paso a paso con explicaciones claras y ejercicios prácticos. ✨
+        En este módulo aprenderás los fundamentos básicos de la programación,
+        resolverás ejercicios interactivos y descubrirás cómo pensar como un programador. 💡
       </p>
 
-      <h3>Lección 1: Vocabulario Técnico Esencial</h3>
+      <h3>Lección 1: Conceptos esenciales</h3>
       <ul>
-        <li><strong>Variable:</strong> <em>Variable</em> — un valor que puede cambiar.</li>
-        <li><strong>Function:</strong> <em>Función</em> — un conjunto de instrucciones.</li>
-        <li><strong>Condition:</strong> <em>Condición</em> — una regla que determina una acción.</li>
+        <li><strong>Variable:</strong> espacio donde guardas un valor.</li>
+        <li><strong>Función:</strong> conjunto de instrucciones reutilizables.</li>
+        <li><strong>Condicional:</strong> ejecuta código según una condición.</li>
       </ul>
 
       <div class="lesson-actions">
-        <a href="activity_english_unit1.html" class="btn">🎩 Empezar Unidad 1</a>
+        <a href="activity_programming_unit1.html" class="btn">🚀 Empezar Unidad 1</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer">
     <div class="container">
       <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/debug_progress.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/learning_module.js" defer></script>
+<script src="../assets/js/voice_manager.js" defer></script> 
+<script src="../assets/js/narrator.js" defer></script>
+<script src="../assets/js/activity_programming.js" defer></script>
+<script src="../assets/js/debug_progress.js" defer></script>
 </body>
 </html>
