@@ -1,96 +1,79 @@
-// ====================================
-// CodeLingua — Future UX Core
-// Autor: Arlevy Sabogal (2025)
-// ====================================
+// assets/js/main.js
+// ======================================================
+// CodeLingua: Control global de tema, idioma y eventos
+// Autor: Arlevy Sabogal
+// ======================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("🚀 CodeLingua (Future UX) inicializado correctamente");
+  const qs = (s) => document.querySelector(s);
 
-  // ===============================
-  // 🔧 Developer Mode
-  // ===============================
-  if (localStorage.getItem('devMode') !== 'true') {
-    console.log("🛠️ Activa el modo desarrollador con: localStorage.setItem('devMode','true')");
+  const themeToggle = qs('#theme-toggle');
+  const langToggle = qs('#lang-toggle');
+
+  // Seguridad por si no existen los botones
+  if (!themeToggle || !langToggle) {
+    console.warn('⚠️ Controles de tema o idioma no encontrados en esta página.');
   }
 
-  // ===============================
-  // 🌗 THEME TOGGLE
-  // ===============================
-  const themeToggle = document.getElementById('theme-toggle');
+  // ======== TEMA ========
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  applyTheme(savedTheme, false);
+
   if (themeToggle) {
-    const validThemes = ['light', 'dark'];
-    const savedTheme = validThemes.includes(localStorage.getItem('theme'))
-      ? localStorage.getItem('theme')
-      : 'dark';
-
-    document.body.classList.toggle('light-mode', savedTheme === 'light');
-    themeToggle.textContent = savedTheme === 'light' ? '☀️' : '🌙';
-
     themeToggle.addEventListener('click', () => {
       const isLight = document.body.classList.toggle('light-mode');
       const newTheme = isLight ? 'light' : 'dark';
-      themeToggle.textContent = isLight ? '☀️' : '🌙';
-      localStorage.setItem('theme', newTheme);
-
-      // 🌈 Transición visual suave
-      document.body.classList.add('theme-transition');
-      setTimeout(() => document.body.classList.remove('theme-transition'), 600);
+      applyTheme(newTheme, true);
     });
   }
 
-  // ===============================
-  // 🌐 LANGUAGE TOGGLE
-  // ===============================
-  const langToggle = document.getElementById('lang-toggle');
+  function applyTheme(theme, persist = true) {
+    if (theme === 'light') {
+      document.body.classList.add('light-mode');
+      if (themeToggle) themeToggle.textContent = '☀️';
+    } else {
+      document.body.classList.remove('light-mode');
+      if (themeToggle) themeToggle.textContent = '🌙';
+    }
+    if (persist) localStorage.setItem('theme', theme);
+  }
+
+  // ======== IDIOMA ========
+  const savedLang = localStorage.getItem('lang') || 'es';
+  applyLang(savedLang, false);
+
   if (langToggle) {
-    const validLangs = ['es', 'en'];
-    const savedLang = validLangs.includes(localStorage.getItem('lang'))
-      ? localStorage.getItem('lang')
-      : 'es';
+    langToggle.addEventListener('click', () => {
+      const current = document.documentElement.lang || savedLang;
+      const next = current === 'es' ? 'en' : 'es';
+      applyLang(next, true);
+    });
+  }
 
-    langToggle.textContent = savedLang === 'en' ? '🇺🇸' : '🇪🇸';
-    document.documentElement.lang = savedLang;
+  function applyLang(lang, persist = true) {
+    document.documentElement.lang = lang;
+    if (langToggle) langToggle.textContent = (lang === 'en') ? '🇺🇸' : '🇪🇸';
+    if (persist) localStorage.setItem('lang', lang);
+    notifyLangChange(lang);
+  }
 
-    // Diccionario principal
-    const dictionary = {
-      es: {
-        title: "Aprende programación e inglés técnico al mismo tiempo",
-        intro: "Bienvenido a CodeLingua, donde aprenderás idiomas y código al mismo tiempo.",
-        startProg: "Unidad 1 - Programación",
-        startEng: "Unidad 1 - Inglés",
-      },
-      en: {
-        title: "Learn programming and technical English at the same time",
-        intro: "Welcome to CodeLingua, where you learn languages and code together.",
-        startProg: "Unit 1 - Programming",
-        startEng: "Unit 1 - English",
-      },
-    };
+  function notifyLangChange(lang) {
+    window.CodeLingua = window.CodeLingua || {};
+    window.CodeLingua.currentLang = lang;
 
-    function updateLanguage(lang) {
-      const data = dictionary[lang];
-      const titleEl = document.getElementById('page-title') || document.querySelector('h2');
-      const introEl = document.querySelector('.intro-text');
-      const btnProg = document.querySelector('.btn[href*="programming"]');
-      const btnEng = document.querySelector('.btn[href*="english"]');
-
-      if (titleEl) titleEl.textContent = data.title;
-      if (introEl) introEl.textContent = data.intro;
-      if (btnProg) btnProg.textContent = data.startProg;
-      if (btnEng) btnEng.textContent = data.startEng;
+    if (typeof window.CodeLingua.onLangChange === 'function') {
+      try { window.CodeLingua.onLangChange(lang); } catch (e) { console.warn(e); }
+    }
+    if (typeof window.CodeLingua.onMentorLangChange === 'function') {
+      try { window.CodeLingua.onMentorLangChange(lang); } catch (e) { console.warn(e); }
     }
 
-    // Aplica el idioma guardado
-    updateLanguage(savedLang);
-
-    // Evento de cambio
-    langToggle.addEventListener('click', () => {
-      const currentLang = document.documentElement.lang;
-      const newLang = currentLang === 'es' ? 'en' : 'es';
-      document.documentElement.lang = newLang;
-      langToggle.textContent = newLang === 'en' ? '🇺🇸' : '🇪🇸';
-      localStorage.setItem('lang', newLang);
-      updateLanguage(newLang);
-    });
+    document.dispatchEvent(new CustomEvent('codelingua:langchange', { detail: { lang } }));
   }
+
+  // API global
+  window.CodeLingua = window.CodeLingua || {};
+  window.CodeLingua.getLang = () => document.documentElement.lang || 'es';
+  window.CodeLingua.getTheme = () =>
+    document.body.classList.contains('light-mode') ? 'light' : 'dark';
 });

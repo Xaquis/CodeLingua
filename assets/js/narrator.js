@@ -1,67 +1,55 @@
-// ===============================
-// CodeLingua - Narrador Inteligente (v2)
-// Integración con VoiceManager.js
-// ===============================
+// assets/js/narrator.js
+// ======================================================
+// CodeLingua - Sistema de narrador/mentor (Codder y Lin)
+// Autor: Arlevy Sabogal
+// ======================================================
 
 window.CodeLingua = window.CodeLingua || {};
 
-document.addEventListener("DOMContentLoaded", () => {
-  const dialogueBox = document.getElementById("mentor-dialogue");
-  if (!dialogueBox) return;
+window.CodeLingua.speak = function (text, lang = null, mentor = 'Lin') {
+  const chosenLang =
+    lang || window.CodeLingua.getLang?.() || document.documentElement.lang || 'es';
 
-  // === Personajes base ===
-  const lin = {
-    name: "Lin",
-    accent: "en-GB", // Identidad británica
-    style: "british",
-    color: "#00B8FF",
-    voiceIndex: 1
-  };
-
-  const codder = {
-    name: "Codder",
-    accent: "en-US",
-    style: "neutral",
-    color: "#00FF99",
-    voiceIndex: 0
-  };
-
-  // === Contexto dinámico según la unidad ===
-  const isProgramming = location.href.includes("programming");
-  const mentor = isProgramming ? codder : lin;
-
-  // === Control narrativo ===
-  const narrator = {
-    log: [],
-    add(message, speaker = mentor.name) {
-      const bubble = document.createElement("div");
-      bubble.className = "mentor-bubble";
-      bubble.innerHTML = `<strong>${speaker}:</strong> ${message}`;
-      dialogueBox.appendChild(bubble);
-      dialogueBox.scrollTop = dialogueBox.scrollHeight;
-
-      this.log.push({ speaker, message });
-
-      // 🔊 Reproduce voz automática
-      window.CodeLingua.voice?.speak(message, mentor.accent);
-    },
-    clear() {
-      dialogueBox.innerHTML = "";
+  // Si existe un manejador de voz
+  if (typeof window.CodeLingua.voiceSpeak === 'function') {
+    try {
+      window.CodeLingua.voiceSpeak(text, chosenLang, mentor);
+      return;
+    } catch (e) {
+      console.warn('Error al usar voice manager:', e);
     }
-  };
-
-  window.CodeLingua.narrator = narrator;
-
-  // === Mensaje inicial según contexto ===
-  if (isProgramming) {
-    narrator.add(
-      "Welcome to Unit 1: Fundamentals of Programming. Let's explore how Java became one of the most powerful languages in the digital era."
-    );
-  } else {
-    narrator.add(
-      "Hello! I'm Lin, your technical English mentor. Let's practice understanding and applying English in the world of technology."
-    );
   }
 
-  console.log(`🎙️ Narrator loaded (${mentor.name}, ${mentor.accent})`);
-});
+  // Mostrar burbuja visual (fallback)
+  const old = document.querySelector('.speech-bubble');
+  if (old) old.remove();
+
+  const bubble = document.createElement('div');
+  bubble.className = 'speech-bubble';
+  bubble.textContent = (mentor ? mentor + ': ' : '') + text;
+  document.body.appendChild(bubble);
+
+  setTimeout(() => bubble.remove(), 4000);
+};
+
+// Reacciona al cambio de idioma global
+window.CodeLingua.onMentorLangChange = function (lang) {
+  window.CodeLingua._mentorLang = lang;
+  const msg = lang === 'en'
+    ? 'Interface set to English.'
+    : 'Interfaz cambiada a Español.';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'mentor-bubble';
+  bubble.style.position = 'fixed';
+  bubble.style.bottom = '80px';
+  bubble.style.right = '20px';
+  bubble.style.background = 'rgba(0,0,0,0.75)';
+  bubble.style.color = '#fff';
+  bubble.style.padding = '8px 12px';
+  bubble.style.borderRadius = '8px';
+  bubble.textContent = msg;
+  document.body.appendChild(bubble);
+
+  setTimeout(() => bubble.remove(), 2000);
+};
