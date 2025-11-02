@@ -1,0 +1,52 @@
+[
+  {
+    "title": "El nacimiento de Java",
+    "text": "Java fue creado en 1995 por Sun Microsystems para construir programas que funcionaran en cualquier dispositivo. Su lema era 'Write Once, Run Anywhere'.",
+    "code": "",
+    "question": {
+      "text": "¿En qué año se lanzó oficialmente Java?",
+      "options": ["1995", "2000", "1989", "2010"],
+      "answer": "1995"
+    }
+  },
+  {
+    "title": "Tu primer programa en Java",
+    "text": "Todo programa en Java comienza con una clase principal y un método main. Observa este ejemplo:",
+    "code": "public class HolaMundo {\n  public static void main(String[] args) {\n    System.out.println(\"¡Hola, Java!\");\n  }\n}",
+    "question": {
+      "text": "¿Qué método se usa para imprimir texto en Java?",
+      "options": ["System.out.println()", "console.log()", "printText()", "output()"],
+      "answer": "System.out.println()"
+    }
+  },
+  {
+    "title": "Variables y tipos de datos",
+    "text": "En Java, las variables almacenan información. Cada una tiene un tipo, como int, double o String.",
+    "code": "int edad = 25;\nString nombre = \"Codder\";\nboolean activo = true;",
+    "question": {
+      "text": "¿Qué tipo de dato se usa para almacenar texto en Java?",
+      "options": ["String", "Text", "Char", "Word"],
+      "answer": "String"
+    }
+  },
+  {
+    "title": "Métodos y funciones",
+    "text": "Los métodos permiten agrupar código reutilizable. En Java siempre se declaran dentro de una clase.",
+    "code": "public static void saludar() {\n  System.out.println(\"¡Hola desde un método!\");\n}",
+    "question": {
+      "text": "¿Dónde deben declararse los métodos en Java?",
+      "options": ["Dentro de una clase", "Fuera del main", "En un archivo aparte", "Dentro del método main"],
+      "answer": "Dentro de una clase"
+    }
+  },
+  {
+    "title": "Programación Orientada a Objetos",
+    "text": "Java es un lenguaje orientado a objetos. Las clases definen las características y comportamientos de los objetos.",
+    "code": "class Perro {\n  String nombre;\n  void ladrar() {\n    System.out.println(nombre + \" está ladrando!\");\n  }\n}",
+    "question": {
+      "text": "¿Qué representa una clase en Java?",
+      "options": ["El molde de un objeto", "Una variable", "Una función", "Una biblioteca"],
+      "answer": "El molde de un objeto"
+    }
+  }
+]

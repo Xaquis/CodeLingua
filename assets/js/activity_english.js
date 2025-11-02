@@ -3,8 +3,38 @@
 // Integración con unit_config.js
 // ======================================================
 
+// ===============================
+// CodeLingua - Sistema de Idiomas
+// ===============================
 window.CodeLingua = window.CodeLingua || {};
 
+window.CodeLingua.lang = localStorage.getItem("cl_lang") || "es";
+
+window.CodeLingua.t = function (key) {
+  const texts = {
+    es: {
+      correct: "✅ ¡Correcto! Bien hecho.",
+      incorrect: "❌ Incorrecto.",
+      lostLife: "❌ Incorrecto. Perdiste una vida.",
+      tryAgain: "🔁 Inténtalo de nuevo.",
+      progress: "Progreso",
+      lives: "Vidas",
+    },
+    en: {
+      correct: "✅ Correct! Well done.",
+      incorrect: "❌ Incorrect.",
+      lostLife: "❌ Incorrect. You lost a life.",
+      tryAgain: "🔁 Try again.",
+      progress: "Progress",
+      lives: "Lives",
+    }
+  };
+  return texts[window.CodeLingua.lang][key] || key;
+};
+
+// ===============================
+// CodeLingua - Actividad de Inglés Técnico
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Iniciando actividad de inglés...");
 
@@ -26,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showMentorIntro() {
     mentorBubble.innerHTML = "";
     let index = 0;
+
     const interval = setInterval(() => {
       if (index < unit.intro.length) {
         const msg = document.createElement("div");
@@ -35,10 +66,19 @@ document.addEventListener("DOMContentLoaded", () => {
         index++;
       } else {
         clearInterval(interval);
+        console.log("✅ Introducción completada");
         window.CodeLingua.learningReady?.();
       }
     }, 2000);
   }
+
+  // ========= INICIALIZACIÓN =========
+  if (unit && mentorName) {
+    showMentorIntro();
+  } else {
+    console.error("❌ Error: No se pudo cargar la configuración de la unidad o el mentor.");
+  }
+});
 
   // ========= VALIDACIÓN =========
   exercises.forEach((exercise) => {

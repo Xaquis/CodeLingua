@@ -9,22 +9,23 @@
 
 <body data-unit="">
   <!-- Encabezado principal -->
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">CodeLingua</h1>
-      <nav>
-        <a href="index.html" class="active">Inicio</a>
-        <a href="learn/activity_programming_unit1.html">Programación</a>
-        <a href="learn/activity_english_unit1.html">Inglés</a>
-        <a href="about.html">Sobre</a>
-      </nav>
+<header class="site-header">
+  <div class="container">
+    <h1 class="logo">CodeLingua</h1>
+    <nav aria-label="Menú principal">
+      <a href="../index.html">Inicio</a>
+      <a href="programming.html">Programación</a>
+      <a href="english.html">Inglés</a>
+      <a href="../about.html">Sobre</a>
+    </nav>
 
-      <div class="controls">
-        <button id="theme-toggle" class="theme-toggle">🌙</button>
-        <button id="lang-toggle" class="lang-toggle">🇪🇸</button>
-      </div>
+    <div class="controls" aria-hidden="false">
+      <!-- IDs obligatorios: theme-toggle, lang-toggle -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
+      <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">🇪🇸</button>
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- Contenido principal -->
   <main class="container">
