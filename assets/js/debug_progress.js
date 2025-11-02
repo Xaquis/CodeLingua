@@ -70,7 +70,12 @@
       if (btn) {
         btn.onclick = () => {
           if (confirm("¿Borrar todos los datos de progreso?")) {
-            localStorage.clear();
+          Object.keys(localStorage).forEach(key => {
+  if (key.startsWith("cl_")) {
+    localStorage.removeItem(key);
+  }
+});
+
             updatePanel();
           }
         };

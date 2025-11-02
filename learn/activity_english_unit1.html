@@ -4,89 +4,369 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
-
-  <!-- Estilos -->
+  <meta name="description" content="Unidad 1: Inglés técnico. Lin (mentor británico) explica y pregunta: historia breve, ejemplos y ejercicios interactivos." />
   <link rel="stylesheet" href="../assets/css/style.css" />
-
-  <!-- Scripts -->
-<script src="../assets/js/progress.js" defer></script>
-<script src="../assets/js/learning_module.js" defer></script>
-<script src="../assets/js/voice_manager.js" defer></script> 
-<script src="../assets/js/narrator.js" defer></script>
-<script src="../assets/js/activity_programming.js" defer></script>
-<script src="../assets/js/debug_progress.js" defer></script>
-
 </head>
 
 <body data-unit="unit1_eng">
   <header class="site-header">
     <div class="container">
-      <h1 class="logo">Unidad 1: Inglés Técnico</h1>
+      <h1 class="logo">Unidad 1: Inglés Técnico — Lin 🎩🇬🇧</h1>
       <nav>
         <a href="../index.html">Inicio</a>
         <a href="programming.html">Programación</a>
+        <a href="english.html" class="active">Inglés</a>
         <a href="../about.html">Sobre</a>
       </nav>
+
+      <div class="controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
+        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">🌐</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Introducción -->
-<section id="intro-lin" class="intro-section">
-  <div class="mascot lin">🎩🇬🇧</div>
-  <p>
-    ¡Hola! Soy <strong>Lin</strong> 🎩🇬🇧 y hoy aprenderemos vocabulario técnico esencial.
-    No te preocupes si fallas, te enseñaré la palabra correcta. 💬
-  </p>
-</section>
+    <!-- Intro + Lin -->
+    <section id="intro-lin" class="intro-section">
+      <div class="mascot lin">🎩🇬🇧</div>
+      <p>
+        Hello! I'm <strong>Lin</strong> 🎩 — your British mentor for technical English.
+        We'll learn short explanations and then practice with friendly questions.
+        The first exercise gives you up to <strong>3 free attempts</strong> without losing lives.
+      </p>
+      <div style="margin-top:10px;">
+        <button id="start-lesson" class="btn">Start Unit 1</button>
+      </div>
+    </section>
 
-    <!-- Diálogo didáctico -->
-<section class="mentor-dialogue" id="mentor-dialogue"></section>
+    <!-- Mentor dialogue (visual) -->
+    <section class="mentor-dialogue" id="mentor-dialogue" aria-live="polite"></section>
 
-    <!-- Estado -->
+    <!-- Story / micro-lesson -->
+    <section id="story-area" class="story-mode hidden">
+      <h2 id="story-title">Cargando...</h2>
+      <p id="story-text"></p>
+      <pre id="story-code"></pre>
+
+      <div id="story-question" class="hidden">
+        <p id="question-text" style="font-weight:700;"></p>
+        <div id="question-options" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;"></div>
+        <p id="question-feedback" style="margin-top:10px;font-weight:600;"></p>
+      </div>
+
+      <button id="next-btn" class="btn hidden">Next</button>
+    </section>
+
+    <!-- Status -->
     <section id="status">
       <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
-      <div class="progress-bar-container"><div id="progress-bar"></div></div>
+      <div class="progress-bar-container">
+        <div id="progress-bar" style="width:0%"></div>
+      </div>
       <p id="progress">Progreso: 0%</p>
     </section>
 
-    <!-- Ejercicios -->
-    <section id="exercises" class="hidden">
-      <div class="exercise" data-answer="variable" data-free-tries="2">
-        <h3>Exercise 1:</h3>
-        <p>Translate: “Variable” means something that can change.</p>
-        <input type="text" placeholder="Tu traducción..." />
-        <button class="check">Check</button>
-        <p class="exercise-feedback"></p>
-      </div>
-
-      <div class="exercise" data-answer="function" data-free-tries="1">
-        <h3>Exercise 2:</h3>
-        <p>Translate: “Function” means a reusable block of code.</p>
-        <input type="text" placeholder="Tu traducción..." />
-        <button class="check">Check</button>
-        <p class="exercise-feedback"></p>
-      </div>
-
-      <div class="exercise" data-answer="condition" data-free-tries="1">
-        <h3>Exercise 3:</h3>
-        <p>Translate: “Condition” means a rule that must be true for something to happen.</p>
-        <input type="text" placeholder="Tu traducción..." />
-        <button class="check">Check</button>
-        <p class="exercise-feedback"></p>
-      </div>
-    </section>
-
-    <!-- Finalización -->
+    <!-- Completion -->
     <section id="complete" class="hidden">
-      <p>🎉 Great job! You've completed Unit 1 of Technical English. ☕🇬🇧</p>
+      <p>🎉 Congratulations! You completed Unit 1 (Inglés técnico).</p>
+      <a href="unit_complete.html?unit=1" class="btn" id="complete-continue">Continue</a>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
+      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Scripts: manten el orden indicado (voice_manager debe cargarse antes que narrator si lo usas) -->
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/learning_module.js" defer></script>
+<script src="../assets/js/voice_manager.js" defer></script>
+<script src="../assets/js/narrator.js" defer></script>
+<script src="../assets/js/debug_progress.js" defer></script>
+<script src="../assets/js/activity_english.js" defer></script>
+  <!-- Lógica propia de la unidad (autocontenida para que funcione en cuanto la pegues) -->
+  <script>
+    (function () {
+      // datos de la micro-lección y preguntas (de menos a más dificultad)
+      const scenes = [
+        {
+          title: "What is a variable?",
+          text: "A variable is a named storage for a value. Think of it like a labeled box where you keep a number, text, or true/false value.",
+          code: "Example: let count = 5; // 'count' stores the number 5",
+          question: {
+            text: "Which is the best definition of a variable?",
+            options: [
+              { text: "A storage container for values", correct: true },
+              { text: "A function to repeat code", correct: false },
+              { text: "A type of error", correct: false }
+            ],
+            freeTries: 3
+          }
+        },
+        {
+          title: "What is a function?",
+          text: "A function is a reusable block of code that performs a task. You can call it many times.",
+          code: "Example: function greet() { console.log('Hello'); }",
+          question: {
+            text: "What does a function do?",
+            options: [
+              { text: "Stores data permanently", correct: false },
+              { text: "Repeats code forever", correct: false },
+              { text: "Encapsulates a task to be reused", correct: true }
+            ],
+            freeTries: 1
+          }
+        },
+        {
+          title: "What is a loop?",
+          text: "A loop repeats instructions while a condition holds true.",
+          code: "Example: for (let i=0; i<3; i++) { console.log(i); }",
+          question: {
+            text: "When would you use a loop?",
+            options: [
+              { text: "To repeat actions multiple times", correct: true },
+              { text: "To store user data", correct: false },
+              { text: "To style a web page", correct: false }
+            ],
+            freeTries: 1
+          }
+        },
+        {
+          title: "Conditional statements",
+          text: "Conditionals run code only when a condition is met (e.g., if a > b then...).",
+          code: "Example: if (score > 60) { console.log('Pass'); }",
+          question: {
+            text: "What is the purpose of a conditional?",
+            options: [
+              { text: "To handle different outcomes", correct: true },
+              { text: "To define a function", correct: false },
+              { text: "To format text", correct: false }
+            ],
+            freeTries: 1
+          }
+        },
+      ];
+
+      // DOM
+      const startBtn = document.getElementById('start-lesson');
+      const mentorBox = document.getElementById('mentor-dialogue');
+      const storyArea = document.getElementById('story-area');
+      const storyTitle = document.getElementById('story-title');
+      const storyText = document.getElementById('story-text');
+      const storyCode = document.getElementById('story-code');
+      const storyQuestion = document.getElementById('story-question');
+      const questionText = document.getElementById('question-text');
+      const questionOptions = document.getElementById('question-options');
+      const questionFeedback = document.getElementById('question-feedback');
+      const nextBtn = document.getElementById('next-btn');
+      const progressBar = document.getElementById('progress-bar');
+      const progressText = document.getElementById('progress');
+      const lifeCountEl = document.getElementById('life-count');
+      const completeSection = document.getElementById('complete');
+
+      // estado
+      let current = 0;
+      let corrects = 0;
+      let lives = 10;
+      let freeTriesRemaining = scenes[0].question.freeTries || 0;
+      let livesRegenTimer = null;
+
+      // helpers visual mentor (fallback si no hay voice_manager)
+      function mentorSpeak(speaker, text, delay = 0) {
+        // try unified TTS call (voice_manager.js defines window.CodeLingua.speak(text, lang, mentor))
+        if (window.CodeLingua && typeof window.CodeLingua.speak === 'function') {
+          // voice_manager.js expects: speak(text, lang = "en-GB", mentor = "Lin")
+          const lang = (speaker === 'Lin') ? 'en-GB' : 'en-US';
+          try {
+            window.CodeLingua.speak(text, lang, speaker);
+            // Also add bubble in dialogue area
+            addMentorBubble(speaker, text);
+          } catch (e) {
+            addMentorBubble(speaker, text);
+          }
+        } else {
+          addMentorBubble(speaker, text);
+        }
+      }
+
+      function addMentorBubble(speaker, text) {
+        if (!mentorBox) return;
+        const bubble = document.createElement('div');
+        bubble.className = 'mentor-bubble';
+        bubble.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+        mentorBox.appendChild(bubble);
+        mentorBox.scrollTop = mentorBox.scrollHeight;
+      }
+
+      function updateStatus() {
+        const percent = Math.round((corrects / scenes.length) * 100);
+        progressBar.style.width = percent + '%';
+        progressText.textContent = `Progreso: ${percent}%`;
+        lifeCountEl.textContent = lives;
+      }
+
+      function showScene(i) {
+        const s = scenes[i];
+        storyTitle.textContent = s.title;
+        storyText.textContent = s.text;
+        storyCode.textContent = s.code || '';
+        questionText.textContent = s.question.text;
+        questionOptions.innerHTML = '';
+        questionFeedback.textContent = '';
+        storyQuestion.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+
+        // add options
+        s.question.options.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'btn';
+          btn.textContent = opt.text;
+          btn.dataset.correct = opt.correct ? '1' : '0';
+          btn.style.minWidth = '160px';
+          btn.addEventListener('click', () => handleAnswer(btn, opt));
+          questionOptions.appendChild(btn);
+        });
+
+        // show micro-lesson with delay and speak
+        storyArea.classList.remove('hidden');
+        window.setTimeout(() => {
+          mentorSpeak('Lin', s.text, 200);
+          // show question area after short delay
+          setTimeout(() => {
+            storyQuestion.classList.remove('hidden');
+          }, 1200);
+        }, 300);
+      }
+
+      function handleAnswer(button, option) {
+        const scene = scenes[current];
+        // free tries logic
+        const freeTries = scene.question.freeTries || 0;
+
+        // if correct
+        if (option.correct) {
+          button.disabled = true;
+          addFeedback('✅ Correct!', true);
+          corrects++;
+          updateStatus();
+          // small celebration bubble
+          mentorSpeak('Lin', '✅ Excellent! That is correct.');
+          // next scene after short delay
+          setTimeout(() => {
+            current++;
+            if (current >= scenes.length) {
+              finishUnit();
+            } else {
+              freeTriesRemaining = scenes[current].question.freeTries || 0;
+              showScene(current);
+            }
+          }, 900);
+        } else {
+          // incorrect
+          const trialText = freeTriesRemaining > 0 ? 'Try again (free attempt)' : 'Wrong — you lose a life';
+          addFeedback('❌ ' + trialText, false);
+          mentorSpeak('Lin', 'Not quite — I will show the correct answer so you can learn it.');
+
+          // show correct answer visibly
+          const correctOption = Array.from(questionOptions.children).find(b => b.dataset.correct === '1');
+          if (correctOption) {
+            correctOption.style.outline = '3px solid #00FFC6';
+          }
+
+          if (freeTriesRemaining > 0) {
+            freeTriesRemaining--;
+          } else {
+            // lose life and advance to next question to avoid wasting time
+            lives--;
+            updateStatus();
+            // reveal correct answer message
+            addFeedback('Respuesta correcta: ' + (correctOption ? correctOption.textContent : '—'), false);
+            // if lives run out
+            if (lives <= 0) {
+              triggerLivesExhausted();
+              return;
+            }
+            // advance to next
+            setTimeout(() => {
+              current++;
+              if (current >= scenes.length) finishUnit();
+              else {
+                freeTriesRemaining = scenes[current].question.freeTries || 0;
+                showScene(current);
+              }
+            }, 1200);
+          }
+        }
+      }
+
+      function addFeedback(text, positive) {
+        questionFeedback.textContent = text;
+        questionFeedback.style.color = positive ? '#00FF99' : '#FF5E5E';
+      }
+
+      function finishUnit() {
+        storyArea.classList.add('hidden');
+        document.getElementById('exercises')?.classList?.add('hidden'); // optional
+        completeSection.classList.remove('hidden');
+        // mark completion in localStorage
+        try {
+          localStorage.setItem('cl_unit1_eng_completed', 'true');
+        } catch (e) {
+          console.warn('No localStorage', e);
+        }
+        mentorSpeak('Lin', '🏁 Congratulations! You have completed the unit.');
+      }
+
+      function triggerLivesExhausted() {
+        // block interaction and show message
+        mentorSpeak('Lin', 'You have run out of lives. Wait 5 minutes for a refresh or try again later.');
+        questionFeedback.textContent = 'Se han acabado las vidas. Espera 5 minutos para regenerar.';
+        questionFeedback.style.color = '#FF5E5E';
+        // disable buttons
+        Array.from(questionOptions.children).forEach(b => b.disabled = true);
+        // schedule regen in 5 minutes
+        if (livesRegenTimer) clearTimeout(livesRegenTimer);
+        livesRegenTimer = setTimeout(() => {
+          lives = 10;
+          freeTriesRemaining = scenes[current].question.freeTries || 0;
+          updateStatus();
+          questionFeedback.textContent = 'Lives have been regenerated. You can continue.';
+          Array.from(questionOptions.children).forEach(b => b.disabled = false);
+        }, 5 * 60 * 1000);
+      }
+
+      // start lesson button
+      startBtn.addEventListener('click', () => {
+        // hide intro
+        document.getElementById('intro-lin').classList.add('hidden');
+        // initial mentor welcome
+        mentorSpeak('Lin', 'Welcome! In this unit we will learn basic technical English terms. I will explain and then ask short questions.');
+        // show story area + load first scene
+        setTimeout(() => {
+          showScene(0);
+        }, 800);
+      });
+
+      // update initial status
+      updateStatus();
+
+      // Accessibility: allow keyboard navigation for options
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          // if next btn visible, trigger it
+          if (!nextBtn.classList.contains('hidden')) nextBtn.click();
+        }
+      });
+
+      // Expose for debugging (dev mode)
+      window.CodeLingua = window.CodeLingua || {};
+      window.CodeLingua.unit1English = {
+        getState: () => ({ current, corrects, lives })
+      };
+    })();
+  </script>
 </body>
 </html>
