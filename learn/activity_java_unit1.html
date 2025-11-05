@@ -1,224 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Introducción a Java | CodeLingua</title>
-  <meta name="description" content="Explora la historia y fundamentos del lenguaje Java con Codder. Aprende programación paso a paso de forma narrativa.">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css" />
-
-  <!-- Scripts -->
-<script src="../assets/js/progress.js" defer></script>
-<script src="../assets/js/learning_module.js" defer></script>
-<script src="../assets/js/voice_manager.js" defer></script>
-<script src="../assets/js/narrator.js" defer></script>
-<script src="../assets/js/debug_progress.js" defer></script>
-<script src="../assets/js/activity_java_storymode.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeLingua - Java Story Mode: Unidad 1</title>
+  <link rel="stylesheet" href="../assets/css/style_future.css">
 </head>
 
-<body data-unit="java_story">
+<body>
+  <!-- =======================
+       ENCABEZADO
+  ======================= -->
   <header class="site-header">
-    <div class="container">
-      <h1 class="logo">Unidad 1: Introducción a Java ☕</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html" class="active">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-    </div>
+    <h1 class="logo">☕ Java Story Mode</h1>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="programming.html">Programación</a>
+      <a href="english.html">Inglés</a>
+      <a href="about.html">Sobre</a>
+    </nav>
   </header>
 
+  <!-- =======================
+       CONTENIDO PRINCIPAL
+  ======================= -->
   <main class="container">
-    <!-- Diálogo del mentor -->
-    <section class="mentor-dialogue" id="mentor-dialogue"></section>
+    <section id="intro">
+      <div id="mentor-dialogue" class="mentor-dialogue"></div>
+    </section>
 
-    <!-- Historia interactiva -->
     <section id="story-area" class="story-mode">
-      <h2 id="story-title">Cargando historia...</h2>
-      <p id="story-text"></p>
-      <pre id="story-code"></pre>
+      <h2>Bienvenido al Mundo Java</h2>
+      <p>Era 1998. Un joven ingeniero británico llamado <strong>Lin</strong> recorría los pasillos de <em>Sun Microsystems</em>,
+         donde se fraguaba un lenguaje que cambiaría el futuro de la programación.</p>
 
-      <div id="story-question" class="hidden">
-        <p id="question-text"></p>
-        <div id="question-options"></div>
+      <p>Java no solo nació para computadoras; fue diseñado con una visión universal:
+         <em>“Write Once, Run Anywhere”</em>. Desde entonces, Java impulsa millones de dispositivos,
+         servidores, y aplicaciones que conectan el mundo digital.</p>
+
+      <pre>
+public class HolaMundo {
+    public static void main(String[] args) {
+        System.out.println("¡Hola, mundo!");
+    }
+}
+      </pre>
+
+      <p>Lin sonríe: “El código parece simple, pero en él habita toda la filosofía de Java:
+         estructura, claridad y portabilidad.”</p>
+
+      <div id="story-question">
+        <p>¿Qué representa la clase <code>public class HolaMundo</code>?</p>
+        <button class="btn" data-answer="estructura">Es la estructura base del programa</button>
+        <button class="btn" data-answer="comentario">Es un comentario</button>
+        <button class="btn" data-answer="libreria">Es una librería externa</button>
       </div>
 
-      <button id="next-btn" class="hidden">Siguiente →</button>
+      <button id="next-btn" class="hidden">Continuar</button>
+    </section>
+
+    <section id="complete" class="hidden">
+      <h2>¡Excelente trabajo!</h2>
+      <p>Has completado la primera parte del modo historia de Java. 🌍☕</p>
+      <p>Ahora Lin te guiará hacia los fundamentos de la <strong>Programación Orientada a Objetos</strong>.</p>
     </section>
   </main>
 
+  <!-- =======================
+       PIE DE PÁGINA
+  ======================= -->
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
+    <p>© 2025 CodeLingua. Desarrollado por Arlevy Sabogal.</p>
   </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Introducción a Java | CodeLingua</title>
-  <meta name="description" content="Explora la historia y fundamentos del lenguaje Java con Codder. Aprende programación paso a paso de forma narrativa.">
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css" />
-
-  <!-- Scripts -->
-  <script src="../assets/js/narrator.js" defer></script>
-  <script src="../assets/js/java_story.js" defer></script>
-</head>
-
-<body data-unit="java_story">
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">Unidad 1: Introducción a Java ☕</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html" class="active">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Diálogo del mentor -->
-    <section class="mentor-dialogue" id="mentor-dialogue"></section>
-
-    <!-- Historia interactiva -->
-    <section id="story-area" class="story-mode">
-      <h2 id="story-title">Cargando historia...</h2>
-      <p id="story-text"></p>
-      <pre id="story-code"></pre>
-
-      <div id="story-question" class="hidden">
-        <p id="question-text"></p>
-        <div id="question-options"></div>
-      </div>
-
-      <button id="next-btn" class="hidden">Siguiente →</button>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Introducción a Java | CodeLingua</title>
-  <meta name="description" content="Explora la historia y fundamentos del lenguaje Java con Codder. Aprende programación paso a paso de forma narrativa.">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css" />
-
-  <!-- Scripts -->
-  <script src="../assets/js/narrator.js" defer></script>
-  <script src="../assets/js/java_story.js" defer></script>
-</head>
-
-<body data-unit="java_story">
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">Unidad 1: Introducción a Java ☕</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html" class="active">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Diálogo del mentor -->
-    <section class="mentor-dialogue" id="mentor-dialogue"></section>
-
-    <!-- Historia interactiva -->
-    <section id="story-area" class="story-mode">
-      <h2 id="story-title">Cargando historia...</h2>
-      <p id="story-text"></p>
-      <pre id="story-code"></pre>
-
-      <div id="story-question" class="hidden">
-        <p id="question-text"></p>
-        <div id="question-options"></div>
-      </div>
-
-      <button id="next-btn" class="hidden">Siguiente →</button>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Unidad 1 - Introducción a Java | CodeLingua</title>
-  <meta name="description" content="Explora la historia y fundamentos del lenguaje Java con Codder. Aprende programación paso a paso de forma narrativa.">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css" />
-
-  <!-- Scripts -->
-  <script src="../assets/js/narrator.js" defer></script>
-  <script src="../assets/js/java_story.js" defer></script>
-</head>
-
-<body data-unit="java_story">
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">Unidad 1: Introducción a Java ☕</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html" class="active">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Diálogo del mentor -->
-    <section class="mentor-dialogue" id="mentor-dialogue"></section>
-
-    <!-- Historia interactiva -->
-    <section id="story-area" class="story-mode">
-      <h2 id="story-title">Cargando historia...</h2>
-      <p id="story-text"></p>
-      <pre id="story-code"></pre>
-
-      <div id="story-question" class="hidden">
-        <p id="question-text"></p>
-        <div id="question-options"></div>
-      </div>
-
-      <button id="next-btn" class="hidden">Siguiente →</button>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+  <!-- =======================
+       SCRIPTS ACTUALIZADOS
+  ======================= -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/voice_manager.js" defer></script>
+  <script src="../assets/js/mentor_system.js" defer></script>
+  <script src="../assets/js/activity_java_storymode.js" defer></script>
 </body>
 </html>

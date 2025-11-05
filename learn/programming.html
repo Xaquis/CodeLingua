@@ -1,60 +1,104 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Programación | CodeLingua</title>
-  <meta name="description" content="Aprende los fundamentos de la programación con Codder, tu guía interactivo. Ejercicios prácticos, progreso dinámico y modo historia." />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeLingua - Programming Hub</title>
+  <link rel="stylesheet" href="../assets/css/style_future.css" />
 </head>
 
-<body data-unit="programming_home">
+<body>
+  <!-- =======================
+       HEADER
+  ======================= -->
   <header class="site-header">
-    <div class="container">
-      <h1 class="logo">CodeLingua</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="programming.html" class="active">Programación</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-
-      <div class="controls">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
-        <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">🌐</button>
-      </div>
-    </div>
+    <h1 class="logo">💻 CodeLingua | Programming Hub</h1>
+    <nav>
+      <a href="../index.html" data-i18n="home">Home</a>
+      <a href="english.html" data-i18n="english">English</a>
+      <a href="java_story.html" data-i18n="javaStory">Java Story</a>
+      <a href="about.html" data-i18n="about">About</a>
+    </nav>
   </header>
 
+  <!-- =======================
+       MAIN CONTENT
+  ======================= -->
   <main class="container">
-    <section class="lesson">
-      <h2 id="page-title">Aprende Programación desde cero</h2>
-      <p class="intro-text">
-        En este módulo aprenderás los fundamentos básicos de la programación,
-        resolverás ejercicios interactivos y descubrirás cómo pensar como un programador. 💡
-      </p>
+    <section id="intro">
+      <div id="mentor-dialogue" class="mentor-dialogue"></div>
+    </section>
 
-      <h3>Lección 1: Conceptos esenciales</h3>
-      <ul>
-        <li><strong>Variable:</strong> espacio donde guardas un valor.</li>
-        <li><strong>Función:</strong> conjunto de instrucciones reutilizables.</li>
-        <li><strong>Condicional:</strong> ejecuta código según una condición.</li>
-      </ul>
+    <section id="units">
+      <h2>🚀 Programming Learning Path</h2>
+      <p>Welcome to the <strong>Programming Module</strong>. Choose your unit to start learning step by step.</p>
 
-      <div class="lesson-actions">
-        <a href="activity_programming_unit1.html" class="btn">🚀 Empezar Unidad 1</a>
+      <div class="lesson">
+        <h3>🧠 Unit 1: Introduction to Programming</h3>
+        <p>Understand the logic behind how computers process instructions. Start here!</p>
+        <a href="activity_programming_unit1.html" class="btn">Start Unit 1</a>
+      </div>
+
+      <div class="lesson">
+        <h3>☕ Java Story Mode</h3>
+        <p>Learn Java through storytelling — discover the origins of one of the most influential languages ever created.</p>
+        <a href="activity_java_storymode.html" class="btn">Enter Story Mode</a>
+      </div>
+
+      <div class="lesson">
+        <h3>🌐 English for Programmers</h3>
+        <p>Improve your technical English and understand documentation with Lin as your guide.</p>
+        <a href="activity_english_unit1.html" class="btn">Start English Module</a>
       </div>
     </section>
   </main>
 
+  <!-- =======================
+       FOOTER
+  ======================= -->
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 <strong>CodeLingua</strong> — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
+    <p>© 2025 CodeLingua. Developed by Arlevy Sabogal.</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/debug_progress.js" defer></script>
+  <!-- =======================
+       SCRIPTS
+  ======================= -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/voice_manager.js" defer></script>
+  <script src="../assets/js/mentor_system.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("cl_lang") || "en";
+      const mentor = "Lin";
+      const mentorBox = document.getElementById("mentor-dialogue");
+
+      const introTexts = {
+        es: [
+          "¡Bienvenido al módulo de programación de CodeLingua!",
+          "Aquí aprenderás los fundamentos de la lógica, estructuras y lenguajes modernos.",
+          "Recuerda que cada unidad guarda tu progreso automáticamente.",
+          "¿Listo para comenzar?"
+        ],
+        en: [
+          "Welcome to CodeLingua’s Programming Module!",
+          "Here you’ll learn the fundamentals of logic, structures, and modern languages.",
+          "Remember, your progress is saved automatically after each exercise.",
+          "Ready to begin?"
+        ]
+      };
+
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < introTexts[lang].length) {
+          const msg = document.createElement("div");
+          msg.classList.add("mentor-bubble");
+          msg.innerHTML = `<strong>${mentor}:</strong> ${introTexts[lang][i]}`;
+          mentorBox.appendChild(msg);
+          i++;
+        } else clearInterval(interval);
+      }, 1800);
+    });
+  </script>
 </body>
 </html>

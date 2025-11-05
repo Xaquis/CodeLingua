@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeLingua - The Java Story</title>
+  <link rel="stylesheet" href="../assets/css/style_future.css" />
+</head>
+
+<body>
+  <!-- =======================
+       HEADER
+  ======================= -->
+  <header class="site-header">
+    <h1 class="logo">☕ CodeLingua | The Java Story</h1>
+    <nav>
+      <a href="../index.html" data-i18n="home">Home</a>
+      <a href="programming.html" data-i18n="programming">Programming</a>
+      <a href="english.html" data-i18n="english">English</a>
+      <a href="about.html" data-i18n="about">About</a>
+    </nav>
+  </header>
+
+  <!-- =======================
+       MAIN STORY AREA
+  ======================= -->
+  <main class="container">
+    <section class="story-mode" id="intro-section">
+      <h2>🌅 The Birth of Java</h2>
+      <p>
+        In 1991, a small team at <strong>Sun Microsystems</strong> began developing a new language for digital devices.
+        That language would later change the world — <strong>Java</strong>.
+      </p>
+      <p>
+        Its creator, <em>James Gosling</em>, imagined a syntax that was both powerful and simple, inspired by C but safer,
+        more portable, and ready for the connected future.
+      </p>
+      <button id="startStory" class="btn">Start Story Mode</button>
+    </section>
+
+    <section id="story-area" class="hidden">
+      <div id="story-content"></div>
+      <div id="story-question" class="hidden"></div>
+      <button id="next-btn" class="hidden">Next</button>
+    </section>
+  </main>
+
+  <!-- =======================
+       FOOTER
+  ======================= -->
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua. Developed by Arlevy Sabogal.</p>
+  </footer>
+
+  <!-- =======================
+       SCRIPTS
+  ======================= -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/voice_manager.js" defer></script>
+  <script src="../assets/js/mentor_system.js" defer></script>
+  <script src="../assets/js/activity_java_storymode.js" defer></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("cl_lang") || "en";
+      const mentor = "Codder";
+      const startBtn = document.getElementById("startStory");
+      const storyArea = document.getElementById("story-area");
+      const introSection = document.getElementById("intro-section");
+      const storyContent = document.getElementById("story-content");
+      const storyQuestion = document.getElementById("story-question");
+      const nextBtn = document.getElementById("next-btn");
+
+      const storyText = {
+        es: [
+          "Java fue creado en 1991 por un equipo de Sun Microsystems.",
+          "Su objetivo era ser independiente de la plataforma, usando la famosa frase: 'Escribe una vez, ejecuta en cualquier lugar'.",
+          "Con el tiempo, Java se convirtió en el lenguaje de la web, los servidores y los sistemas empresariales."
+        ],
+        en: [
+          "Java was created in 1991 by a small team at Sun Microsystems.",
+          "Its goal was to be platform-independent, using the motto: 'Write once, run anywhere'.",
+          "Over time, Java became the language of the web, servers, and enterprise systems."
+        ]
+      };
+
+      const questionData = {
+        es: {
+          question: "¿En qué año comenzó el desarrollo de Java?",
+          options: ["1991", "1985", "1999"],
+          correct: "1991"
+        },
+        en: {
+          question: "In what year did the development of Java begin?",
+          options: ["1991", "1985", "1999"],
+          correct: "1991"
+        }
+      };
+
+      startBtn.addEventListener("click", () => {
+        introSection.classList.add("hidden");
+        storyArea.classList.remove("hidden");
+        startStorySequence();
+      });
+
+      let index = 0;
+      function startStorySequence() {
+        storyContent.innerHTML = `<p>${storyText[lang][index]}</p>`;
+        nextBtn.classList.remove("hidden");
+      }
+
+      nextBtn.addEventListener("click", () => {
+        index++;
+        if (index < storyText[lang].length) {
+          storyContent.innerHTML = `<p>${storyText[lang][index]}</p>`;
+        } else {
+          nextBtn.classList.add("hidden");
+          showQuestion();
+        }
+      });
+
+      function showQuestion() {
+        const qData = questionData[lang];
+        storyQuestion.classList.remove("hidden");
+        storyQuestion.innerHTML = `
+          <p>${qData.question}</p>
+          ${qData.options.map(opt => `<button class="btn">${opt}</button>`).join("")}
+        `;
+
+        storyQuestion.querySelectorAll(".btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            if (btn.textContent === qData.correct) {
+              storyContent.innerHTML = `<p>✅ ${lang === "es" ? "¡Correcto!" : "Correct!"}</p>`;
+            } else {
+              storyContent.innerHTML = `<p>❌ ${lang === "es" ? "Incorrecto." : "Incorrect."}</p>`;
+            }
+            storyQuestion.classList.add("hidden");
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

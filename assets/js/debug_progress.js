@@ -1,96 +1,112 @@
-// ===============================
-// CodeLingua - Debug Panel de Progreso
-// Autor: © 2025 Arlevy Sabogal
-// ===============================
-//
-// Descripción:
-// Este script activa un panel flotante de depuración
-// para visualizar en tiempo real las claves almacenadas en localStorage.
-// Solo se muestra si el modo desarrollador (devMode) está habilitado.
-//
+// ======================================================
+// CodeLingua v2.0 (141125)
+// Sistema de Progreso y Vidas
+// ======================================================
 
-(function () {
-  try {
-    // Verificar si está activado el modo desarrollador
-    if (localStorage.getItem("devMode") !== "true") return;
+window.CodeLingua = window.CodeLingua || {};
 
-    // Crear el panel principal
-    const panel = document.createElement("div");
-    panel.id = "debug-panel";
-    Object.assign(panel.style, {
-      position: "fixed",
-      bottom: "10px",
-      right: "10px",
-      background: "rgba(0,0,0,0.85)",
-      color: "#00FFC6",
-      padding: "12px",
-      borderRadius: "10px",
-      zIndex: "9999",
-      fontFamily: "monospace",
-      fontSize: "13px",
-      maxWidth: "280px",
-      maxHeight: "300px",
-      overflowY: "auto",
-      boxShadow: "0 0 8px rgba(0,255,198,0.4)",
-    });
+// ============================
+// 🧠 CONFIGURACIÓN GENERAL
+// ============================
 
-    /**
-     * Refresca la información visible en el panel
-     */
-    function updatePanel() {
-      const keys = Object.keys(localStorage);
-      let html = "<b>📊 Progreso</b><br>";
+window.CodeLingua.Progress = {
+  dataKeyPrefix: "cl_progress_",
+  lifeKeyPrefix: "cl_lives_",
+  maxLives: 5,
 
-      if (keys.length === 0) {
-        html += "<i>Sin datos</i>";
-      } else {
-        // Mostrar las claves relevantes primero
-        keys
-          .filter(k => k.startsWith("cl_"))
-          .forEach(key => {
-            html += `${key}: <span style="color:#fff">${localStorage.getItem(key)}</span><br>`;
-          });
+  // Recuperar progreso guardado
+  get(unitId) {
+    const data = localStorage.getItem(this.dataKeyPrefix + unitId);
+    return data ? JSON.parse(data) : { completed: 0, total: 0 };
+  },
 
-        // Mostrar otras claves solo si existen
-        const extras = keys.filter(k => !k.startsWith("cl_") && k !== "devMode");
-        if (extras.length) {
-          html += "<hr><b>🔧 Otros:</b><br>";
-          extras.forEach(k => {
-            html += `${k}: <span style="color:#ccc">${localStorage.getItem(k)}</span><br>`;
-          });
-        }
-      }
+  // Guardar progreso actual
+  save(unitId, completed, total) {
+    const data = { completed, total };
+    localStorage.setItem(this.dataKeyPrefix + unitId, JSON.stringify(data));
+    console.log(`📘 Progreso guardado (${unitId}): ${completed}/${total}`);
+  },
 
-      // Botón para limpiar el almacenamiento
-      html += '<hr><button id="clearStorage" style="background:#00FFC6;color:#000;border:none;border-radius:6px;padding:4px 8px;cursor:pointer;">🧹 Limpiar</button>';
-      panel.innerHTML = html;
+  // Obtener número de vidas disponibles
+  getLives(unitId) {
+    const lives = localStorage.getItem(this.lifeKeyPrefix + unitId);
+    return lives ? parseInt(lives, 10) : this.maxLives;
+  },
 
-      // Asociar evento al botón
-      const btn = document.getElementById("clearStorage");
-      if (btn) {
-        btn.onclick = () => {
-          if (confirm("¿Borrar todos los datos de progreso?")) {
-          Object.keys(localStorage).forEach(key => {
-  if (key.startsWith("cl_")) {
-    localStorage.removeItem(key);
-  }
-});
+  // Restar una vida
+  loseLife(unitId) {
+    let lives = this.getLives(unitId);
+    lives = Math.max(lives - 1, 0);
+    localStorage.setItem(this.lifeKeyPrefix + unitId, lives);
+    console.warn(`💀 Vida perdida. Restan ${lives}`);
+    return lives;
+  },
 
-            updatePanel();
-          }
-        };
+  // Restaurar vidas completas
+  resetLives(unitId) {
+    localStorage.setItem(this.lifeKeyPrefix + unitId, this.maxLives);
+    console.log(`❤️ Vidas restauradas (${unitId}): ${this.maxLives}`);
+    return this.maxLives;
+  },
+
+  // Calcular porcentaje de avance
+  getProgressPercent(unitId) {
+    const { completed, total } = this.get(unitId);
+    return total > 0 ? Math.round((completed / total) * 100) : 0;
+  },
+
+  // Limpiar progreso solo de CodeLingua
+  clearAll() {
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("cl_")) {
+        keysToRemove.push(key);
       }
     }
-
-    // Permitir clics en el panel para refrescar
-    panel.addEventListener("click", updatePanel);
-
-    // Insertar en el documento
-    document.body.appendChild(panel);
-
-    // Mostrar los datos iniciales
-    updatePanel();
-  } catch (err) {
-    console.error("❌ Error en debug_progress.js:", err);
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+    console.log("🧹 Progreso CodeLingua limpiado completamente");
   }
-})();
+};
+
+// ============================
+// ⚙️ ACTUALIZACIÓN VISUAL
+// ============================
+
+window.CodeLingua.updateProgressUI = function (unitId) {
+  const progress = this.Progress.getProgressPercent(unitId);
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress");
+  const lifeCount = document.getElementById("life-count");
+
+  if (progressBar) {
+    progressBar.style.width = `${progress}%`;
+  }
+
+  if (progressText) {
+    const lang = this.lang || "es";
+    progressText.textContent =
+      lang === "es"
+        ? `Progreso: ${progress}% completado`
+        : `Progress: ${progress}% completed`;
+  }
+
+  if (lifeCount) {
+    const lives = this.Progress.getLives(unitId);
+    lifeCount.textContent =
+      (this.lang === "es" ? "Vidas: " : "Lives: ") + lives;
+  }
+};
+
+// ============================
+// 🚀 EVENTO AUTOMÁTICO
+// ============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🎯 Sistema de progreso activo");
+
+  // Actualizar automáticamente si hay ID de unidad global
+  if (window.CodeLingua.currentUnitId) {
+    window.CodeLingua.updateProgressUI(window.CodeLingua.currentUnitId);
+  }
+});

@@ -1,74 +1,70 @@
-// =======================================
-// CodeLingua - Configuración Global
-// Mantenible, modular y reusable (CMMI / ISO 25010)
-// =======================================
+// ======================================================
+// CodeLingua v2.0 (141125)
+// Configuración Global de Unidades y Mentores
+// ======================================================
 
 window.CodeLingua = window.CodeLingua || {};
 
-window.CodeLingua.config = {
-  global: {
-    defaultLives: 10,
-    freeTries: 1,
-    retryDelay: 300000, // 5 minutos
-    transitionDelay: 1000,
-    progressStep: 20,
-    languages: ["es", "en"],
-    currentLang: "es",
-    mentors: {
-      codder: "🧢💻 Codder",
-      lin: "🎩🇬🇧 Lin",
+// ===============================
+// CONFIGURACIÓN GLOBAL DE UNIDADES
+// ===============================
+window.CodeLingua.units = {
+  unit1_prog: {
+    mentor: "Codder",
+    settings: {
+      lives: 10,
+      lang: "es",
+      type: "programming"
     },
+    intro: [
+      "¡Hola! Soy Codder 🧢💻, y hoy exploraremos los fundamentos de la programación.",
+      "Empezaremos entendiendo qué es una variable y cómo los programas piensan paso a paso.",
+      "No te preocupes si fallas, ¡aprender de los errores es parte del código!"
+    ]
   },
 
-  units: {
-    // ==========================
-    // 🧢 Unidad 1: Programación
-    // ==========================
-    unit1_prog: {
-      mentor: "codder",
-      intro: [
-        "¡Hola! Soy Codder 🧢💻 y seré tu guía en esta unidad.",
-        "Imagina que una variable es como una caja 📦 donde guardas datos.",
-        "Las funciones son grupos de instrucciones reutilizables.",
-        "Y los bucles repiten tareas, como practicar hasta dominar algo. 🔁",
-        "¿Listo para programar? 🚀",
-      ],
-      settings: {
-        lives: 10,
-        freeTries: 1,
-      },
+  unit1_eng: {
+    mentor: "Lin",
+    settings: {
+      lives: 10,
+      lang: "en",
+      type: "english"
     },
-
-    // ==========================
-    // 🎩 Unidad 1: Inglés Técnico
-    // ==========================
-    unit1_eng: {
-      mentor: "lin",
-      intro: [
-        "🎩 Hello there! Soy Lin y te acompañaré a aprender inglés técnico.",
-        "Hoy aprenderás vocabulario esencial del mundo de la programación. 💻",
-        "Recuerda: ¡no se trata solo de traducir, sino de comprender cómo se usa! ✨",
-        "Si fallas, te mostraré la respuesta correcta para que mejores. 💪",
-        "Let's go! 🚀",
-      ],
-      settings: {
-        lives: 10,
-        freeTries: 2,
-      },
-    },
-  },
+    intro: [
+      "Welcome! I'm Lin 🎩🇬🇧, your mentor in this technical English unit.",
+      "We'll learn basic technology terms and how to pronounce them correctly.",
+      "Let’s start by practicing the most common programming words."
+    ]
+  }
 };
 
-// =======================================
-// Funciones utilitarias globales
-// =======================================
+// ===============================
+// FUNCIONES AUXILIARES
+// ===============================
+
+/**
+ * Devuelve la configuración completa de la unidad según el ID.
+ */
 window.CodeLingua.getUnitConfig = function (unitId) {
-  return window.CodeLingua.config.units[unitId] || null;
+  return window.CodeLingua.units[unitId] || null;
 };
 
+/**
+ * Retorna el nombre correcto del mentor según su identificador.
+ */
 window.CodeLingua.getMentorName = function (id) {
-  const mentor = window.CodeLingua.config.global.mentors[id];
-  return mentor ? mentor : "Mentor";
+  const names = {
+    Codder: "Codder",
+    Lin: "Lin"
+  };
+  return names[id] || "Mentor";
 };
 
-console.log("🧩 CodeLingua Config cargada correctamente.");
+/**
+ * Guarda el progreso de una unidad completada en localStorage.
+ */
+window.CodeLingua.saveCompletion = function (unitNumber, type) {
+  const key = `cl_unit${unitNumber}_${type}_done`;
+  localStorage.setItem(key, "true");
+  console.log(`💾 Unidad ${unitNumber} (${type}) completada y guardada.`);
+};
