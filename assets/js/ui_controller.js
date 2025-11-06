@@ -1,119 +1,109 @@
-// ===========================================================
-// CodeLingua v2.0 - UI Controller
-// Gestión de tema, idioma y narrador
+// ==========================================================
+// CodeLingua - UI Controller (Theme & Language)
 // Autor: Arlevy Sabogal
-// ===========================================================
+// Versión: v2.0 - 14/11/25
+// ==========================================================
 
 window.CodeLingua = window.CodeLingua || {};
 
-// ===============================
-// CONFIGURACIÓN INICIAL
-// ===============================
+// ================ CONFIGURACIÓN DE IDIOMA =================
+window.CodeLingua.lang = localStorage.getItem("cl_lang") || "es";
+
+window.CodeLingua.t = function (key) {
+  const texts = {
+    es: {
+      mode_dark: "🌙 Modo oscuro",
+      mode_light: "☀️ Modo claro",
+      lang_switch: "🇬🇧 English",
+      correct: "✅ ¡Correcto! Bien hecho.",
+      incorrect: "❌ Incorrecto.",
+      lostLife: "❌ Incorrecto. Perdiste una vida.",
+      tryAgain: "🔁 Inténtalo de nuevo.",
+      progress: "Progreso",
+      lives: "Vidas",
+    },
+    en: {
+      mode_dark: "🌙 Dark Mode",
+      mode_light: "☀️ Light Mode",
+      lang_switch: "🇪🇸 Español",
+      correct: "✅ Correct! Well done.",
+      incorrect: "❌ Incorrect.",
+      lostLife: "❌ Incorrect. You lost a life.",
+      tryAgain: "🔁 Try again.",
+      progress: "Progress",
+      lives: "Lives",
+    }
+  };
+  return texts[window.CodeLingua.lang][key] || key;
+};
+
+// ================ CONTROL DE INTERFAZ =====================
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🧠 UI Controller cargado");
+  const body = document.body;
+  const modeToggle = document.getElementById("mode-toggle");
+  const langToggle = document.getElementById("lang-toggle");
 
-  // Inicializar idioma automáticamente
-  CodeLingua.detectLanguage();
+  // ====== MODO OSCURO / CLARO ======
+  const savedMode = localStorage.getItem("cl_mode") || "dark";
+  if (savedMode === "light") body.classList.add("light-mode");
+  updateModeButton();
 
-  // Aplicar tema desde almacenamiento local
-  CodeLingua.applyTheme(localStorage.getItem("cl_theme") || "dark");
+  // ====== IDIOMA ACTUAL ======
+  const savedLang = window.CodeLingua.lang;
+  updateLangButton();
 
-  // Asignar listeners a botones si existen
-  CodeLingua.setupUIControls();
-
-  // Inicializar narrador (si está activado)
-  if (localStorage.getItem("cl_voice") === "on") {
-    CodeLingua.voiceEnabled = true;
+  // ====== EVENTO: CAMBIO DE MODO ======
+  if (modeToggle) {
+    modeToggle.addEventListener("click", () => {
+      body.classList.toggle("light-mode");
+      const newMode = body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem("cl_mode", newMode);
+      updateModeButton();
+    });
   }
+
+  // ====== EVENTO: CAMBIO DE IDIOMA ======
+  if (langToggle) {
+    langToggle.addEventListener("click", () => {
+      window.CodeLingua.lang = window.CodeLingua.lang === "es" ? "en" : "es";
+      localStorage.setItem("cl_lang", window.CodeLingua.lang);
+      updateLangButton();
+      // Recarga para actualizar textos en toda la página
+      location.reload();
+    });
+  }
+
+  // ====== FUNCIONES AUXILIARES ======
+  function updateLangButton() {
+    if (langToggle) {
+      langToggle.textContent = window.CodeLingua.t("lang_switch");
+    }
+  }
+
+  function updateModeButton() {
+    if (modeToggle) {
+      const textKey = body.classList.contains("light-mode") ? "mode_dark" : "mode_light";
+      modeToggle.textContent = window.CodeLingua.t(textKey);
+    }
+  }
+
+  console.log(`🌐 Idioma activo: ${window.CodeLingua.lang}`);
+  console.log(`🌓 Modo: ${body.classList.contains("light-mode") ? "Claro" : "Oscuro"}`);
 });
+// ==========================================================
+// CodeLingua v2.1 - Detección automática de sección activa
+// ==========================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll("#main-nav a");
+  const currentPath = window.location.pathname;
 
-// ===============================
-// SISTEMA DE IDIOMA
-// ===============================
-CodeLingua.detectLanguage = function () {
-  let lang = localStorage.getItem("cl_lang");
-
-  if (!lang) {
-    const browserLang = navigator.language.toLowerCase();
-    lang = browserLang.startsWith("en") ? "en" : "es";
-    localStorage.setItem("cl_lang", lang);
-  }
-
-  CodeLingua.lang = lang;
-  document.documentElement.lang = lang;
-  console.log(`🌐 Idioma detectado: ${lang}`);
-};
-
-CodeLingua.toggleLanguage = function () {
-  CodeLingua.lang = CodeLingua.lang === "es" ? "en" : "es";
-  localStorage.setItem("cl_lang", CodeLingua.lang);
-  document.documentElement.lang = CodeLingua.lang;
-  console.log(`🌐 Idioma cambiado a: ${CodeLingua.lang}`);
-  location.reload(); // recargar para aplicar traducciones
-};
-
-// ===============================
-// SISTEMA DE TEMA (Dark / Light)
-// ===============================
-CodeLingua.applyTheme = function (mode) {
-  document.body.classList.toggle("light-mode", mode === "light");
-  localStorage.setItem("cl_theme", mode);
-  console.log(`🎨 Tema aplicado: ${mode}`);
-};
-
-CodeLingua.toggleTheme = function () {
-  const newTheme = document.body.classList.contains("light-mode") ? "dark" : "light";
-  CodeLingua.applyTheme(newTheme);
-};
-
-// ===============================
-// NARRADOR (Web Speech API)
-// ===============================
-CodeLingua.voiceEnabled = false;
-
-CodeLingua.speak = function (text) {
-  if (!CodeLingua.voiceEnabled || !window.speechSynthesis) return;
-
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = CodeLingua.lang === "en" ? "en-US" : "es-ES";
-  utter.rate = 1.05;
-  utter.pitch = 1;
-  speechSynthesis.speak(utter);
-};
-
-CodeLingua.toggleVoice = function () {
-  CodeLingua.voiceEnabled = !CodeLingua.voiceEnabled;
-  localStorage.setItem("cl_voice", CodeLingua.voiceEnabled ? "on" : "off");
-
-  if (CodeLingua.voiceEnabled) {
-    CodeLingua.speak(CodeLingua.lang === "es" ? 
-      "Narrador activado." : 
-      "Voice narrator enabled.");
-  } else {
-    speechSynthesis.cancel();
-  }
-
-  console.log(`🔊 Narrador: ${CodeLingua.voiceEnabled ? "activo" : "inactivo"}`);
-};
-
-// ===============================
-// INTERFAZ DE CONTROL
-// ===============================
-CodeLingua.setupUIControls = function () {
-  const btnTheme = document.getElementById("btn-theme");
-  const btnLang = document.getElementById("btn-lang");
-  const btnVoice = document.getElementById("btn-voice");
-
-  if (btnTheme) btnTheme.addEventListener("click", CodeLingua.toggleTheme);
-  if (btnLang) btnLang.addEventListener("click", CodeLingua.toggleLanguage);
-  if (btnVoice) btnVoice.addEventListener("click", CodeLingua.toggleVoice);
-
-  console.log("🧩 Controles UI inicializados");
-};
-
-// ===============================
-// UTILIDAD GLOBAL
-// ===============================
-CodeLingua.say = function (text) {
-  CodeLingua.speak(text);
-};
+  navLinks.forEach(link => {
+    const pageKey = link.dataset.page;
+    if (currentPath.includes(pageKey)) {
+      link.classList.add("active");
+      console.log(`📘 Página activa: ${pageKey}`);
+    } else {
+      link.classList.remove("active");
+    }
+  });
+});

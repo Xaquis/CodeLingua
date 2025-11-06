@@ -1,150 +1,77 @@
-// ======================================================
-// CodeLingua - Unidad 1 Inglés Técnico (v2.0 - 141125)
-// Mentor: Lin 🎩🇬🇧
-// Integrado con unit_config.js + progress.js
-// ======================================================
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeLingua - Programming Fundamentals</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <!-- ===== CABECERA GLOBAL ===== -->
+  <header class="site-header">
+    <h1 class="logo">💻 CodeLingua - Programming</h1>
+    <nav>
+      <button id="mode-toggle" class="btn small" title="Cambiar tema">🌙</button>
+      <button id="lang-toggle" class="btn small" title="Cambiar idioma">🇬🇧 English</button>
+    </nav>
+  </header>
 
-window.CodeLingua = window.CodeLingua || {};
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="container">
+    <section id="mentor-dialogue" class="mentor-dialogue">
+      <div class="mentor-bubble"><strong>Codder:</strong> ¡Hola, programador! Soy Codder 🤖.</div>
+      <div class="mentor-bubble"><strong>Codder:</strong> En esta unidad aprenderás los fundamentos del lenguaje Java.</div>
+      <div class="mentor-bubble"><strong>Codder:</strong> Empecemos con lo básico: estructura, sintaxis y lógica.</div>
+    </section>
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🎩 CodeLingua - Módulo de Inglés Técnico iniciado");
+    <section id="exercises">
+      <h2>Unit 1: Introduction to Java Programming</h2>
 
-  const unitId = "unit1_eng";
-  const unit = window.CodeLingua.getUnitConfig(unitId);
-  const mentorName = window.CodeLingua.getMentorName(unit.mentor || "lin");
+      <div class="exercise" data-answer="class">
+        <p>Exercise 1: Which keyword defines a class in Java?</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
+      </div>
 
-  const mentorBubble = document.getElementById("mentor-dialogue");
-  const exercises = document.querySelectorAll(".exercise");
-  const progressBar = document.getElementById("progress-bar");
-  const lifeCount = document.getElementById("life-count");
-  const progressText = document.getElementById("progress");
-  const completeSection = document.getElementById("complete");
-  const exercisesSection = document.getElementById("exercises");
+      <div class="exercise" data-answer="public static void main">
+        <p>Exercise 2: Write the method signature for the main method in Java.</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
+      </div>
 
-  let lives = unit.settings.lives;
-  let correctCount = 0;
+      <div class="exercise" data-answer="System.out.println">
+        <p>Exercise 3: Which command prints text to the console?</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
+      </div>
 
-  // ===============================
-  // 🎓 INTRODUCCIÓN DE LIN
-  // ===============================
-  function showMentorIntro() {
-    if (!mentorBubble) return;
-    mentorBubble.innerHTML = "";
-    let i = 0;
+      <div class="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+      <p id="progress">Progress: 0%</p>
+      <p id="life-count">Lives: 3</p>
+    </section>
 
-    const intro = window.CodeLingua.lang === "es" ? unit.intro.es : unit.intro.en;
-    const interval = setInterval(() => {
-      if (i < intro.length) {
-        const msg = document.createElement("div");
-        msg.classList.add("mentor-bubble");
-        msg.innerHTML = `<strong>${mentorName}:</strong> ${intro[i]}`;
-        mentorBubble.appendChild(msg);
-        i++;
-      } else {
-        clearInterval(interval);
-        exercisesSection.classList.remove("hidden");
-      }
-    }, 2000);
-  }
+    <section id="complete" class="hidden">
+      <h3>✅ Unit Complete!</h3>
+      <p>Well done! You’ve learned the Java fundamentals.</p>
+      <p>Next, Codder will teach you about variables, data types, and methods.</p>
+    </section>
+  </main>
 
-  // ===============================
-  // 🧠 LÓGICA DE EJERCICIOS
-  // ===============================
-  exercises.forEach((exercise) => {
-    const input = exercise.querySelector("input");
-    const button = exercise.querySelector(".check");
-    const feedback = exercise.querySelector(".exercise-feedback");
-    const correctAnswer = exercise.dataset.answer.trim().toLowerCase();
-    const explanation = exercise.dataset.explanation || "";
-    const freeTries = parseInt(exercise.dataset.freeTries || 1);
-    let tries = 0;
-    let answered = false;
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua. Developed by Arlevy Sabogal.</p>
+  </footer>
 
-    button.addEventListener("click", () => {
-      if (answered) return;
-      const userAnswer = input.value.trim().toLowerCase();
-      tries++;
-
-      if (userAnswer === correctAnswer) {
-        exercise.classList.remove("wrong");
-        exercise.classList.add("correct");
-        feedback.textContent =
-          window.CodeLingua.lang === "es"
-            ? `✅ ¡Correcto! ${explanation}`
-            : `✅ Correct! ${explanation}`;
-        feedback.style.color = "#00ff99";
-        answered = true;
-        correctCount++;
-        updateProgress();
-        if (correctCount >= exercises.length) completeUnit();
-      } else {
-        exercise.classList.remove("correct");
-        exercise.classList.add("wrong");
-        feedback.textContent =
-          tries > freeTries
-            ? window.CodeLingua.lang === "es"
-              ? "❌ Incorrecto. Perdiste una vida."
-              : "❌ Incorrect. You lost a life."
-            : window.CodeLingua.lang === "es"
-              ? "🔁 Inténtalo de nuevo."
-              : "🔁 Try again.";
-        feedback.style.color = "#FF5E5E";
-
-        if (tries > freeTries) {
-          lives--;
-          lifeCount.textContent = lives;
-          if (lives <= 0) endGame();
-        }
-      }
-    });
-  });
-
-  // ===============================
-  // 📊 PROGRESO
-  // ===============================
-  function updateProgress() {
-    const percent = Math.floor((correctCount / exercises.length) * 100);
-    progressBar.style.width = `${percent}%`;
-    progressText.textContent =
-      `${window.CodeLingua.lang === "es" ? "Progreso" : "Progress"}: ${percent}%`;
-  }
-
-  // ===============================
-  // 🏁 COMPLETAR UNIDAD
-  // ===============================
-  function completeUnit() {
-    exercisesSection.classList.add("hidden");
-    completeSection.classList.remove("hidden");
-
-    const msg = document.createElement("div");
-    msg.classList.add("mentor-bubble");
-    msg.innerHTML =
-      window.CodeLingua.lang === "es"
-        ? `<strong>${mentorName}:</strong> 🎉 ¡Excelente trabajo! Has completado la unidad de inglés técnico.`
-        : `<strong>${mentorName}:</strong> 🎉 Excellent work! You've completed the Technical English unit.`;
-    mentorBubble.appendChild(msg);
-
-    window.CodeLingua.saveCompletion?.(1, "eng");
-    console.log("✅ Unidad completada (Inglés Técnico)");
-  }
-
-  // ===============================
-  // 💀 FIN DEL JUEGO
-  // ===============================
-  function endGame() {
-    exercisesSection.classList.add("hidden");
-    const msg = document.createElement("div");
-    msg.classList.add("mentor-bubble");
-    msg.innerHTML =
-      window.CodeLingua.lang === "es"
-        ? `<strong>${mentorName}:</strong> 😢 Te has quedado sin vidas, pero no pasa nada. En 5 minutos podrás intentarlo de nuevo.`
-        : `<strong>${mentorName}:</strong> 😢 You’ve run out of lives, but that’s alright. Try again in 5 minutes.`;
-    mentorBubble.appendChild(msg);
-    setTimeout(() => location.reload(), 300000);
-  }
-
-  // ===============================
-  // 🚀 INICIAR
-  // ===============================
-  showMentorIntro();
-});
+  <!-- ===== SCRIPTS ===== -->
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/voice_manager.js" defer></script>
+  <script src="../assets/js/activity_programming.js" defer></script>
+</body>
+</html>

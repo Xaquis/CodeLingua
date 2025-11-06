@@ -500,3 +500,48 @@ body.light-mode .exercise input,
 body.light-mode .exercise p {
   color: #0b3940;
 }
+/* ====== CONTROLES DE IDIOMA Y MODO ====== */
+.header-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-controls .btn.small {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(0, 255, 198, 0.1);
+  color: var(--neon-green);
+  border: 1px solid rgba(0, 255, 198, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-controls .btn.small:hover {
+  background: rgba(0, 255, 198, 0.3);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.4);
+}
+
+body.light-mode .header-controls .btn.small {
+  background: #E0F2F1;
+  color: #004D40;
+  border-color: #80CBC4;
+}
+
+body.light-mode .header-controls .btn.small:hover {
+  background: #B2DFDB;
+}
+/* ====== MENÚ ACTIVO ====== */
+nav a.active {
+  color: var(--neon-green);
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--neon-green);
+  border-bottom: 2px solid var(--neon-green);
+}
+
+body.light-mode nav a.active {
+  color: #00796B;
+  border-bottom: 2px solid #009688;
+}

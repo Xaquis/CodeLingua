@@ -1,96 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<!-- ==========================================================
+     CodeLingua v2.0 (141125)
+     Unidad 1 - Inglés Técnico Aplicado a Sistemas
+     Autor: Arlevy Sabogal
+     Cumple con lineamientos ISO 25010 y CMMI Nivel 3
+     ========================================================== -->
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodeLingua - English for Programmers: Unit 1</title>
-  <link rel="stylesheet" href="../assets/css/style_future.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unidad 1 - Inglés Técnico | CodeLingua</title>
+
+  <!-- ====== Estilos Globales ====== -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- ====== Núcleo del Sistema ====== -->
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/unit_config.js" defer></script>
+
+  <!-- ====== Módulos Específicos ====== -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity_english.js" defer></script>
+
+  <!-- ====== Utilidades de Diagnóstico ====== -->
+  <script src="../assets/js/debug_progress.js" defer></script>
 </head>
-
 <body>
-  <!-- =======================
-       HEADER
-  ======================= -->
-  <header class="site-header">
-    <h1 class="logo">🌐 English for Programmers</h1>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="programming.html">Programming</a>
-      <a href="java_story.html">Java Story</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<!-- ===========================================
+     CodeLingua v2.1 - Header Dinámico
+     Autor: Arlevy Sabogal
+     Fecha: 2025-11-14
+     =========================================== -->
 
-  <!-- =======================
-       MAIN CONTENT
-  ======================= -->
+<header class="site-header">
+  <h1 class="logo">CodeLingua<span style="color:#00B8FF;">.AI</span></h1>
+
+  <nav id="main-nav">
+    <a href="../index.html" data-page="index">Inicio</a>
+    <a href="../learn/programming.html" data-page="programming">Programación</a>
+    <a href="../learn/english.html" data-page="english">Inglés Técnico</a>
+    <a href="../learn/java_story.html" data-page="java_story">Historia Java</a>
+    <a href="../about.html" data-page="about">Sobre</a>
+  </nav>
+
+<div class="header-controls">
+  <button id="mode-toggle" class="btn small" aria-label="Cambiar tema">🌓</button>
+  <button id="lang-toggle" class="btn small" aria-label="Cambiar idioma">🌐</button>
+</div>
+</header>
+
+  <!-- ====== CONTENIDO PRINCIPAL ====== -->
   <main class="container">
-    <section id="intro">
-      <div id="mentor-dialogue" class="mentor-dialogue"></div>
+    <section id="mentor-dialogue" class="mentor-dialogue">
+      <div class="mentor-bubble"><strong>Lin:</strong> ¡Hola! Soy Lin 🇬🇧, tu mentora en inglés técnico.</div>
+      <div class="mentor-bubble"><strong>Lin:</strong> En esta unidad aprenderás los fundamentos del inglés en la programación.</div>
+      <div class="mentor-bubble"><strong>Lin:</strong> ¡Empecemos cuando estés listo!</div>
     </section>
 
-    <section class="lesson">
+    <section id="exercises">
       <h2>Unit 1: Understanding Programming Vocabulary</h2>
-      <p>
-        Welcome, <strong>developer</strong>. In this unit, Lin will guide you through the essential
-        English terms used in programming environments.
-      </p>
 
-      <p>
-        Let’s begin with some key words you’ll encounter in almost every language:
-        <strong>variable</strong>, <strong>function</strong>, and <strong>loop</strong>.
-      </p>
-
-      <div class="exercise">
-        <p><strong>Exercise 1:</strong> What does the word <em>variable</em> mean?</p>
-        <button class="btn" data-answer="storage">A storage location for data</button>
-        <button class="btn" data-answer="function">A reusable block of code</button>
-        <button class="btn" data-answer="error">A type of error</button>
+      <div class="exercise" data-answer="variable">
+        <p>Exercise 1: What does the word <em>variable</em> mean?</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
       </div>
 
-      <div class="exercise">
-        <p><strong>Exercise 2:</strong> Choose the correct translation of “loop”.</p>
-        <button class="btn" data-answer="bucle">Bucle</button>
-        <button class="btn" data-answer="variable">Variable</button>
-        <button class="btn" data-answer="cadena">Cadena</button>
+      <div class="exercise" data-answer="loop">
+        <p>Exercise 2: Choose the correct translation of “loop”.</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
       </div>
 
-      <div class="exercise">
-        <p><strong>Exercise 3:</strong> What is a <em>function</em> in programming?</p>
-        <button class="btn" data-answer="block">A block of code that performs a task</button>
-        <button class="btn" data-answer="loop">A repeated action</button>
-        <button class="btn" data-answer="data">A type of data</button>
+      <div class="exercise" data-answer="function">
+        <p>Exercise 3: What is a <em>function</em> in programming?</p>
+        <input type="text" placeholder="Your answer..." />
+        <button class="check">Check</button>
+        <div class="exercise-feedback"></div>
       </div>
 
       <div class="progress-bar-container">
         <div id="progress-bar"></div>
       </div>
-
       <p id="progress">Progress: 0%</p>
-      <p id="lives">Lives: <span id="life-count">3</span></p>
+      <p id="life-count">Lives: 3</p>
     </section>
 
     <section id="complete" class="hidden">
-      <h2>✅ Unit Complete!</h2>
-      <p>Well done! You've learned key programming terms in English.</p>
-      <p>Next, Lin will guide you through reading code in English context.</p>
+      <h3>✅ Unit Complete!</h3>
+      <p>Well done! You’ve learned the core terms of programming in English.</p>
+      <p>Next, Lin will guide you through reading English-based code examples.</p>
     </section>
   </main>
 
-  <!-- =======================
-       FOOTER
-  ======================= -->
+  <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
     <p>© 2025 CodeLingua. Developed by Arlevy Sabogal.</p>
   </footer>
 
-  <!-- =======================
-       SCRIPTS UPDATED
-  ======================= -->
+  <!-- ====== SCRIPTS ====== -->
+  <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/progress.js" defer></script>
   <script src="../assets/js/learning_module.js" defer></script>
   <script src="../assets/js/voice_manager.js" defer></script>
-  <script src="../assets/js/mentor_system.js" defer></script>
   <script src="../assets/js/activity_english.js" defer></script>
 </body>
 </html>
+

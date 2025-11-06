@@ -8,22 +8,30 @@
 </head>
 
 <body>
-  <!-- =======================
-       ENCABEZADO
-  ======================= -->
-  <header class="site-header">
-    <h1 class="logo">☕ Java Story Mode</h1>
-    <nav>
-      <a href="../index.html">Inicio</a>
-      <a href="programming.html">Programación</a>
-      <a href="english.html">Inglés</a>
-      <a href="about.html">Sobre</a>
-    </nav>
-  </header>
+<!-- ===========================================
+     CodeLingua v2.1 - Header Dinámico
+     Autor: Arlevy Sabogal
+     Fecha: 2025-11-05
+     =========================================== -->
 
-  <!-- =======================
-       CONTENIDO PRINCIPAL
-  ======================= -->
+<header class="site-header">
+  <h1 class="logo">CodeLingua<span style="color:#00B8FF;">.AI</span></h1>
+
+  <nav id="main-nav">
+    <a href="../index.html" data-page="index">Inicio</a>
+    <a href="../learn/programming.html" data-page="programming">Programación</a>
+    <a href="../learn/english.html" data-page="english">Inglés Técnico</a>
+    <a href="../learn/java_story.html" data-page="java_story">Historia Java</a>
+    <a href="../about.html" data-page="about">Sobre</a>
+  </nav>
+
+  <div class="header-controls">
+  <button id="mode-toggle" class="btn small" aria-label="Cambiar tema">🌓</button>
+  <button id="lang-toggle" class="btn small" aria-label="Cambiar idioma">🌐</button>
+</div>
+</header>
+
+
   <main class="container">
     <section id="intro">
       <div id="mentor-dialogue" class="mentor-dialogue"></div>

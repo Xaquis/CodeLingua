@@ -1,13 +1,9 @@
-// ======================================================
-// CodeLingua v2.0 (141125)
-// Configuración Global de Unidades y Mentores
-// ======================================================
+// assets/js/unit_config.js
+// CodeLingua v2.0 - Configuración global de unidades (limpia)
+// Evitar caracteres raros/UTF problems.
 
 window.CodeLingua = window.CodeLingua || {};
 
-// ===============================
-// CONFIGURACIÓN GLOBAL DE UNIDADES
-// ===============================
 window.CodeLingua.units = {
   unit1_prog: {
     mentor: "Codder",
@@ -17,9 +13,9 @@ window.CodeLingua.units = {
       type: "programming"
     },
     intro: [
-      "¡Hola! Soy Codder 🧢💻, y hoy exploraremos los fundamentos de la programación.",
-      "Empezaremos entendiendo qué es una variable y cómo los programas piensan paso a paso.",
-      "No te preocupes si fallas, ¡aprender de los errores es parte del código!"
+      "¡Hola! Soy Codder, y hoy exploraremos los fundamentos de la programación.",
+      "Empezaremos entendiendo qué es una variable y cómo piensan los programas paso a paso.",
+      "No te preocupes si fallas: aprender de los errores es parte del proceso."
     ]
   },
 
@@ -31,40 +27,25 @@ window.CodeLingua.units = {
       type: "english"
     },
     intro: [
-      "Welcome! I'm Lin 🎩🇬🇧, your mentor in this technical English unit.",
-      "We'll learn basic technology terms and how to pronounce them correctly.",
-      "Let’s start by practicing the most common programming words."
+      "Welcome! I'm Lin, your mentor for this technical English unit.",
+      "We'll learn basic tech terms and practice pronunciation and meaning.",
+      "Don't worry if you make mistakes — it's how you learn!"
     ]
   }
 };
 
-// ===============================
-// FUNCIONES AUXILIARES
-// ===============================
-
-/**
- * Devuelve la configuración completa de la unidad según el ID.
- */
+// helpers
 window.CodeLingua.getUnitConfig = function (unitId) {
   return window.CodeLingua.units[unitId] || null;
 };
 
-/**
- * Retorna el nombre correcto del mentor según su identificador.
- */
 window.CodeLingua.getMentorName = function (id) {
-  const names = {
-    Codder: "Codder",
-    Lin: "Lin"
-  };
+  const names = { Codder: "Codder", Lin: "Lin" };
   return names[id] || "Mentor";
 };
 
-/**
- * Guarda el progreso de una unidad completada en localStorage.
- */
 window.CodeLingua.saveCompletion = function (unitNumber, type) {
   const key = `cl_unit${unitNumber}_${type}_done`;
   localStorage.setItem(key, "true");
-  console.log(`💾 Unidad ${unitNumber} (${type}) completada y guardada.`);
+  console.log(`✓ Unidad ${unitNumber} (${type}) completada.`);
 };

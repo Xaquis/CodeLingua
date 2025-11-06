@@ -1,143 +1,112 @@
 // ======================================================
-// CodeLingua - Unidad 1 Programación (v2.0 - 141125)
-// Integrado con learning_module.js + unit_config.js
+// CodeLingua - Unidad 1 Programación (v2)
 // Mentor: Codder 🤖
+// Integración con sistema de idioma y progreso
 // ======================================================
 
 window.CodeLingua = window.CodeLingua || {};
+window.CodeLingua.lang = localStorage.getItem("cl_lang") || "es";
+
+window.CodeLingua.t = function (key) {
+  const texts = {
+    es: {
+      correct: "✅ ¡Correcto! Bien hecho.",
+      incorrect: "❌ Incorrecto.",
+      lostLife: "❌ Incorrecto. Perdiste una vida.",
+      tryAgain: "🔁 Inténtalo de nuevo.",
+      progress: "Progreso",
+      lives: "Vidas",
+      complete: "Unidad completada 🎉",
+    },
+    en: {
+      correct: "✅ Correct! Well done.",
+      incorrect: "❌ Incorrect.",
+      lostLife: "❌ Incorrect. You lost a life.",
+      tryAgain: "🔁 Try again.",
+      progress: "Progress",
+      lives: "Lives",
+      complete: "Unit complete 🎉",
+    },
+  };
+  return texts[window.CodeLingua.lang][key] || key;
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 CodeLingua - Módulo de Programación iniciado");
-
-  const unitId = "unit1_prog";
-  const unit = window.CodeLingua.getUnitConfig(unitId);
-  const mentorName = window.CodeLingua.getMentorName(unit.mentor || "codder");
-
-  const mentorBubble = document.getElementById("mentor-dialogue");
   const exercises = document.querySelectorAll(".exercise");
   const progressBar = document.getElementById("progress-bar");
-  const lifeCount = document.getElementById("life-count");
   const progressText = document.getElementById("progress");
-  const completeSection = document.getElementById("complete");
-  const exercisesSection = document.getElementById("exercises");
+  const lifeCount = document.getElementById("life-count");
+  const complete = document.getElementById("complete");
+  const mentorBubble = document.getElementById("mentor-dialogue");
 
-  let lives = unit.settings.lives;
+  let lives = 3;
   let correctCount = 0;
 
-  // ===============================
-  // 🎓 INTRODUCCIÓN DEL MENTOR
-  // ===============================
-  function showMentorIntro() {
-    if (!mentorBubble) return;
-    mentorBubble.innerHTML = "";
-    let i = 0;
-
-    const intro = window.CodeLingua.lang === "es" ? unit.intro.es : unit.intro.en;
-    const interval = setInterval(() => {
-      if (i < intro.length) {
-        const msg = document.createElement("div");
-        msg.classList.add("mentor-bubble");
-        msg.innerHTML = `<strong>${mentorName}:</strong> ${intro[i]}`;
-        mentorBubble.appendChild(msg);
-        i++;
-      } else {
-        clearInterval(interval);
-        exercisesSection.classList.remove("hidden");
-      }
-    }, 2000);
-  }
-
-  // ===============================
-  // 🎮 LÓGICA DE EJERCICIOS
-  // ===============================
   exercises.forEach((exercise) => {
     const input = exercise.querySelector("input");
     const button = exercise.querySelector(".check");
     const feedback = exercise.querySelector(".exercise-feedback");
     const correctAnswer = exercise.dataset.answer.trim().toLowerCase();
-    const freeTries = parseInt(exercise.dataset.freeTries || 1);
-    let tries = 0;
-    let answered = false;
 
     button.addEventListener("click", () => {
-      if (answered) return;
       const userAnswer = input.value.trim().toLowerCase();
-      tries++;
 
       if (userAnswer === correctAnswer) {
-        exercise.classList.remove("wrong");
-        exercise.classList.add("correct");
         feedback.textContent = window.CodeLingua.t("correct");
         feedback.style.color = "#00ff99";
-        answered = true;
         correctCount++;
         updateProgress();
-        if (correctCount >= exercises.length) completeUnit();
+        mentorTalk("correct");
       } else {
-        exercise.classList.remove("correct");
-        exercise.classList.add("wrong");
-        feedback.textContent =
-          tries > freeTries
-            ? window.CodeLingua.t("lostLife")
-            : window.CodeLingua.t("tryAgain");
-        feedback.style.color = "#FF5E5E";
-
-        if (tries > freeTries) {
-          lives--;
-          lifeCount.textContent = lives;
-          if (lives <= 0) endGame();
-        }
+        lives--;
+        feedback.textContent = window.CodeLingua.t("lostLife");
+        feedback.style.color = "#ff5e5e";
+        lifeCount.textContent = `${window.CodeLingua.t("lives")}: ${lives}`;
+        mentorTalk("incorrect");
+        if (lives <= 0) endGame();
       }
     });
   });
 
-  // ===============================
-  // 📊 ACTUALIZAR PROGRESO
-  // ===============================
   function updateProgress() {
     const percent = Math.floor((correctCount / exercises.length) * 100);
-    progressBar.style.width = `${percent}%`;
+    progressBar.style.width = percent + "%";
     progressText.textContent = `${window.CodeLingua.t("progress")}: ${percent}%`;
+    if (correctCount >= exercises.length) completeUnit();
   }
 
-  // ===============================
-  // 🏁 FINALIZAR UNIDAD
-  // ===============================
   function completeUnit() {
-    exercisesSection.classList.add("hidden");
-    completeSection.classList.remove("hidden");
-
-    const msg = document.createElement("div");
-    msg.classList.add("mentor-bubble");
-    msg.innerHTML = `<strong>${mentorName}:</strong> ${
-      window.CodeLingua.lang === "es"
-        ? "Excelente trabajo 🎉 Has completado esta unidad."
-        : "Excellent work 🎉 You've completed this unit."
-    }`;
-    mentorBubble.appendChild(msg);
-
-    window.CodeLingua.saveCompletion?.(1, "prog");
-    console.log("✅ Unidad completada");
+    document.getElementById("exercises").classList.add("hidden");
+    complete.classList.remove("hidden");
+    mentorTalk("complete");
   }
 
-  // ===============================
-  // 💀 FIN DEL JUEGO
-  // ===============================
+  function mentorTalk(type) {
+    const bubble = document.createElement("div");
+    bubble.classList.add("mentor-bubble");
+
+    const messages = {
+      correct: {
+        es: "¡Excelente! Vas entendiendo la lógica de Java.",
+        en: "Excellent! You're grasping Java logic.",
+      },
+      incorrect: {
+        es: "Mmm... revisa la sintaxis, recuerda las mayúsculas importan.",
+        en: "Hmm... check your syntax, remember Java is case-sensitive.",
+      },
+      complete: {
+        es: "¡Unidad completada! Eres un verdadero programador en formación.",
+        en: "Unit complete! You’re becoming a real programmer.",
+      },
+    };
+
+    bubble.innerHTML = `<strong>Codder:</strong> ${messages[type][window.CodeLingua.lang]}`;
+    mentorBubble.appendChild(bubble);
+  }
+
   function endGame() {
-    exercisesSection.classList.add("hidden");
-    const msg = document.createElement("div");
-    msg.classList.add("mentor-bubble");
-    msg.innerHTML = `<strong>${mentorName}:</strong> ${
-      window.CodeLingua.lang === "es"
-        ? "😢 Te has quedado sin vidas. Inténtalo de nuevo en 5 minutos."
-        : "😢 You've run out of lives. Try again in 5 minutes."
-    }`;
-    mentorBubble.appendChild(msg);
-    setTimeout(() => location.reload(), 300000);
+    document.getElementById("exercises").classList.add("hidden");
+    mentorBubble.innerHTML =
+      `<div class="mentor-bubble"><strong>Codder:</strong> 😢 You ran out of lives... but every error is a new lesson. Try again!</div>`;
   }
-
-  // ===============================
-  // 🚀 INICIAR
-  // ===============================
-  showMentorIntro();
 });

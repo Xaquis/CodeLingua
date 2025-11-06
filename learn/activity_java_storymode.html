@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modo Historia - El Mundo de Java | CodeLingua</title>
+
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <!-- Configuración e integración -->
+  <script src="../assets/js/unit_config.js" defer></script>
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity_java_storymode.js" defer></script>
+  <script src="../assets/js/debug_progress.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="logo">☕ CodeLingua: Historia de Java</h1>
+    <div class="header-controls">
+      <button id="mode-toggle" class="btn small">🌓</button>
+      <button id="lang-toggle" class="btn small">🌐</button>
+    </div>
+  </header>
+
+  <main class="container story-mode">
+    <section>
+      <h2>🌍 Bienvenido al Mundo de Java</h2>
+      <p>
+        Lin te guiará a través de los orígenes del lenguaje Java, su propósito y su legado.
+        Aprenderás cómo su diseño cambió la programación moderna, y por qué su lema 
+        <strong>“Write Once, Run Anywhere”</strong> definió toda una generación de desarrolladores.
+      </p>
+
+      <div id="mentor-dialogue" class="mentor-dialogue"></div>
+
+      <div id="story-area" class="hidden">
+        <h2 id="story-title">Introducción</h2>
+        <p id="story-text">Cargando historia...</p>
+        <pre id="story-code"></pre>
+        <div id="story-question"></div>
+        <button id="next-btn" class="btn hidden">Continuar ▶️</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua - Historia de Java. Creado por Arlevy Sabogal.</p>
+  </footer>
+</body>
+</html>

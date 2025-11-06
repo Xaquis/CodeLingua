@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- ==========================================================
+     CodeLingua v2.0 (141125)
+     Unidad 1 - Fundamentos de Programación
+     Autor: Arlevy Sabogal
+     Cumple con lineamientos ISO 25010 y CMMI Nivel 3
+     ========================================================== -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidad 1 - Fundamentos de Programación | CodeLingua</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-</head>
 
+  <!-- ====== Estilos Globales ====== -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- ====== Núcleo del Sistema ====== -->
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/unit_config.js" defer></script>
+
+  <!-- ====== Módulos Específicos ====== -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity_programming.js" defer></script>
+
+  <!-- ====== Utilidades de Diagnóstico ====== -->
+  <script src="../assets/js/debug_progress.js" defer></script>
+</head>
 <body data-unit="unit1_prog">
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">Unidad 1: Fundamentos de Programación</h1>
-      <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="english.html">Inglés</a>
-        <a href="../about.html">Sobre</a>
-      </nav>
-    </div>
-  </header>
+<!-- ===========================================
+     CodeLingua v2.1 - Header Dinámico
+     Autor: Arlevy Sabogal
+     Fecha: 2025-11-05
+     =========================================== -->
+
+<header class="site-header">
+  <h1 class="logo">CodeLingua<span style="color:#00B8FF;">.AI</span></h1>
+
+  <nav id="main-nav">
+    <a href="../index.html" data-page="index">Inicio</a>
+    <a href="../learn/programming.html" data-page="programming">Programación</a>
+    <a href="../learn/english.html" data-page="english">Inglés Técnico</a>
+    <a href="../learn/java_story.html" data-page="java_story">Historia Java</a>
+    <a href="../about.html" data-page="about">Sobre</a>
+  </nav>
+
+ <div class="header-controls">
+  <button id="mode-toggle" class="btn small" aria-label="Cambiar tema">🌓</button>
+  <button id="lang-toggle" class="btn small" aria-label="Cambiar idioma">🌐</button>
+</div>
+</header>
 
   <main class="container">
     <!-- Introducción -->
@@ -90,12 +120,13 @@
   </footer>
 
   <!-- Scripts -->
-<script src="../assets/js/progress.js" defer></script>
-<script src="../assets/js/learning_module.js" defer></script>
-<script src="../assets/js/voice_manager.js" defer></script>
-<script src="../assets/js/narrator.js" defer></script>
-<script src="../assets/js/debug_progress.js" defer></script>
-<script src="../assets/js/activity_programming.js" defer></script>
-<script src="../assets/js/activity_java_storymode.js" defer></script>
+  <!-- Scripts principales -->
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/learning_module.js" defer></script>
+  <script src="../assets/js/voice_manager.js" defer></script>
+  <script src="../assets/js/mentor_system.js" defer></script>
+
+  <!-- Script principal de la unidad -->
+  <script src="../assets/js/activity_java_storymode.js" defer></script>
 </body>
 </html>

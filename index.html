@@ -1,73 +1,95 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CodeLingua — Aprende programación e inglés</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CodeLingua - Plataforma interactiva para aprender inglés técnico y programación">
+  <title>CodeLingua v2.0 - Inicio</title>
+
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/progress.js" defer></script>
+  <script src="assets/js/unit_config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </head>
 
-<body data-unit="">
-  <!-- Encabezado principal -->
-<header class="site-header">
-  <div class="container">
-    <h1 class="logo">CodeLingua</h1>
-    <nav aria-label="Menú principal">
-      <a href="../index.html">Inicio</a>
-      <a href="programming.html">Programación</a>
-      <a href="english.html">Inglés</a>
-      <a href="../about.html">Sobre</a>
-    </nav>
-
-    <div class="controls" aria-hidden="false">
-      <!-- IDs obligatorios: theme-toggle, lang-toggle -->
-      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌓</button>
-      <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">🇪🇸</button>
+<body>
+  <header class="site-header">
+    <h1 class="logo">💻 CodeLingua</h1>
+    <div class="header-controls">
+      <button id="mode-toggle" class="btn small">🌙 Modo</button>
+      <button id="lang-toggle" class="btn small">🇬🇧 English</button>
     </div>
-  </div>
-</header>
+  </header>
 
-  <!-- Contenido principal -->
   <main class="container">
-    <section class="hero">
-      <h2>Aprende programación e inglés técnico al mismo tiempo</h2>
+    <section>
+      <h2>Bienvenido a CodeLingua v2.0</h2>
       <p>
-        <strong>CodeLingua</strong> es un entorno educativo interactivo diseñado para 
-        practicar programación e inglés técnico en paralelo.
+        Una plataforma educativa diseñada para combinar <strong>Programación</strong> e <strong>Inglés Técnico</strong> con un enfoque didáctico, interactivo y accesible.
       </p>
+      <p>
+        Aquí podrás avanzar por unidades, aprender con mentores virtuales y desarrollar tus habilidades a través de prácticas guiadas.
+      </p>
+    </section>
 
-      <div class="buttons">
-        <a class="btn" href="learn/activity_programming_unit1.html">Unidad 1 — Programación</a>
-        <a class="btn outline" href="learn/activity_english_unit1.html">Unidad 1 — Inglés</a>
+    <section>
+      <h3>Explora las Unidades</h3>
+      <ul>
+        <li><a href="learn/programming.html" class="btn">Unidad 1 - Fundamentos de Programación</a></li>
+        <li><a href="learn/english.html" class="btn">Unidad 1 - Inglés Técnico</a></li>
+      </ul>
+    </section>
+
+    <section id="video-section">
+      <h3>🎬 Video de Presentación del Proyecto</h3>
+      <p>Inserta aquí el enlace de tu video de presentación en YouTube:</p>
+
+      <div id="video-input">
+        <input type="text" id="youtube-link" placeholder="Pega el enlace de YouTube aquí..." style="width:70%; padding:8px; border-radius:6px;">
+        <button id="load-video" class="btn">Cargar Video</button>
+      </div>
+
+      <div id="video-player" style="margin-top:20px;">
+        <iframe id="youtube-frame" width="560" height="315" style="display:none; border:none; border-radius:10px;"
+          allowfullscreen></iframe>
       </div>
     </section>
 
-    <section class="about-box">
-      <h3>Estado del proyecto</h3>
+    <section>
+      <h3>Sobre CodeLingua</h3>
       <p>
-        Día 1: Entorno configurado y documentado.<br>
-        Día 2: Diseño base y paleta Future.<br>
-        Día 3–6: Integración, progreso y personajes (Codder & Lin).
-      </p>
-
-      <p>
-        Repositorio:
-        <a href="https://github.com/Xaquis/CodeLingua" target="_blank">
-          github.com/Xaquis/CodeLingua
-        </a>
+        Desarrollado por <strong>Arlevy Sabogal</strong> con el acompañamiento técnico de <strong>IA Cristal</strong>.<br>
+        Cumple con normas <strong>ISO 25010</strong> y metodologías <strong>CMMI</strong> de calidad de software.<br>
+        Proyecto académico para la carrera de <strong>Ingeniería de Sistemas</strong>.
       </p>
     </section>
   </main>
 
-  <!-- Pie de página -->
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 CodeLingua — Arlevy Sabogal. Todos los derechos reservados.</p>
-    </div>
+    <p>© 2025 CodeLingua v2.0 | Desarrollado por Arlevy Sabogal</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/debug_progress.js" defer></script>
+  <script>
+    // ====== CARGADOR DE VIDEO DE PRESENTACIÓN ======
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("youtube-link");
+      const button = document.getElementById("load-video");
+      const frame = document.getElementById("youtube-frame");
+
+      button.addEventListener("click", () => {
+        const url = input.value.trim();
+        if (!url) return alert("Por favor, ingresa un enlace de YouTube válido.");
+
+        const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+        if (match && match[1]) {
+          const videoId = match[1];
+          frame.src = `https://www.youtube.com/embed/${videoId}`;
+          frame.style.display = "block";
+        } else {
+          alert("⚠️ Enlace inválido. Asegúrate de pegar un enlace completo de YouTube.");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
