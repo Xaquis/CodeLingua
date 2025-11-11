@@ -1,77 +1,82 @@
-/* ===========================================
-   CodeLingua - Tema Future + Light Mode
+/* =========================================================
+   CodeLingua v2.2 - Tema Future + Light Mode
    Autor: Arlevy Sabogal
-   =========================================== */
+   Fecha: 15/11/2025
+   ========================================================= */
 
-/* ====== VARIABLES BASE (tema oscuro) ====== */
+/* ====== VARIABLES BASE ====== */
 :root {
-  --neon-green: #00FFC6;
-  --neon-blue: #00B8FF;
+  --neon-green: #00ffc6;
+  --neon-blue: #00b8ff;
   --dark-bg: #010304;
-  --panel-bg: rgba(255, 255, 255, 0.02);
-  --text-color: #E0E0E0;
-  --muted: #A7C7C5;
-  --error: #FF5E5E;
-  --success: #00FF99;
+  --text-color: #e0e0e0;
+  --muted: #a7c7c5;
+  --error: #ff5e5e;
+  --success: #00ff99;
+
+  /* Colores modo claro suaves */
+  --light-bg: #e8edf0;
+  --light-panel: #ffffff;
+  --light-border: #ccd6dd;
+  --light-text: #1b1f22;
+  --light-accent: #00aab4;
 }
 
 /* ====== BASE ====== */
 body {
   background: radial-gradient(circle at top, #0a0f1e 0%, var(--dark-bg) 100%);
   color: var(--text-color);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   transition: background 0.8s, color 0.8s;
   overflow-x: hidden;
 }
 
-/* ===========================
-   MODO CLARO - THEME FUTURE
-   =========================== */
+/* ====== MODO CLARO SUAVIZADO ====== */
 body.light-mode {
-  background-color: #F2F4F5;
-  color: #1A1A1A;
+  background: var(--light-bg);
+  color: var(--light-text);
 }
 
 body.light-mode header,
 body.light-mode footer,
 body.light-mode section {
-  background-color: #FFFFFF;
-  color: #1A1A1A;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #E0E0E0;
-}
-
-body.light-mode a {
-  color: #00796B;
-}
-
-body.light-mode a:hover {
-  color: #009688;
-}
-
-body.light-mode button {
-  background-color: #009688;
-  color: #FFFFFF;
-}
-
-body.light-mode button:hover {
-  background-color: #00796B;
+  background: var(--light-panel);
+  color: var(--light-text);
+  border: 1px solid var(--light-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 body.light-mode .logo {
-  color: #009688;
-  text-shadow: 0 0 4px rgba(0, 150, 136, 0.3);
+  color: var(--light-accent);
+  text-shadow: 0 0 6px rgba(0, 150, 136, 0.3);
+}
+
+body.light-mode a {
+  color: var(--light-accent);
+}
+
+body.light-mode .btn {
+  background: linear-gradient(90deg, #00bfa5, #00a2ff);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 150, 136, 0.2);
+}
+
+body.light-mode .btn:hover {
+  background: linear-gradient(90deg, #009688, #0080ff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
 }
 
 body.light-mode input {
-  background: #FFFFFF;
-  color: #1A1A1A;
-  border: 1px solid #B2DFDB;
+  background: #f8f9fa;
+  color: #111;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
 }
 
-/* ====== ENCABEZADO ====== */
+/* ====== HEADER ====== */
 .site-header {
   background: rgba(0, 0, 0, 0.85);
   border-bottom: 1px solid rgba(0, 255, 198, 0.3);
@@ -80,51 +85,34 @@ body.light-mode input {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 12px rgba(0, 255, 198, 0.15);
-  animation: glowHeader 4s ease-in-out infinite alternate;
 }
 
 .logo {
   font-size: 1.8em;
   color: var(--neon-green);
   text-shadow: 0 0 10px var(--neon-green);
-  margin: 0;
 }
 
-@keyframes glowHeader {
-  0% { box-shadow: 0 0 8px var(--neon-green); }
-  100% { box-shadow: 0 0 25px var(--neon-blue); }
+.header-controls {
+  display: flex;
+  gap: 10px;
 }
 
-/* ====== NAVEGACIÓN ====== */
-nav a {
-  color: var(--neon-blue);
-  text-decoration: none;
-  margin: 0 10px;
-  transition: color 0.3s, text-shadow 0.3s;
-}
-
-nav a:hover {
-  color: var(--neon-green);
-  text-shadow: 0 0 8px var(--neon-green);
-}
-
-/* ====== BOTONES ====== */
-button, .btn, .check {
-  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-  color: #111;
-  border: none;
+.btn.small {
+  font-size: 0.9rem;
+  padding: 6px 12px;
   border-radius: 8px;
-  padding: 10px 22px;
-  font-weight: bold;
+  background: rgba(0, 255, 198, 0.1);
+  color: var(--neon-green);
+  border: 1px solid rgba(0, 255, 198, 0.3);
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 0 12px rgba(0, 255, 198, 0.2);
+  transition: all 0.3s ease;
 }
 
-button:hover, .btn:hover, .check:hover {
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 18px var(--neon-green), 0 0 25px var(--neon-blue);
+.btn.small:hover {
+  background: rgba(0, 255, 198, 0.3);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.4);
 }
 
 /* ====== CONTENEDOR ====== */
@@ -134,77 +122,101 @@ button:hover, .btn:hover, .check:hover {
   padding: 20px;
 }
 
-/* ====== TARJETAS ====== */
+/* ====== SECCIONES ====== */
 section {
-  background: var(--panel-bg);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(0, 255, 198, 0.2);
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(0, 255, 198, 0.08);
   padding: 20px;
   margin-bottom: 25px;
-  transition: 0.10s ease;
+  transition: all 0.3s ease;
 }
 
 section:hover {
-  box-shadow: 0 0 25px rgba(0, 255, 198, 0.2);
+  box-shadow: 0 0 25px rgba(0, 255, 198, 0.15);
 }
 
-/* ====== EJERCICIOS ====== */
-.exercise {
-  background: rgba(0, 255, 198, 0.05);
-  border-left: 4px solid var(--neon-green);
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 0 12px rgba(0, 255, 198, 0.1);
-  animation: fadeIn 0.12s ease;
+h2, h3 {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px rgba(0, 255, 198, 0.4);
 }
 
-.exercise input {
-  border: 1px solid rgba(0, 255, 198, 0.3);
-  background: rgba(0, 0, 0, 0.5);
-  color: var(--text-color);
-  padding: 8px;
-  border-radius: 6px;
-  width: 60%;
-  box-shadow: inset 0 0 5px rgba(0, 255, 198, 0.1);
+/* ====== BOTONES ====== */
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-align: center;
 }
 
-.exercise.correct {
-  border-left-color: var(--neon-green);
-  background: rgba(0, 255, 198, 0.12);
-  box-shadow: 0 0 15px rgba(0, 255, 198, 0.3);
+.btn:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px var(--neon-green), 0 0 25px var(--neon-blue);
 }
 
-.exercise.wrong {
-  border-left-color: var(--error);
-  background: rgba(255, 94, 94, 0.05);
-  box-shadow: 0 0 10px rgba(255, 94, 94, 0.2);
+/* ====== VIDEO SECTION ====== */
+.video-section {
+  text-align: center;
 }
 
-/* ====== BARRA DE PROGRESO ====== */
-.progress-bar-container {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  height: 10px;
-  overflow: hidden;
+.video-input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
-#progress-bar {
-  height: 10px;
-  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-  width: 0%;
-  border-radius: 10px;
-  transition: width 0.10s ease;
+.video-input input {
+  width: 60%;
+  min-width: 250px;
+  padding: 10px;
+  border: 1px solid rgba(0, 255, 198, 0.4);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text-color);
 }
 
-/* ====== VIDAS ====== */
-#lives {
-  text-align: center;
+#video-container iframe {
+  width: 100%;
+  max-width: 720px;
+  height: 405px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.25);
+}
+
+/* ====== FORMULARIOS ====== */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-container label {
   font-weight: bold;
   color: var(--neon-blue);
-  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.form-container input {
+  padding: 10px;
+  border: 1px solid rgba(0, 255, 198, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+}
+
+.form-container input:focus {
+  outline: 2px solid var(--neon-green);
 }
 
 /* ====== FOOTER ====== */
@@ -216,332 +228,23 @@ section:hover {
   font-size: 14px;
   background: rgba(0, 0, 0, 0.6);
 }
-/* ====== MENTOR DIALOGUE ====== */
-.mentor-dialogue {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 12px;
-  height: 180px;
-  overflow-y: auto;
-  box-shadow: inset 0 0 10px rgba(0, 255, 198, 0.2);
-  margin-bottom: 20px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.mentor-bubble {
-  margin: 8px 0;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(0, 255, 198, 0.1);
-  border-left: 3px solid var(--neon-green);
-  animation: fadeIn 0.5s ease;
-  color: var(--text-color);
-  text-shadow: 0 0 4px rgba(0, 255, 198, 0.2);
-}
-
-.mentor-bubble strong {
-  color: var(--neon-green);
-}
-
-.mentor-dialogue::-webkit-scrollbar {
-  width: 6px;
-}
-.mentor-dialogue::-webkit-scrollbar-thumb {
-  background: var(--neon-green);
-  border-radius: 4px;
-}
-
-/* ====== ANIMACIONES ====== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ====== ACCESIBILIDAD ====== */
-*:focus {
-  outline: 2px solid var(--neon-blue);
-  outline-offset: 2px;
-}
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 600px) {
-  .exercise input {
+  .container {
+    padding: 15px;
+  }
+  .video-input {
+    flex-direction: column;
+  }
+  .video-input input {
     width: 100%;
-    margin-bottom: 10px;
   }
-  button, .btn, .check {
-    width: 100%;
+  #video-container iframe {
+    height: 220px;
   }
-}
-/* ====== SPEECH BUBBLE (narrador clásico) ====== */
-.speech-bubble {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  max-width: 280px;
-  background: rgba(0, 255, 198, 0.1);
-  border: 1px solid rgba(0, 255, 198, 0.3);
-  color: var(--neon-green);
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 10px 14px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 255, 198, 0.25);
-  backdrop-filter: blur(6px);
-  text-shadow: 0 0 6px rgba(0, 255, 198, 0.4);
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(15px);
-  animation: bubbleIn 0.5s ease forwards;
-}
-
-@keyframes bubbleIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.95);
+  .header-controls {
+    flex-direction: column;
+    gap: 6px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-body.light-mode .speech-bubble {
-  background: rgba(0, 121, 107, 0.1);
-  border: 1px solid rgba(0, 121, 107, 0.3);
-  color: #00796B;
-  box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
-  text-shadow: none;
-}
-/* =========================================================
-   STORY MODE — ESTILO SUN MICROSYSTEMS 1998
-   ========================================================= */
-
-.story-mode {
-  background: radial-gradient(circle at 30% 20%, #1b2735, #090a0f 70%);
-  color: #f0f0f0;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 0 40px rgba(255, 150, 0, 0.15);
-  margin-top: 20px;
-  animation: fadeIn 1s ease-in-out;
-  border: 1px solid rgba(255, 180, 0, 0.25);
-}
-
-.story-mode h2 {
-  color: #ffb300;
-  text-shadow: 0 0 10px rgba(255, 180, 0, 0.3);
-  font-family: 'Consolas', 'Courier New', monospace;
-}
-
-.story-mode p {
-  line-height: 1.6;
-  font-size: 1.1rem;
-  margin: 10px 0;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-}
-
-.story-mode pre {
-  background: rgba(0, 0, 0, 0.6);
-  border-left: 4px solid #ffb300;
-  padding: 15px;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: 'Fira Code', monospace;
-  color: #00ffcc;
-  box-shadow: inset 0 0 20px rgba(0, 255, 198, 0.1);
-}
-
-.story-mode button.btn {
-  background: linear-gradient(90deg, #ffb300, #ff8000);
-  border: none;
-  color: #000;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.story-mode button.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 180, 0, 0.6);
-}
-
-/* Animación de entrada */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Tema claro */
-body.light-mode .story-mode {
-  background: #fff8e1;
-  color: #222;
-  border-color: #ffb300;
-  box-shadow: 0 0 30px rgba(255, 200, 50, 0.3);
-}
-
-body.light-mode .story-mode pre {
-  background: #fff3cd;
-  color: #4a2c00;
-  border-left-color: #ffb300;
-}
-/* ============================
-   CODELINGUA - MODO HISTORIA JAVA
-   ============================ */
-
-#story-area {
-  background: #0a0a0f;
-  color: #e0e0e0;
-  border-radius: 16px;
-  padding: 2rem;
-  margin-top: 2rem;
-  box-shadow: 0 0 25px rgba(0, 255, 170, 0.1);
-  font-family: "Fira Code", "Courier New", monospace;
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-#story-area h2 {
-  color: #00ffa3;
-  text-shadow: 0 0 6px #00ffa3;
-  font-size: 1.5rem;
-}
-
-#story-area p {
-  line-height: 1.6;
-  font-size: 1rem;
-  margin: 0.8rem 0;
-}
-
-#story-code {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 4px solid #00ffa3;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 8px;
-  color: #00ff99;
-  font-size: 0.95rem;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-#story-question {
-  margin-top: 1.5rem;
-}
-
-#story-question p {
-  font-weight: bold;
-  color: #f5f5f5;
-}
-
-#story-question .btn {
-  display: inline-block;
-  margin: 0.4rem;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #00ffa3;
-  color: #000;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-#story-question .btn:hover {
-  background: #00cc88;
-  transform: scale(1.05);
-}
-
-#next-btn {
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.4rem;
-  background: linear-gradient(90deg, #00ffa3, #00cc88);
-  border: none;
-  border-radius: 10px;
-  color: #000;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: transform 0.2s ease, background 0.3s ease;
-}
-
-#next-btn:hover {
-  transform: scale(1.08);
-  background: linear-gradient(90deg, #00cc88, #00ffa3);
-}
-
-.hidden {
-  display: none !important;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* =====================================================
-   CodeLingua UI Enhancements
-   Fecha última modificación: 2025-11-14
-   Responsable: Arlevy Sabogal
-   ===================================================== */
-
-/* ====== CONTRASTE Y VISIBILIDAD EN MODO CLARO ====== */
-body.light-mode {
-  color: #111;
-}
-
-body.light-mode .mentor-bubble,
-body.light-mode .speech-bubble {
-  background: rgba(0, 121, 107, 0.1);
-  color: #004d40;
-  box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
-}
-
-body.light-mode .exercise input,
-body.light-mode .exercise p {
-  color: #0b3940;
-}
-/* ====== CONTROLES DE IDIOMA Y MODO ====== */
-.header-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.header-controls .btn.small {
-  font-size: 0.9rem;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(0, 255, 198, 0.1);
-  color: var(--neon-green);
-  border: 1px solid rgba(0, 255, 198, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.header-controls .btn.small:hover {
-  background: rgba(0, 255, 198, 0.3);
-  color: #000;
-  box-shadow: 0 0 10px rgba(0, 255, 198, 0.4);
-}
-
-body.light-mode .header-controls .btn.small {
-  background: #E0F2F1;
-  color: #004D40;
-  border-color: #80CBC4;
-}
-
-body.light-mode .header-controls .btn.small:hover {
-  background: #B2DFDB;
-}
-/* ====== MENÚ ACTIVO ====== */
-nav a.active {
-  color: var(--neon-green);
-  font-weight: bold;
-  text-shadow: 0 0 10px var(--neon-green);
-  border-bottom: 2px solid var(--neon-green);
-}
-
-body.light-mode nav a.active {
-  color: #00796B;
-  border-bottom: 2px solid #009688;
 }

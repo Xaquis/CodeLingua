@@ -1,11 +1,9 @@
 // ===========================================================
-// CodeLingua - Módulo Java Story Mode (v2.1)
-// Autor: Arlevy Sabogal
-// Mantiene los diálogos del mentor como pista activa
+// CodeLingua - Módulo SQL Fundamentals (v2.1)
+// Mentor: Ada 🧮
 // ===========================================================
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Iniciando módulo Java Story Mode...");
+  console.log("🚀 Iniciando módulo SQL...");
 
   const mentorBubble = document.getElementById("mentor-dialogue");
   const exercises = document.querySelectorAll(".exercise");
@@ -15,43 +13,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let lives = 5;
   let correctCount = 0;
+  const mentor = "Ada 🧮";
 
-  const mentor = "Codder 🤖";
   const messages = [
-    "Hola, soy Codder 🤖, tu mentor en esta unidad de Java.",
-    "Hoy aprenderemos a estructurar clases y métodos.",
-    "Recuerda: los comentarios ayudan a otros a entender tu código.",
-    "Lee bien las instrucciones antes de ejecutar.",
-    "Cuando estés listo, comienza el primer ejercicio. ¡Buena suerte!"
+    "Hola, soy Ada 🧮, tu mentora de bases de datos.",
+    "SQL significa Structured Query Language — el lenguaje de las consultas.",
+    "Comenzaremos aprendiendo SELECT, WHERE y ORDER BY.",
+    "Recuerda: cada consulta termina con punto y coma (;).",
+    "¡Vamos a practicar!"
   ];
 
-  // ====== Mostrar diálogo inicial ======
+  // ====== Intro ======
   showMentorIntro();
 
   function showMentorIntro() {
-    let index = 0;
+    let i = 0;
     const interval = setInterval(() => {
-      if (index < messages.length) {
-        appendMentorMessage(`${mentor}: ${messages[index]}`);
-        index++;
-      } else {
-        clearInterval(interval);
-      }
+      if (i < messages.length) {
+        appendMentorMessage(`${mentor}: ${messages[i]}`);
+        i++;
+      } else clearInterval(interval);
     }, 2000);
   }
 
-  // ====== Función para agregar mensajes sin borrar los anteriores ======
+  // ====== Mostrar mensajes sin borrar ======
   function appendMentorMessage(text) {
     const msg = document.createElement("div");
     msg.classList.add("mentor-bubble");
     msg.innerHTML = `<strong>${text}</strong>`;
     mentorBubble.appendChild(msg);
-
-    // Desplaza hacia abajo automáticamente
     mentorBubble.scrollTop = mentorBubble.scrollHeight;
   }
 
-  // ====== Comprobación de respuestas ======
+  // ====== Ejercicios ======
   exercises.forEach((ex) => {
     const input = ex.querySelector("input");
     const button = ex.querySelector("button");
@@ -63,28 +57,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (userAnswer === correctAnswer) {
         ex.classList.add("correct");
-        ex.classList.remove("wrong");
-        feedback.textContent = "✅ ¡Correcto! Excelente trabajo.";
+        feedback.textContent = "✅ ¡Correcto!";
         feedback.style.color = "#00ff99";
         correctCount++;
-
-        appendMentorMessage(`${mentor}: ¡Bien hecho! Esa es la sintaxis correcta.`);
-
+        appendMentorMessage(`${mentor}: Bien hecho, esa consulta devolverá los resultados correctos.`);
       } else {
         lives--;
         ex.classList.add("wrong");
-        ex.classList.remove("correct");
-        feedback.textContent = "❌ Incorrecto. Intenta de nuevo.";
+        feedback.textContent = "❌ Incorrecto.";
         feedback.style.color = "#ff5e5e";
-
-        appendMentorMessage(`${mentor}: Pista — verifica el uso de mayúsculas o la estructura del código.`);
+        appendMentorMessage(`${mentor}: Pista — verifica las mayúsculas, comillas o el uso de punto y coma.`);
       }
-
       updateProgress();
     });
   });
 
-  // ====== Actualizar progreso ======
+  // ====== Progreso ======
   function updateProgress() {
     const total = exercises.length;
     const progress = Math.round((correctCount / total) * 100);
@@ -93,17 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
     lifeCount.textContent = `Vidas: ${lives}`;
 
     if (lives <= 0) {
-      appendMentorMessage(`${mentor}: Te has quedado sin vidas. Repasa la unidad y vuelve a intentarlo.`);
-      disableAllInputs();
+      appendMentorMessage(`${mentor}: Te quedaste sin vidas. Repasa los comandos y vuelve a intentarlo.`);
+      disableInputs();
     }
 
     if (progress === 100) {
-      appendMentorMessage(`${mentor}: ¡Felicidades! Has completado la unidad de Java Story Mode.`);
+      appendMentorMessage(`${mentor}: ¡Excelente! Has completado la unidad SQL.`);
     }
   }
 
-  // ====== Bloquear inputs al perder ======
-  function disableAllInputs() {
+  function disableInputs() {
     exercises.forEach(ex => {
       ex.querySelector("input").disabled = true;
       ex.querySelector("button").disabled = true;

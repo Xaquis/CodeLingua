@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mi Perfil | CodeLingua</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h2>👤 Perfil del Usuario</h2>
+    <div id="user-info"></div>
+    <a href="./backend/logout.php" class="btn danger">Cerrar Sesión</a>
+  </main>
+
+  <script>
+    fetch("./backend/profile.php")
+      .then(r => r.json())
+      .then(user => {
+        if (user.error) return alert(user.error);
+        document.getElementById("user-info").innerHTML = `
+          <p><strong>Nombre:</strong> ${user.name}</p>
+          <p><strong>Correo:</strong> ${user.email}</p>
+        `;
+      });
+  </script>
+</body>
+</html>

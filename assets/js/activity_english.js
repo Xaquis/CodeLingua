@@ -1,77 +1,66 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodeLingua - Programming Fundamentals</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-</head>
-<body>
-  <!-- ===== CABECERA GLOBAL ===== -->
-  <header class="site-header">
-    <h1 class="logo">💻 CodeLingua - Programming</h1>
-    <nav>
-      <button id="mode-toggle" class="btn small" title="Cambiar tema">🌙</button>
-      <button id="lang-toggle" class="btn small" title="Cambiar idioma">🇬🇧 English</button>
-    </nav>
-  </header>
+// ======================================================
+// CodeLingua - Unidad 2 Inglés Técnico
+// Mentor: Lin
+// ======================================================
 
-  <!-- ===== CONTENIDO PRINCIPAL ===== -->
-  <main class="container">
-    <section id="mentor-dialogue" class="mentor-dialogue">
-      <div class="mentor-bubble"><strong>Codder:</strong> ¡Hola, programador! Soy Codder 🤖.</div>
-      <div class="mentor-bubble"><strong>Codder:</strong> En esta unidad aprenderás los fundamentos del lenguaje Java.</div>
-      <div class="mentor-bubble"><strong>Codder:</strong> Empecemos con lo básico: estructura, sintaxis y lógica.</div>
-    </section>
+document.addEventListener("DOMContentLoaded", () => {
+  const unitId = "unit2_eng";
+  const unit = window.CodeLingua.getUnitConfig(unitId);
+  const mentorName = window.CodeLingua.getMentorName(unit.mentor);
 
-    <section id="exercises">
-      <h2>Unit 1: Introduction to Java Programming</h2>
+  const mentorBubble = document.getElementById("mentor-dialogue");
+  const exercises = document.querySelectorAll(".exercise");
+  const progressBar = document.getElementById("progress-bar");
+  const lifeCount = document.getElementById("life-count");
 
-      <div class="exercise" data-answer="class">
-        <p>Exercise 1: Which keyword defines a class in Java?</p>
-        <input type="text" placeholder="Your answer..." />
-        <button class="check">Check</button>
-        <div class="exercise-feedback"></div>
-      </div>
+  let lives = unit.settings.lives;
+  let correctCount = 0;
 
-      <div class="exercise" data-answer="public static void main">
-        <p>Exercise 2: Write the method signature for the main method in Java.</p>
-        <input type="text" placeholder="Your answer..." />
-        <button class="check">Check</button>
-        <div class="exercise-feedback"></div>
-      </div>
+  // ======= INTRO =======
+  function showIntro() {
+    mentorBubble.innerHTML = "";
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < unit.intro.length) {
+        const msg = document.createElement("div");
+        msg.classList.add("mentor-bubble");
+        msg.innerHTML = `<strong>${mentorName}:</strong> ${unit.intro[index]}`;
+        mentorBubble.appendChild(msg);
+        index++;
+      } else clearInterval(interval);
+    }, 2500);
+  }
 
-      <div class="exercise" data-answer="System.out.println">
-        <p>Exercise 3: Which command prints text to the console?</p>
-        <input type="text" placeholder="Your answer..." />
-        <button class="check">Check</button>
-        <div class="exercise-feedback"></div>
-      </div>
+  showIntro();
 
-      <div class="progress-bar-container">
-        <div id="progress-bar"></div>
-      </div>
-      <p id="progress">Progress: 0%</p>
-      <p id="life-count">Lives: 3</p>
-    </section>
+  // ======= EJERCICIOS =======
+  exercises.forEach((ex) => {
+    const input = ex.querySelector("input");
+    const checkBtn = ex.querySelector(".check");
 
-    <section id="complete" class="hidden">
-      <h3>✅ Unit Complete!</h3>
-      <p>Well done! You’ve learned the Java fundamentals.</p>
-      <p>Next, Codder will teach you about variables, data types, and methods.</p>
-    </section>
-  </main>
+    checkBtn.addEventListener("click", () => {
+      const answer = input.value.trim().toLowerCase();
+      const correct = input.dataset.answer.toLowerCase();
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <p>© 2025 CodeLingua. Developed by Arlevy Sabogal.</p>
-  </footer>
+      if (answer === correct) {
+        ex.classList.add("correct");
+        correctCount++;
+        progressBar.style.width = `${(correctCount / exercises.length) * 100}%`;
+      } else {
+        ex.classList.add("wrong");
+        lives--;
+        lifeCount.textContent = lives;
+      }
 
-  <!-- ===== SCRIPTS ===== -->
-  <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/progress.js" defer></script>
-  <script src="../assets/js/learning_module.js" defer></script>
-  <script src="../assets/js/voice_manager.js" defer></script>
-  <script src="../assets/js/activity_programming.js" defer></script>
-</body>
-</html>
+      if (lives <= 0) {
+        alert("💀 You’ve lost all your lives. Try again!");
+        window.location.reload();
+      }
+
+      if (correctCount === exercises.length) {
+        window.CodeLingua.saveCompletion(2, "english");
+        alert("🎉 Unit completed!");
+      }
+    });
+  });
+});

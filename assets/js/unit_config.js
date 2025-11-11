@@ -1,9 +1,13 @@
-// assets/js/unit_config.js
-// CodeLingua v2.0 - Configuración global de unidades (limpia)
-// Evitar caracteres raros/UTF problems.
+// ======================================================
+// CodeLingua v2.0 (Producción Final)
+// Configuración Global de Unidades y Mentores
+// ======================================================
 
 window.CodeLingua = window.CodeLingua || {};
 
+// ===============================
+// CONFIGURACIÓN GLOBAL DE UNIDADES
+// ===============================
 window.CodeLingua.units = {
   unit1_prog: {
     mentor: "Codder",
@@ -13,13 +17,14 @@ window.CodeLingua.units = {
       type: "programming"
     },
     intro: [
-      "¡Hola! Soy Codder, y hoy exploraremos los fundamentos de la programación.",
-      "Empezaremos entendiendo qué es una variable y cómo piensan los programas paso a paso.",
-      "No te preocupes si fallas: aprender de los errores es parte del proceso."
+      "👋 ¡Hola! Soy Codder 🤖, tu mentor en esta unidad.",
+      "Hoy exploraremos los fundamentos de la programación.",
+      "Comenzaremos entendiendo qué son las variables y cómo los programas toman decisiones paso a paso.",
+      "No te preocupes por equivocarte: cada error es una oportunidad para aprender."
     ]
   },
 
-  unit1_eng: {
+  unit2_eng: {
     mentor: "Lin",
     settings: {
       lives: 10,
@@ -27,25 +32,26 @@ window.CodeLingua.units = {
       type: "english"
     },
     intro: [
-      "Welcome! I'm Lin, your mentor for this technical English unit.",
-      "We'll learn basic tech terms and practice pronunciation and meaning.",
-      "Don't worry if you make mistakes — it's how you learn!"
+      "Welcome! I’m Lin 🇬🇧, your mentor for the Technical English unit.",
+      "We’ll learn basic technology vocabulary and how to use it in real programming contexts.",
+      "Follow me carefully — practice makes perfect!"
     ]
   }
 };
 
-// helpers
+// ===============================
+// FUNCIONES AUXILIARES
+// ===============================
+window.CodeLingua = window.CodeLingua || {};
+
+window.CodeLingua.units = {
+  unit1_prog: { mentor: "Codder", type: "programming", lang: "es" },
+  java_fundamentals: { mentor: "Codder", type: "java", lang: "es" },
+  sql_essentials: { mentor: "Codder", type: "sql", lang: "es" },
+  python_basics: { mentor: "Codder", type: "python", lang: "es" },
+  english_unit1: { mentor: "Lin", type: "english", lang: "en" },
+};
+
 window.CodeLingua.getUnitConfig = function (unitId) {
   return window.CodeLingua.units[unitId] || null;
-};
-
-window.CodeLingua.getMentorName = function (id) {
-  const names = { Codder: "Codder", Lin: "Lin" };
-  return names[id] || "Mentor";
-};
-
-window.CodeLingua.saveCompletion = function (unitNumber, type) {
-  const key = `cl_unit${unitNumber}_${type}_done`;
-  localStorage.setItem(key, "true");
-  console.log(`✓ Unidad ${unitNumber} (${type}) completada.`);
 };

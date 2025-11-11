@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro | CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/ui_controller.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">CodeLingua — Registro</h1>
+      <div class="header-controls">
+        <button id="mode-toggle" class="btn small">🌓</button>
+        <button id="lang-toggle" class="btn small">🇬🇧</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-container">
+      <h2>Crear cuenta</h2>
+
+      <form id="register-form" method="POST" action="../backend/register.php">
+        <label for="displayname">Nombre de usuario visible</label>
+        <input id="displayname" name="displayname" type="text" required />
+
+        <label for="email">Correo</label>
+        <input id="email" name="email" type="email" required />
+
+        <label for="username">Usuario (login)</label>
+        <input id="username" name="username" type="text" required />
+
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" required minlength="6" />
+
+        <label for="confirm-password">Confirmar Contraseña</label>
+        <input id="confirm-password" name="confirm_password" type="password" required minlength="6" />
+
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button type="submit" class="btn">Registrar</button>
+          <a class="btn outline" href="login.html">Volver</a>
+        </div>
+
+        <p id="reg-feedback" style="margin-top:10px;color:var(--muted)"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Pequeña verificación de cliente para evitar enviar confirm mismatch
+    document.getElementById('register-form').addEventListener('submit', function(e){
+      const p = document.getElementById('password').value;
+      const cp = document.getElementById('confirm-password').value;
+      if (p !== cp) {
+        e.preventDefault();
+        document.getElementById('reg-feedback').textContent = 'Las contraseñas no coinciden.';
+      }
+    });
+  </script>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text">© 2025 CodeLingua</p>
+    </div>
+  </footer>
+</body>
+</html>

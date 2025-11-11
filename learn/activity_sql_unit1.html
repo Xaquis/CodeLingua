@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad SQL - CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/activity_sql.js" defer></script>
+  <script src="../assets/js/ui_controller.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>💾 CodeLingua | SQL Fundamentals</h1>
+    <div class="header-controls">
+      <button id="mode-toggle" class="btn small">🌓</button>
+      <button id="lang-toggle" class="btn small">🇬🇧 English</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>🧮 Bienvenido a la Unidad SQL</h2>
+      <p>Aquí aprenderás a consultar datos con <strong>SELECT</strong>, filtrar con <strong>WHERE</strong> y ordenar resultados con <strong>ORDER BY</strong>.</p>
+    </section>
+
+    <section id="mentor-dialogue" class="mentor-dialogue"></section>
+
+    <section class="exercise" data-answer="select * from users;">
+      <h3>Ejercicio 1</h3>
+      <p>Escribe una consulta SQL para mostrar todos los usuarios desde la tabla <code>users</code>.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section class="exercise" data-answer="select name, email from users where active = 1;">
+      <h3>Ejercicio 2</h3>
+      <p>Muestra el <code>nombre</code> y <code>email</code> de los usuarios activos.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section class="exercise" data-answer="select * from orders order by date desc;">
+      <h3>Ejercicio 3</h3>
+      <p>Escribe una consulta SQL para mostrar todas las órdenes ordenadas por fecha descendente.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section>
+      <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-text">Progreso: 0%</p>
+      <p id="life-count">Vidas: 5</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua — Unidad SQL por Arlevy Sabogal</p>
+  </footer>
+</body>
+</html>

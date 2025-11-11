@@ -1,0 +1,45 @@
+estructura codelingua
+
+CodeLingua/
+│---index.html
+├──.gitattributes
+├──about.html
+├──app.js
+├──index.html
+├──lessons.json
+├──LICENSE.txt
+├──README.md
+├── learn
+├		├── activity_java_storymode.html
+├		├── activity_english_unit1.html
+├		├── activity_programming_unit1.html
+├		├── activity_java_unit1.html
+├		├── unit_complete.html
+├		
+├--Documentacion (aqui estan los archivos markdown del 1 al 12)		
+├		
+├──backend
+│       ├── clear_progress.php
+│       ├── config.php
+│       ├── index.php
+│       └── load_progress.php
+│		├── programming.html
+│       ├── save_progress.php
+│     
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       ├── activity_english.js
+│       ├── activity_java_storymode.js
+│       ├── activity_programming.js
+│       └── debug_progress.js
+│		├── learning_module.js
+│       ├── main.js<eliminado
+│       └──	progress.js
+		├── ui_controller.js
+│       ├── unit_config.js
+│       └──
+└──data
+     ├── lessons.json
+│    ├── unit_java_story.json

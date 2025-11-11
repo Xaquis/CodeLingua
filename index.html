@@ -1,94 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CodeLingua - Plataforma interactiva para aprender inglés técnico y programación">
-  <title>CodeLingua v2.0 - Inicio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CodeLingua v2.0 | Inicio</title>
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/progress.js" defer></script>
-  <script src="assets/js/unit_config.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <!-- Core scripts -->
+  <script src="./assets/js/ui_controller.js" defer></script>
+  <script src="./assets/js/progress.js" defer></script>
+  <script src="./assets/js/unit_config.js" defer></script>
+  <script src="./assets/js/debug_progress.js" defer></script>
 </head>
 
 <body>
-  <header class="site-header">
-    <h1 class="logo">💻 CodeLingua</h1>
-    <div class="header-controls">
-      <button id="mode-toggle" class="btn small">🌙 Modo</button>
-      <button id="lang-toggle" class="btn small">🇬🇧 English</button>
+  <header class="site-header" role="banner">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <h1 class="logo" style="margin:0">🌐 CodeLingua v2.0</h1>
+        <nav id="main-nav" aria-label="Navegación principal">
+          <a href="./index.html" data-page="index">Inicio</a>
+          <a href="./learn/activity_programming_unit1.html" data-page="programming">Programación</a>
+          <a href="./learn/activity_english_unit1.html" data-page="english">Inglés</a>
+          <a href="./about.html" data-page="about">Sobre</a>
+        </nav>
+      </div>
+
+      <div class="header-controls" style="display:flex;align-items:center;gap:8px;">
+        <a id="start-link" class="btn small" href="./learn/login.html" title="Iniciar sesión / Perfil">Iniciar sesión</a>
+        <button id="mode-toggle" class="btn small" aria-pressed="false" aria-label="Cambiar tema">🌓</button>
+        <button id="lang-toggle" class="btn small" aria-label="Cambiar idioma">🇬🇧 English</button>
+      </div>
     </div>
   </header>
 
-  <main class="container">
-    <section>
-      <h2>Bienvenido a CodeLingua v2.0</h2>
+  <main class="container" role="main">
+    <section aria-labelledby="welcome-title">
+      <h2 id="welcome-title">Bienvenido a CodeLingua v2.0</h2>
       <p>
-        Una plataforma educativa diseñada para combinar <strong>Programación</strong> e <strong>Inglés Técnico</strong> con un enfoque didáctico, interactivo y accesible.
-      </p>
-      <p>
-        Aquí podrás avanzar por unidades, aprender con mentores virtuales y desarrollar tus habilidades a través de prácticas guiadas.
+        Plataforma educativa para aprender <strong>Programación</strong> e <strong>Inglés Técnico</strong>
+        con mentores didácticos, actividades interactivas y seguimiento de progreso.
       </p>
     </section>
 
-    <section>
-      <h3>Explora las Unidades</h3>
+    <!-- EXPLORA LAS UNIDADES -->
+    <section aria-labelledby="explore-title">
+      <h3 id="explore-title">📘 Explora las Unidades</h3>
       <ul>
-        <li><a href="learn/programming.html" class="btn">Unidad 1 - Fundamentos de Programación</a></li>
-        <li><a href="learn/english.html" class="btn">Unidad 1 - Inglés Técnico</a></li>
+        <li>
+          <a id="start-programming" href="./learn/activity_programming_unit1.html" class="btn" data-page="programming">Unidad 1 - Fundamentos de Programación</a>
+        </li>
+        <li>
+          <a id="start-english" href="./learn/activity_english_unit1.html" class="btn" data-page="english">Unidad 1 - Inglés Técnico</a>
+        </li>
+        <li>
+          <a id="start-sql" href="./learn/activity_sql_unit1.html" class="btn" data-page="sql">Unidad SQL - Introducción</a>
+        </li>
+        <li>
+          <a id="start-python" href="./learn/activity_python_unit1.html" class="btn" data-page="python">Unidad Python - Introducción</a>
+        </li>
+        <li>
+          <a id="start-story" href="./learn/activity_java_storymode.html" class="btn" data-page="story">Modo Historia - Java</a>
+        </li>
       </ul>
     </section>
 
-    <section id="video-section">
-      <h3>🎬 Video de Presentación del Proyecto</h3>
-      <p>Inserta aquí el enlace de tu video de presentación en YouTube:</p>
+    <!-- VIDEO DE PRESENTACIÓN -->
+    <section class="video-section" aria-labelledby="video-title">
+      <h3 id="video-title">🎥 Video de Presentación del Proyecto</h3>
+      <p id="video-label">Inserta aquí el enlace de tu video de presentación en YouTube:</p>
 
-      <div id="video-input">
-        <input type="text" id="youtube-link" placeholder="Pega el enlace de YouTube aquí..." style="width:70%; padding:8px; border-radius:6px;">
+      <div class="video-input" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <input type="url" id="video-link" placeholder="Pega el enlace de YouTube aquí..." aria-label="Enlace YouTube" style="min-width:220px;flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,255,198,0.2)" />
         <button id="load-video" class="btn">Cargar Video</button>
       </div>
 
-      <div id="video-player" style="margin-top:20px;">
-        <iframe id="youtube-frame" width="560" height="315" style="display:none; border:none; border-radius:10px;"
-          allowfullscreen></iframe>
-      </div>
+      <div id="video-container" style="margin-top:1rem;"></div>
     </section>
 
-    <section>
-      <h3>Sobre CodeLingua</h3>
+    <!-- SOBRE CODELINGUA -->
+    <section aria-labelledby="about-title">
+      <h3 id="about-title">👨‍💻 Sobre CodeLingua</h3>
       <p>
-        Desarrollado por <strong>Arlevy Sabogal</strong> con el acompañamiento técnico de <strong>IA Cristal</strong>.<br>
-        Cumple con normas <strong>ISO 25010</strong> y metodologías <strong>CMMI</strong> de calidad de software.<br>
-        Proyecto académico para la carrera de <strong>Ingeniería de Sistemas</strong>.
+        Desarrollado por <strong>Arlevy Sabogal</strong> con asistencia técnica. CodeLingua combina aprendizaje
+        técnico y lingüístico con un enfoque práctico y didáctico. El sistema aplica estándares de calidad
+        (CMMI / ISO/IEC 25010) en el desarrollo de contenidos y evaluación.
+      </p>
+      <p>
+        Si utilizas la versión con backend (PHP), puedes crear cuenta y guardar tu progreso. Si estás en GitHub Pages,
+        la parte de backend no funcionará (GH Pages no ejecuta PHP); para pruebas con login usa un servidor que soporte PHP.
       </p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2025 CodeLingua v2.0 | Desarrollado por Arlevy Sabogal</p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p id="footer-text">© 2025 CodeLingua v2.0 — Desarrollado por Arlevy Sabogal.</p>
+    </div>
   </footer>
 
+  <!-- Pequeño script para insertar video (cliente) -->
   <script>
-    // ====== CARGADOR DE VIDEO DE PRESENTACIÓN ======
-    document.addEventListener("DOMContentLoaded", () => {
-      const input = document.getElementById("youtube-link");
-      const button = document.getElementById("load-video");
-      const frame = document.getElementById("youtube-frame");
+    document.getElementById('load-video').addEventListener('click', () => {
+      const link = document.getElementById('video-link').value.trim();
+      const container = document.getElementById('video-container');
+      if (!link) {
+        alert("Por favor, pega un enlace de YouTube válido.");
+        return;
+      }
 
-      button.addEventListener("click", () => {
-        const url = input.value.trim();
-        if (!url) return alert("Por favor, ingresa un enlace de YouTube válido.");
+      let videoId = "";
+      if (link.includes("v=")) {
+        videoId = link.split("v=")[1].split("&")[0];
+      } else if (link.includes("youtu.be/")) {
+        videoId = link.split("youtu.be/")[1].split("?")[0];
+      } else {
+        // Soporte para enlaces embed o mobile
+        const m = link.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+        if (m) videoId = m[1];
+      }
 
-        const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
-        if (match && match[1]) {
-          const videoId = match[1];
-          frame.src = `https://www.youtube.com/embed/${videoId}`;
-          frame.style.display = "block";
-        } else {
-          alert("⚠️ Enlace inválido. Asegúrate de pegar un enlace completo de YouTube.");
-        }
-      });
+      if (!videoId) {
+        alert("El enlace no parece ser válido. Asegúrate de que sea de YouTube.");
+        return;
+      }
+
+      container.innerHTML = `
+        <iframe width="100%" height="405" style="max-width:720px;border-radius:12px"
+          src="https://www.youtube.com/embed/${videoId}"
+          title="Video de presentación"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>`;
     });
   </script>
 </body>

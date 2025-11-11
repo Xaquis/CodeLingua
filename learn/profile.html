@@ -1,0 +1,56 @@
+<?php
+// learn/profile.html served as PHP to check session
+// Save as learn/profile.php on server if you use PHP.
+// If you serve as static file, you must adapt to use JS + API.
+
+session_start();
+$logged = isset($_SESSION['cl_user']);
+?>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil | CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/ui_controller.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">CodeLingua — Perfil</h1>
+      <div class="header-controls">
+        <button id="mode-toggle" class="btn small">🌓</button>
+        <button id="lang-toggle" class="btn small">🇬🇧</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <?php if (!$logged): ?>
+      <section>
+        <h2>No autenticado</h2>
+        <p>Debes <a href="login.html">iniciar sesión</a> para ver tu perfil.</p>
+      </section>
+    <?php else: ?>
+      <section>
+        <h2>Bienvenido, <?=htmlspecialchars($_SESSION['cl_user']['display'] ?? $_SESSION['cl_user']['username'])?></h2>
+        <p><strong>Correo:</strong> <?=htmlspecialchars($_SESSION['cl_user']['email'] ?? '—')?></p>
+        <p><strong>Rol:</strong> <?=htmlspecialchars($_SESSION['cl_user']['role'] ?? 'usuario')?></p>
+
+        <div style="margin-top:16px">
+          <form method="POST" action="../backend/logout.php">
+            <button class="btn" type="submit">Cerrar sesión</button>
+          </form>
+        </div>
+      </section>
+    <?php endif; ?>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text">© 2025 CodeLingua</p>
+    </div>
+  </footer>
+</body>
+</html>

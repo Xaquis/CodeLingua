@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unidad SQL 1 | CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/unit_config.js" defer></script>
+  <script src="../assets/js/ui_controller.js" defer></script>
+  <script src="../assets/js/progress.js" defer></script>
+  <script src="../assets/js/activity_sql.js" defer></script>
+</head>
+<body data-unit="unit_sql1">
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Unidad SQL — Introducción</h1>
+      <div class="header-controls">
+        <a href="login.html" class="btn small">Perfil</a>
+        <button id="mode-toggle" class="btn small">🌓</button>
+        <button id="lang-toggle" class="btn small">🇬🇧</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="intro">
+      <h2>¿Qué es SQL?</h2>
+      <p>SQL es el lenguaje para consultar bases de datos. Aprenderás SELECT, WHERE y JOIN de forma práctica.</p>
+    </section>
+
+    <section class="mentor-dialogue" id="mentor-dialogue"></section>
+
+    <section id="status">
+      <h3>Vidas: <span id="life-count">10</span> ❤️</h3>
+      <div class="progress-bar-container"><div id="progress-bar"></div></div>
+      <p id="progress">Progreso: 0%</p>
+    </section>
+
+    <section id="question-area">
+      <h2 id="question-text">Cargando...</h2>
+      <div id="options-container"></div>
+      <p id="feedback"></p>
+    </section>
+
+    <section id="complete" class="hidden">
+      <p>🎉 ¡Unidad SQL completada!</p>
+      <a href="unit_complete.html?unit=sql1" class="btn">Finalizar</a>
+    </section>
+  </main>
+</body>
+</html>

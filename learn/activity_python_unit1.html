@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad Python - CodeLingua</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/activity_python.js" defer></script>
+  <script src="../assets/js/ui_controller.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>🐍 CodeLingua | Python Fundamentals</h1>
+    <div class="header-controls">
+      <button id="mode-toggle" class="btn small">🌓</button>
+      <button id="lang-toggle" class="btn small">🇬🇧 English</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>🐍 Bienvenido a la Unidad Python</h2>
+      <p>Aprenderás los fundamentos de Python: <strong>print()</strong>, variables y lógica básica.</p>
+    </section>
+
+    <section id="mentor-dialogue" class="mentor-dialogue"></section>
+
+    <section class="exercise" data-answer="print('hola mundo')">
+      <h3>Ejercicio 1</h3>
+      <p>Escribe un comando para imprimir el texto <code>Hola Mundo</code>.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section class="exercise" data-answer="x = 10">
+      <h3>Ejercicio 2</h3>
+      <p>Crea una variable <code>x</code> y asígnale el valor <code>10</code>.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section class="exercise" data-answer="if x > 5: print('mayor')">
+      <h3>Ejercicio 3</h3>
+      <p>Escribe una condición que imprima "mayor" si <code>x</code> es mayor que 5.</p>
+      <input type="text" placeholder="Tu respuesta aquí..." />
+      <button class="btn">Enviar</button>
+      <div class="feedback"></div>
+    </section>
+
+    <section>
+      <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-text">Progreso: 0%</p>
+      <p id="life-count">Vidas: 5</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua — Unidad Python por Arlevy Sabogal</p>
+  </footer>
+</body>
+</html>
