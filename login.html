@@ -2,18 +2,31 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Iniciar Sesión | CodeLingua</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingreso | CodeLingua v2.1 DEMO</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
+  <header class="site-header">
+    <h1 class="logo">🌐 CodeLingua v2.1</h1>
+  </header>
+
   <main class="container">
-    <h2>🔐 Iniciar Sesión</h2>
-    <form action="./backend/login.php" method="POST" class="form-box">
-      <input type="email" name="email" placeholder="Correo electrónico" required>
-      <input type="password" name="password" placeholder="Contraseña" required>
-      <button type="submit" class="btn">Entrar</button>
-    </form>
-    <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+    <section>
+      <h2>Acceso a la Demostración</h2>
+      <p>Este entorno está en modo <strong>DEMO</strong>. No se requiere registro ni contraseña.</p>
+      <p>Podrás explorar todas las unidades como el usuario temporal <strong>aprendiz1</strong>.</p>
+
+      <div class="form-container" style="text-align:center;">
+        <form action="../backend/register.php" method="post">
+          <button type="submit" class="btn">Entrar como Aprendiz 1</button>
+        </form>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua v2.1 — Modo demostrativo sin autenticación.</p>
+  </footer>
 </body>
 </html>

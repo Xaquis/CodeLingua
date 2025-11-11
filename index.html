@@ -1,140 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CodeLingua v2.0 | Inicio</title>
+  <title>CodeLingua v2.1 | Inicio</title>
 
-  <!-- Estilos -->
+  <!-- Estilos principales -->
   <link rel="stylesheet" href="./assets/css/style.css" />
 
-  <!-- Core scripts -->
+  <!-- Control de interfaz -->
   <script src="./assets/js/ui_controller.js" defer></script>
   <script src="./assets/js/progress.js" defer></script>
   <script src="./assets/js/unit_config.js" defer></script>
-  <script src="./assets/js/debug_progress.js" defer></script>
 </head>
 
 <body>
-  <header class="site-header" role="banner">
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <h1 class="logo" style="margin:0">🌐 CodeLingua v2.0</h1>
-        <nav id="main-nav" aria-label="Navegación principal">
-          <a href="./index.html" data-page="index">Inicio</a>
-          <a href="./learn/activity_programming_unit1.html" data-page="programming">Programación</a>
-          <a href="./learn/activity_english_unit1.html" data-page="english">Inglés</a>
-          <a href="./about.html" data-page="about">Sobre</a>
-        </nav>
-      </div>
-
-      <div class="header-controls" style="display:flex;align-items:center;gap:8px;">
-        <a id="start-link" class="btn small" href="./learn/login.html" title="Iniciar sesión / Perfil">Iniciar sesión</a>
-        <button id="mode-toggle" class="btn small" aria-pressed="false" aria-label="Cambiar tema">🌓</button>
-        <button id="lang-toggle" class="btn small" aria-label="Cambiar idioma">🇬🇧 English</button>
-      </div>
+  <!-- ============================== -->
+  <!-- ENCABEZADO -->
+  <!-- ============================== -->
+  <header class="site-header">
+    <h1 class="logo">🌐 CodeLingua v2.1</h1>
+    <div class="header-controls">
+      <button id="mode-toggle" class="btn small">🌓</button>
+      <button id="lang-toggle" class="btn small">🇬🇧 English</button>
     </div>
   </header>
 
-  <main class="container" role="main">
-    <section aria-labelledby="welcome-title">
-      <h2 id="welcome-title">Bienvenido a CodeLingua v2.0</h2>
+  <main class="container">
+    <!-- ============================== -->
+    <!-- PRESENTACIÓN -->
+    <!-- ============================== -->
+    <section>
+      <h2>Bienvenido a CodeLingua v2.1</h2>
       <p>
-        Plataforma educativa para aprender <strong>Programación</strong> e <strong>Inglés Técnico</strong>
-        con mentores didácticos, actividades interactivas y seguimiento de progreso.
+        Una plataforma educativa diseñada para combinar <strong>Programación</strong> e
+        <strong>Inglés Técnico</strong> con un enfoque didáctico, interactivo y accesible.
+      </p>
+      <p>
+        Aprende de manera práctica a través de unidades temáticas con mentores virtuales, ejercicios
+        guiados y ejemplos del mundo real.
+      </p>
+      <p style="font-style: italic; color: #00ffc6;">
+        🔐 Modo demostración activo — inicio automático como <strong>Aprendiz 1</strong>.
       </p>
     </section>
 
+    <!-- ============================== -->
     <!-- EXPLORA LAS UNIDADES -->
-    <section aria-labelledby="explore-title">
-      <h3 id="explore-title">📘 Explora las Unidades</h3>
+    <!-- ============================== -->
+    <section>
+      <h3>📘 Explora las Unidades</h3>
       <ul>
-        <li>
-          <a id="start-programming" href="./learn/activity_programming_unit1.html" class="btn" data-page="programming">Unidad 1 - Fundamentos de Programación</a>
-        </li>
-        <li>
-          <a id="start-english" href="./learn/activity_english_unit1.html" class="btn" data-page="english">Unidad 1 - Inglés Técnico</a>
-        </li>
-        <li>
-          <a id="start-sql" href="./learn/activity_sql_unit1.html" class="btn" data-page="sql">Unidad SQL - Introducción</a>
-        </li>
-        <li>
-          <a id="start-python" href="./learn/activity_python_unit1.html" class="btn" data-page="python">Unidad Python - Introducción</a>
-        </li>
-        <li>
-          <a id="start-story" href="./learn/activity_java_storymode.html" class="btn" data-page="story">Modo Historia - Java</a>
-        </li>
+        <li><a href="./learn/activity_programming_unit1.html" class="btn">Unidad 1 - Fundamentos de Programación</a></li>
+        <li><a href="./learn/activity_java_unit1.html" class="btn">Unidad 2 - Java Story Mode</a></li>
+        <li><a href="./learn/activity_english_unit1.html" class="btn">Unidad 3 - Inglés Técnico</a></li>
+        <li><a href="./learn/activity_sql_unit1.html" class="btn">Unidad 4 - Fundamentos de SQL</a></li>
+        <li><a href="./learn/activity_python_unit1.html" class="btn">Unidad 5 - Introducción a Python</a></li>
       </ul>
     </section>
 
+    <!-- ============================== -->
     <!-- VIDEO DE PRESENTACIÓN -->
-    <section class="video-section" aria-labelledby="video-title">
-      <h3 id="video-title">🎥 Video de Presentación del Proyecto</h3>
-      <p id="video-label">Inserta aquí el enlace de tu video de presentación en YouTube:</p>
+    <!-- ============================== -->
+    <section class="video-section">
+      <h3>🎥 Video de Presentación del Proyecto</h3>
+      <p>Demostración práctica del funcionamiento de la plataforma CodeLingua v2.1.</p>
 
-      <div class="video-input" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-        <input type="url" id="video-link" placeholder="Pega el enlace de YouTube aquí..." aria-label="Enlace YouTube" style="min-width:220px;flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,255,198,0.2)" />
-        <button id="load-video" class="btn">Cargar Video</button>
+      <div id="video-container" style="margin-top: 1rem; text-align:center;">
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/xaquis"
+          title="Video de presentación CodeLingua v2.1"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
       </div>
 
-      <div id="video-container" style="margin-top:1rem;"></div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #aaa;">
+        Si el video no carga, también puedes verlo directamente aquí:  
+        <a href="https://xaquis.github.io/CodeLingua/index.html" target="_blank">
+          https://xaquis.github.io/CodeLingua/index.html
+        </a>
+      </p>
     </section>
 
+    <!-- ============================== -->
     <!-- SOBRE CODELINGUA -->
-    <section aria-labelledby="about-title">
-      <h3 id="about-title">👨‍💻 Sobre CodeLingua</h3>
+    <!-- ============================== -->
+    <section>
+      <h3>👨‍💻 Sobre CodeLingua</h3>
       <p>
-        Desarrollado por <strong>Arlevy Sabogal</strong> con asistencia técnica. CodeLingua combina aprendizaje
-        técnico y lingüístico con un enfoque práctico y didáctico. El sistema aplica estándares de calidad
-        (CMMI / ISO/IEC 25010) en el desarrollo de contenidos y evaluación.
+        Desarrollado por <strong>Arlevy Sabogal</strong> con la asistencia técnica de <strong>IA Cristal</strong>,
+        como parte del proyecto académico de integración entre <strong>Programación</strong> e
+        <strong>Inglés Técnico</strong> bajo metodologías activas de aprendizaje.
       </p>
       <p>
-        Si utilizas la versión con backend (PHP), puedes crear cuenta y guardar tu progreso. Si estás en GitHub Pages,
-        la parte de backend no funcionará (GH Pages no ejecuta PHP); para pruebas con login usa un servidor que soporte PHP.
+        CodeLingua combina el aprendizaje técnico con la comprensión lingüística del entorno IT,
+        preparando al estudiante para un desempeño profesional global.
       </p>
     </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <p id="footer-text">© 2025 CodeLingua v2.0 — Desarrollado por Arlevy Sabogal.</p>
-    </div>
+  <!-- ============================== -->
+  <!-- PIE DE PÁGINA -->
+  <!-- ============================== -->
+  <footer class="site-footer">
+    <p>© 2025 CodeLingua v2.1 — Desarrollado por Arlevy Sabogal.</p>
   </footer>
-
-  <!-- Pequeño script para insertar video (cliente) -->
-  <script>
-    document.getElementById('load-video').addEventListener('click', () => {
-      const link = document.getElementById('video-link').value.trim();
-      const container = document.getElementById('video-container');
-      if (!link) {
-        alert("Por favor, pega un enlace de YouTube válido.");
-        return;
-      }
-
-      let videoId = "";
-      if (link.includes("v=")) {
-        videoId = link.split("v=")[1].split("&")[0];
-      } else if (link.includes("youtu.be/")) {
-        videoId = link.split("youtu.be/")[1].split("?")[0];
-      } else {
-        // Soporte para enlaces embed o mobile
-        const m = link.match(/\/embed\/([a-zA-Z0-9_-]+)/);
-        if (m) videoId = m[1];
-      }
-
-      if (!videoId) {
-        alert("El enlace no parece ser válido. Asegúrate de que sea de YouTube.");
-        return;
-      }
-
-      container.innerHTML = `
-        <iframe width="100%" height="405" style="max-width:720px;border-radius:12px"
-          src="https://www.youtube.com/embed/${videoId}"
-          title="Video de presentación"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>`;
-    });
-  </script>
 </body>
 </html>
